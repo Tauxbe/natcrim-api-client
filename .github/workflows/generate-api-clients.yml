@@ -179,31 +179,31 @@ jobs:
         git push
     
     - name: Upload JavaScript client artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: natcrim-api-client-javascript
         path: ./clients/javascript/
     
     - name: Upload Java client artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: natcrim-api-client-java
         path: ./clients/java/
     
     - name: Upload PHP client artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: natcrim-api-client-php
         path: ./clients/php/
     
     - name: Upload Python client artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: natcrim-api-client-python
         path: ./clients/python/
     
     - name: Upload documentation artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: natcrim-api-client-documentation
         path: ./documentation/
