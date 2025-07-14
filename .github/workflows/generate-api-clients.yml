@@ -12,6 +12,8 @@ on:
     # Run daily at 2 AM UTC to check for API changes
     - cron: '0 2 * * *'
   workflow_dispatch:
+  repository_dispatch:
+    types: [api-updated]
 
 permissions:
   contents: write
