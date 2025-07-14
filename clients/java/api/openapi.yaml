@@ -1,0 +1,1325 @@
+openapi: 3.1.0
+info:
+  title: NatCrim Service Integration
+  version: v1.3.7
+servers:
+- url: /
+paths:
+  /me:
+    get:
+      description: Principal attributes
+      operationId: get_me_me_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Me'
+          description: Get information about the currently authenticated principal
+      security:
+      - HTTPBasic: []
+      - HTTPBearer: []
+      summary: Get Me
+      tags:
+      - Principal
+      x-accepts: application/json
+  /orders:
+    get:
+      operationId: list_all_orders_orders_get
+      parameters:
+      - description: "First name, case insensitive"
+        explode: true
+        in: query
+        name: first_name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: "First name, case insensitive"
+        explode: true
+        in: query
+        name: last_name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Match on customer
+        explode: true
+        in: query
+        name: customer_id
+        required: false
+        schema:
+          format: uuid
+          nullable: true
+          type: string
+        style: form
+      - description: Match on sub-account
+        explode: true
+        in: query
+        name: sub_account_id
+        required: false
+        schema:
+          format: uuid
+          nullable: true
+          type: string
+        style: form
+      - description: Filter by order submission time
+        explode: true
+        in: query
+        name: created_at_from
+        required: false
+        schema:
+          format: date-time
+          nullable: true
+          type: string
+        style: form
+      - description: Filter by order submission time
+        explode: true
+        in: query
+        name: created_at_to
+        required: false
+        schema:
+          format: date-time
+          nullable: true
+          type: string
+        style: form
+      - description: "Contained in client reference, case insensitive"
+        explode: true
+        in: query
+        name: client_reference
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Match on requested FIPS code
+        explode: true
+        in: query
+        name: fips
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Match on requested region code
+        explode: true
+        in: query
+        name: region
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: "Sorted field and sort direction, separated by colon. Ascending\
+          \ = 1, Descending = -1"
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          anyOf: []
+          description: "Sorted field and sort direction, separated by colon. Ascending\
+            \ = 1, Descending = -1"
+          nullable: true
+          title: Sort
+        style: form
+      - description: Limit results to this many matches
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Order'
+                type: array
+          description: List submitted orders
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - HTTPBasic: []
+      - HTTPBearer: []
+      summary: List All Orders
+      tags:
+      - Orders
+      x-accepts: application/json
+    post:
+      operationId: post_order_orders_post
+      parameters:
+      - explode: true
+        in: query
+        name: paginate
+        required: false
+        schema:
+          nullable: true
+          type: boolean
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderPost'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderPostResponse-Output'
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - HTTPBasic: []
+      - HTTPBearer: []
+      summary: Post Order
+      tags:
+      - Orders
+      x-content-type: application/json
+      x-accepts: application/json
+  /orders/cache/{order_id}:
+    get:
+      description: ':raises:'
+      operationId: get_order_cache_orders_cache__order_id__get
+      parameters:
+      - explode: false
+        in: path
+        name: order_id
+        required: true
+        schema:
+          format: uuid
+          title: Order Id
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          title: Offset
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: length
+        required: false
+        schema:
+          default: 20
+          title: Length
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderPostResponse-Input'
+          description: Returns the cached results
+        "403":
+          description: Forbidden
+        "410":
+          description: Results no longer available
+        "500":
+          description: Server Error
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - HTTPBasic: []
+      - HTTPBearer: []
+      summary: Get Order Cache
+      tags:
+      - Orders
+      x-accepts: application/json
+  /orders/{order_id}:
+    get:
+      operationId: get_order_orders__order_id__get
+      parameters:
+      - explode: false
+        in: path
+        name: order_id
+        required: true
+        schema:
+          format: uuid
+          title: Order Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: Order detail without search response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - HTTPBasic: []
+      - HTTPBearer: []
+      summary: Get Order
+      tags:
+      - Orders
+      x-accepts: application/json
+  /customers/{customer_id}/profiles:
+    get:
+      description: Retrieve all search profiles
+      operationId: get_profiles_customers__customer_id__profiles_get
+      parameters:
+      - explode: false
+        in: path
+        name: customer_id
+        required: true
+        schema:
+          format: uuid
+          title: Customer Id
+          type: string
+        style: simple
+      - description: Search profile tag field by this prefix value
+        explode: true
+        in: query
+        name: prefix
+        required: false
+        schema:
+          default: ""
+          description: Search profile tag field by this prefix value
+          title: Prefix
+          type: string
+        style: form
+      - description: "Whether to include deleted profiles in the result, in addition\
+          \ to active profiles"
+        explode: true
+        in: query
+        name: is_deleted
+        required: false
+        schema:
+          default: false
+          description: "Whether to include deleted profiles in the result, in addition\
+            \ to active profiles"
+          enum:
+          - true
+          - false
+          title: Is Deleted
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Profile'
+                type: array
+          description: List of profiles of customer
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - HTTPBasic: []
+      - HTTPBearer: []
+      summary: Retrieve all search profiles
+      tags:
+      - Search Profiles
+      x-accepts: application/json
+    post:
+      description: Create a search profile
+      operationId: post_profile_by_id_customers__customer_id__profiles_post
+      parameters:
+      - explode: false
+        in: path
+        name: customer_id
+        required: true
+        schema:
+          format: uuid
+          title: Customer Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfilePut'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - HTTPBasic: []
+      - HTTPBearer: []
+      summary: Create a search profile
+      tags:
+      - Search Profiles
+      x-content-type: application/json
+      x-accepts: application/json
+  /customers/{customer_id}/profiles/{profile_id}:
+    delete:
+      description: Delete a search profile
+      operationId: delete_search_profile_by_id_customers__customer_id__profiles__profile_id__delete
+      parameters:
+      - explode: false
+        in: path
+        name: customer_id
+        required: true
+        schema:
+          format: uuid
+          title: Customer Id
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: profile_id
+        required: true
+        schema:
+          format: uuid
+          title: Profile Id
+          type: string
+        style: simple
+      - description: Delete a profile on a deleted customer
+        explode: true
+        in: query
+        name: is_deleted
+        required: false
+        schema:
+          default: false
+          description: Delete a profile on a deleted customer
+          enum:
+          - true
+          - false
+          title: Is Deleted
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                title: Response Delete Search Profile By Id Customers  Customer Id  Profiles  Profile
+                  Id  Delete
+                type: object
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - HTTPBasic: []
+      - HTTPBearer: []
+      summary: Delete a search profile
+      tags:
+      - Search Profiles
+      x-accepts: application/json
+    get:
+      description: Retrieve a search profile
+      operationId: get_profile_by_id_customers__customer_id__profiles__profile_id__get
+      parameters:
+      - explode: false
+        in: path
+        name: customer_id
+        required: true
+        schema:
+          format: uuid
+          title: Customer Id
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: profile_id
+        required: true
+        schema:
+          format: uuid
+          title: Profile Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - HTTPBasic: []
+      - HTTPBearer: []
+      summary: Retrieve a search profile
+      tags:
+      - Search Profiles
+      x-accepts: application/json
+    put:
+      description: Update a search profile
+      operationId: put_profile_by_id_customers__customer_id__profiles__profile_id__put
+      parameters:
+      - explode: false
+        in: path
+        name: customer_id
+        required: true
+        schema:
+          format: uuid
+          title: Customer Id
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: profile_id
+        required: true
+        schema:
+          format: uuid
+          nullable: true
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfilePut'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - HTTPBasic: []
+      - HTTPBearer: []
+      summary: Update a search profile
+      tags:
+      - Search Profiles
+      x-content-type: application/json
+      x-accepts: application/json
+components:
+  schemas:
+    Customer:
+      additionalProperties: false
+      example:
+        is_deleted: true
+        name: name
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        admin_email: admin_email
+      properties:
+        id:
+          format: uuid
+          title: Id
+          type: string
+        name:
+          description: "Descriptive name of customer, such as their corporate entity\
+            \ name."
+          title: Name
+          type: string
+        admin_email:
+          description: Administrator's email address. Also functions as a username.
+          title: Admin Email
+          type: string
+        is_deleted:
+          title: Is Deleted
+          type: boolean
+      required:
+      - admin_email
+      - id
+      - is_deleted
+      - name
+      title: Customer
+    DOBFilter:
+      example:
+        allow_off_by_one: false
+        minimum_components_matched: 2
+        allow_empty_dob: false
+      properties:
+        allow_off_by_one:
+          default: false
+          description: "Allow any one part of the DOB: month, day, year, to be different\
+            \ by no more than 1."
+          title: Allow Off By One
+          type: boolean
+        allow_empty_dob:
+          default: false
+          description: Match records with no DOB
+          title: Allow Empty Dob
+          type: boolean
+        minimum_components_matched:
+          default: 3
+          description: How many of the parts of the DOB must match the searched DOB
+          maximum: 3.0
+          minimum: 1.0
+          title: Minimum Components Matched
+          type: integer
+      title: DOBFilter
+    DOBFilterGet:
+      example:
+        allow_off_by_one: false
+        minimum_components_matched: 1
+        allow_empty_dob: false
+      properties:
+        allow_off_by_one:
+          default: false
+          title: Allow Off By One
+          type: boolean
+        allow_empty_dob:
+          default: false
+          title: Allow Empty Dob
+          type: boolean
+        minimum_components_matched:
+          default: 3
+          maximum: 3.0
+          minimum: 0.0
+          title: Minimum Components Matched
+          type: integer
+      title: DOBFilterGet
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+      title: HTTPValidationError
+    MaxAge:
+      properties:
+        age:
+          maximum: 99.0
+          minimum: 1.0
+          nullable: true
+          type: integer
+        max_age_field:
+          $ref: '#/components/schemas/MaxAgeFieldSelector'
+      title: MaxAge
+    MaxAgeFieldSelector:
+      enum:
+      - filed
+      - disposition
+      title: MaxAgeFieldSelector
+      type: string
+    MaxAgeGet:
+      properties:
+        age:
+          nullable: true
+          type: integer
+        max_age_field:
+          $ref: '#/components/schemas/MaxAgeFieldSelector'
+      title: MaxAgeGet
+    Me:
+      example:
+        sub_account:
+          is_deleted: ""
+          default_profile: null
+          name: ""
+          id: ""
+          email: ""
+        customer:
+          is_deleted: true
+          name: name
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          admin_email: admin_email
+      properties:
+        customer:
+          $ref: '#/components/schemas/Customer'
+        sub_account:
+          $ref: '#/components/schemas/SubAccount'
+      required:
+      - customer
+      - sub_account
+      title: Me
+    NameFilter:
+      example:
+        match_first_letters: 0
+        match_full_name: true
+        match_required: true
+        match_begins_with: false
+      properties:
+        match_required:
+          default: true
+          title: Match Required
+          type: boolean
+        match_first_letters:
+          default: 0
+          maximum: 10.0
+          minimum: 0.0
+          title: Match First Letters
+          type: integer
+        match_begins_with:
+          default: false
+          title: Match Begins With
+          type: boolean
+        match_full_name:
+          default: true
+          title: Match Full Name
+          type: boolean
+      title: NameFilter
+    NameFilterGet:
+      example:
+        match_first_letters: 0
+        match_full_name: true
+        match_required: true
+        match_begins_with: true
+      properties:
+        match_required:
+          title: Match Required
+          type: boolean
+        match_first_letters:
+          title: Match First Letters
+          type: integer
+        match_begins_with:
+          title: Match Begins With
+          type: boolean
+        match_full_name:
+          title: Match Full Name
+          type: boolean
+      required:
+      - match_begins_with
+      - match_first_letters
+      - match_full_name
+      - match_required
+      title: NameFilterGet
+    Order:
+      additionalProperties: false
+      example:
+        result:
+          completed_at: ""
+          failure: null
+          success: null
+          max_results: null
+        request:
+          client_reference: null
+          profile_def: ""
+          profile_id: null
+          subject:
+            dob: null
+            last_name: ""
+            middle_name: null
+            first_name: ""
+          fips: null
+          max_results: null
+          region: null
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        sub_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        id:
+          format: uuid
+          title: Id
+          type: string
+        created_at:
+          format: date-time
+          title: Created At
+          type: string
+        sub_account_id:
+          format: uuid
+          title: Sub Account Id
+          type: string
+        request:
+          $ref: '#/components/schemas/OrderRequestGet'
+        result:
+          $ref: '#/components/schemas/OrderResult'
+      required:
+      - created_at
+      - id
+      - request
+      - result
+      - sub_account_id
+      title: Order
+    OrderFailure:
+      additionalProperties: false
+      properties:
+        message:
+          title: Message
+          type: string
+      required:
+      - message
+      title: OrderFailure
+    OrderPost:
+      additionalProperties: false
+      example:
+        request:
+          client_reference: null
+          profile_def: null
+          profile_id: null
+          subject:
+            dob: null
+            last_name: ""
+            middle_name: null
+            first_name: ""
+          fips: null
+          max_results: null
+          region: null
+        sub_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        sub_account_id:
+          format: uuid
+          nullable: true
+          type: string
+        request:
+          $ref: '#/components/schemas/OrderRequestPost'
+      required:
+      - request
+      title: OrderPost
+    OrderPostResponse-Input:
+      additionalProperties: false
+      example:
+        result:
+          completed_at: ""
+          failure: null
+          success: null
+          max_results: null
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        sub_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        content: ""
+      properties:
+        id:
+          format: uuid
+          title: Id
+          type: string
+        created_at:
+          format: date-time
+          title: Created At
+          type: string
+        sub_account_id:
+          format: uuid
+          title: Sub Account Id
+          type: string
+        result:
+          $ref: '#/components/schemas/OrderResult'
+        content:
+          anyOf: []
+          nullable: true
+          title: Content
+      required:
+      - content
+      - created_at
+      - id
+      - result
+      - sub_account_id
+      title: OrderPostResponse
+    OrderPostResponse-Output:
+      additionalProperties: false
+      example:
+        result:
+          completed_at: ""
+          failure: null
+          success: null
+          max_results: null
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        sub_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        content: ""
+      properties:
+        id:
+          format: uuid
+          title: Id
+          type: string
+        created_at:
+          format: date-time
+          title: Created At
+          type: string
+        sub_account_id:
+          format: uuid
+          title: Sub Account Id
+          type: string
+        result:
+          $ref: '#/components/schemas/OrderResult'
+        content:
+          anyOf: []
+          nullable: true
+          title: Content
+      required:
+      - content
+      - created_at
+      - id
+      - result
+      - sub_account_id
+      title: OrderPostResponse
+    OrderRequestGet:
+      additionalProperties: false
+      example:
+        client_reference: null
+        profile_def: ""
+        profile_id: null
+        subject:
+          dob: null
+          last_name: ""
+          middle_name: null
+          first_name: ""
+        fips: null
+        max_results: null
+        region: null
+      properties:
+        client_reference:
+          $ref: '#/components/schemas/Client_Reference'
+        profile_id:
+          $ref: '#/components/schemas/Profile_Id'
+        profile_def:
+          allOf:
+          - $ref: '#/components/schemas/ProfileDefinitionGet'
+          description: Search profile of this order. May have been a customization
+            of what was referenced by the profile ID.
+        fips:
+          $ref: '#/components/schemas/Fips'
+        region:
+          $ref: '#/components/schemas/Region'
+        subject:
+          $ref: '#/components/schemas/OrderSubject'
+        max_results:
+          $ref: '#/components/schemas/Max_Results'
+      required:
+      - client_reference
+      - profile_def
+      - profile_id
+      - subject
+      title: OrderRequestGet
+    OrderRequestPost:
+      additionalProperties: false
+      example:
+        client_reference: null
+        profile_def: null
+        profile_id: null
+        subject:
+          dob: null
+          last_name: ""
+          middle_name: null
+          first_name: ""
+        fips: null
+        max_results: null
+        region: null
+      properties:
+        client_reference:
+          $ref: '#/components/schemas/Client_Reference'
+        profile_id:
+          $ref: '#/components/schemas/Profile_Id_1'
+        profile_def:
+          $ref: '#/components/schemas/OrderRequestPost_profile_def'
+        fips:
+          $ref: '#/components/schemas/Fips'
+        region:
+          $ref: '#/components/schemas/Region'
+        subject:
+          $ref: '#/components/schemas/OrderSubject'
+        max_results:
+          $ref: '#/components/schemas/Max_Results_1'
+      required:
+      - subject
+      title: OrderRequestPost
+    OrderResult:
+      additionalProperties: false
+      example:
+        completed_at: ""
+        failure: null
+        success: null
+        max_results: null
+      properties:
+        completed_at:
+          format: date-time
+          title: Completed At
+        failure:
+          $ref: '#/components/schemas/OrderResult_failure'
+        success:
+          $ref: '#/components/schemas/OrderResult_success'
+        max_results:
+          $ref: '#/components/schemas/Max_Results_2'
+      required:
+      - completed_at
+      - failure
+      - success
+      title: OrderResult
+    OrderSubject:
+      additionalProperties: false
+      example:
+        dob: null
+        last_name: ""
+        middle_name: null
+        first_name: ""
+      properties:
+        first_name:
+          title: First Name
+        middle_name:
+          $ref: '#/components/schemas/Middle_Name'
+        last_name:
+          title: Last Name
+        dob:
+          $ref: '#/components/schemas/Dob'
+      required:
+      - first_name
+      - last_name
+      title: OrderSubject
+    OrderSuccess:
+      additionalProperties: false
+      properties:
+        records_returned:
+          title: Records Returned
+      required:
+      - records_returned
+      title: OrderSuccess
+    Profile:
+      example:
+        max_age: null
+        is_deleted: ""
+        dob:
+          allow_off_by_one: false
+          minimum_components_matched: 1
+          allow_empty_dob: false
+        source_types: null
+        last_name:
+          match_first_letters: 0
+          match_full_name: true
+          match_required: true
+          match_begins_with: true
+        tag: null
+        id: ""
+        middle_name:
+          match_first_letters: 0
+          match_full_name: true
+          match_required: true
+          match_begins_with: true
+        first_name:
+          match_first_letters: 0
+          match_full_name: true
+          match_required: true
+          match_begins_with: true
+      properties:
+        tag:
+          $ref: '#/components/schemas/Tag'
+        first_name:
+          $ref: '#/components/schemas/NameFilterGet'
+        middle_name:
+          $ref: '#/components/schemas/NameFilterGet'
+        last_name:
+          $ref: '#/components/schemas/NameFilterGet'
+        dob:
+          $ref: '#/components/schemas/DOBFilterGet'
+        source_types:
+          $ref: '#/components/schemas/Source_Types'
+        max_age:
+          $ref: '#/components/schemas/Profile_max_age'
+        id:
+          format: uuid
+          title: Id
+        is_deleted:
+          title: Is Deleted
+      required:
+      - dob
+      - first_name
+      - id
+      - is_deleted
+      - last_name
+      - middle_name
+      title: Profile
+    ProfileDefinition:
+      properties:
+        tag:
+          $ref: '#/components/schemas/Tag'
+        first_name:
+          $ref: '#/components/schemas/NameFilter'
+        middle_name:
+          $ref: '#/components/schemas/NameFilter'
+        last_name:
+          $ref: '#/components/schemas/NameFilter'
+        dob:
+          $ref: '#/components/schemas/DOBFilter'
+        source_types:
+          $ref: '#/components/schemas/Source_Types'
+        max_age:
+          $ref: '#/components/schemas/ProfileDefinition_max_age'
+      required:
+      - dob
+      - first_name
+      - last_name
+      - middle_name
+      title: ProfileDefinition
+    ProfileDefinitionGet:
+      properties:
+        tag:
+          $ref: '#/components/schemas/Tag'
+        first_name:
+          $ref: '#/components/schemas/NameFilterGet'
+        middle_name:
+          $ref: '#/components/schemas/NameFilterGet'
+        last_name:
+          $ref: '#/components/schemas/NameFilterGet'
+        dob:
+          $ref: '#/components/schemas/DOBFilterGet'
+        source_types:
+          $ref: '#/components/schemas/Source_Types'
+        max_age:
+          $ref: '#/components/schemas/Profile_max_age'
+      required:
+      - dob
+      - first_name
+      - last_name
+      - middle_name
+      title: ProfileDefinitionGet
+    ProfilePut:
+      example:
+        max_age: null
+        dob:
+          allow_off_by_one: false
+          minimum_components_matched: 2
+          allow_empty_dob: false
+        source_types: null
+        last_name:
+          match_first_letters: 0
+          match_full_name: true
+          match_required: true
+          match_begins_with: false
+        tag: null
+        middle_name:
+          match_first_letters: 0
+          match_full_name: true
+          match_required: true
+          match_begins_with: false
+        first_name:
+          match_first_letters: 0
+          match_full_name: true
+          match_required: true
+          match_begins_with: false
+      properties:
+        tag:
+          $ref: '#/components/schemas/Tag_1'
+        first_name:
+          $ref: '#/components/schemas/NameFilter'
+        middle_name:
+          $ref: '#/components/schemas/NameFilter'
+        last_name:
+          $ref: '#/components/schemas/NameFilter'
+        dob:
+          $ref: '#/components/schemas/DOBFilter'
+        source_types:
+          $ref: '#/components/schemas/Source_Types'
+        max_age:
+          $ref: '#/components/schemas/ProfileDefinition_max_age'
+      required:
+      - dob
+      - first_name
+      - last_name
+      - middle_name
+      title: ProfilePut
+    SourceType:
+      enum:
+      - court
+      - doc
+      - arrest
+      - sor
+      - warrant
+      - swl
+      title: SourceType
+    SubAccount:
+      additionalProperties: false
+      example:
+        is_deleted: ""
+        default_profile: null
+        name: ""
+        id: ""
+        email: ""
+      properties:
+        id:
+          format: uuid
+          title: Id
+        name:
+          description: Descriptive name of sub-account
+          title: Name
+        email:
+          description: Email address. Also functions as a username if a password is
+            set
+          title: Email
+        default_profile:
+          $ref: '#/components/schemas/Default_Profile'
+        is_deleted:
+          title: Is Deleted
+      required:
+      - default_profile
+      - email
+      - id
+      - is_deleted
+      - name
+      title: SubAccount
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - {}
+            - {}
+          title: Location
+        msg:
+          title: Message
+        type:
+          title: Error Type
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    Client_Reference:
+      anyOf:
+      - {}
+      - {}
+      description: "Arbitrary value meaningful to client, not Natcrim"
+      title: Client Reference
+    Profile_Id:
+      anyOf:
+      - format: uuid
+      - {}
+      description: Search profile that was associated with this order
+      title: Profile Id
+    Fips:
+      anyOf:
+      - {}
+      - {}
+      default: "00000"
+      description: 5 digit FIPS geographic code
+      title: Fips
+    Region:
+      anyOf:
+      - {}
+      - {}
+      description: Two-letter alpha code from ANSI INCITS 38:2009
+      title: Region
+    Max_Results:
+      anyOf:
+      - {}
+      - {}
+      description: Maximum number of results to return
+      title: Max Results
+    Profile_Id_1:
+      anyOf:
+      - format: uuid
+      - {}
+      description: Search profile to associate with this order
+      title: Profile Id
+    OrderRequestPost_profile_def:
+      anyOf:
+      - $ref: '#/components/schemas/ProfileDefinition'
+      - {}
+      description: Search profile of this order. Does not have to match the definition
+        referenced by the profile ID.
+    Max_Results_1:
+      anyOf:
+      - maximum: 10000.0
+        minimum: 1.0
+      - {}
+      default: 200
+      description: Maximum number of results to return
+      title: Max Results
+    OrderResult_failure:
+      anyOf:
+      - $ref: '#/components/schemas/OrderFailure'
+      - {}
+    OrderResult_success:
+      anyOf:
+      - $ref: '#/components/schemas/OrderSuccess'
+      - {}
+    Max_Results_2:
+      anyOf:
+      - {}
+      - {}
+      default: false
+      title: Max Results
+    Middle_Name:
+      anyOf:
+      - {}
+      - {}
+      default: ""
+      title: Middle Name
+    Dob:
+      anyOf:
+      - format: date
+      - {}
+      title: Dob
+    Tag:
+      anyOf:
+      - {}
+      - {}
+      title: Tag
+    Source_Types:
+      anyOf:
+      - items:
+          $ref: '#/components/schemas/SourceType'
+      - {}
+      default: []
+      description: Source types filter. Includes all types by default
+      title: Source Types
+    Profile_max_age:
+      anyOf:
+      - $ref: '#/components/schemas/MaxAgeGet'
+      - {}
+      default:
+        age: 99
+        max_age_field: filed
+    ProfileDefinition_max_age:
+      anyOf:
+      - $ref: '#/components/schemas/MaxAge'
+      - {}
+      default:
+        age: 99
+        max_age_field: filed
+    Tag_1:
+      anyOf:
+      - minLength: 1
+      - {}
+      description: Search profile name
+      title: Tag
+    Default_Profile:
+      anyOf:
+      - format: uuid
+      - {}
+      description: ID of a search profile to use with a new order order doesn't designate
+        a profile
+      title: Default Profile
+  securitySchemes:
+    HTTPBasic:
+      description: API key and API secret as username and password
+      scheme: basic
+      type: http
+    HTTPBearer:
+      description: API key as bearer token
+      scheme: bearer
+      type: http
+
