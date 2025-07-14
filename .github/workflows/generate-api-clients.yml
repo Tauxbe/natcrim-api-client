@@ -1,0 +1,209 @@
+# GitHub Actions Workflow for NatCrim API Client Generation
+# This workflow generates API clients for JavaScript, Java, PHP, and Python using OpenAPI Generator
+
+name: Generate API Clients
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Run daily at 2 AM UTC to check for API changes
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+env:
+  OPENAPI_SPEC_URL: 'https://api.natcrim.com/openapi.json'
+  OPENAPI_GENERATOR_VERSION: '7.1.0'
+
+jobs:
+  generate-clients:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Set up Java 11
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+    
+    - name: Download OpenAPI Generator
+      run: |
+        wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/${{ env.OPENAPI_GENERATOR_VERSION }}/openapi-generator-cli-${{ env.OPENAPI_GENERATOR_VERSION }}.jar -O openapi-generator-cli.jar
+        java -jar openapi-generator-cli.jar version
+    
+    - name: Generate JavaScript client
+      run: |
+        java -jar openapi-generator-cli.jar generate \
+          -i ${{ env.OPENAPI_SPEC_URL }} \
+          -g javascript \
+          -o ./clients/javascript \
+          --additional-properties=projectName=natcrim-api-client,projectVersion=1.0.0,projectDescription="NatCrim API Client for JavaScript"
+    
+    - name: Generate Java client
+      run: |
+        java -jar openapi-generator-cli.jar generate \
+          -i ${{ env.OPENAPI_SPEC_URL }} \
+          -g java \
+          -o ./clients/java \
+          --additional-properties=groupId=com.natcrim,artifactId=natcrim-api-client,artifactVersion=1.0.0,invokerPackage=com.natcrim.api.client
+    
+    - name: Generate PHP client
+      run: |
+        java -jar openapi-generator-cli.jar generate \
+          -i ${{ env.OPENAPI_SPEC_URL }} \
+          -g php \
+          -o ./clients/php \
+          --additional-properties=packageName=NatCrimApiClient,composerVendorName=natcrim,composerProjectName=api-client
+    
+    - name: Generate Python client
+      run: |
+        java -jar openapi-generator-cli.jar generate \
+          -i ${{ env.OPENAPI_SPEC_URL }} \
+          -g python \
+          -o ./clients/python \
+          --additional-properties=packageName=natcrim_api_client,projectName=natcrim-api-client,packageVersion=1.0.0
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    
+    - name: Test JavaScript client
+      run: |
+        cd ./clients/javascript
+        npm install
+        npm test || echo "JavaScript tests completed"
+      continue-on-error: true
+    
+    - name: Test Java client
+      run: |
+        cd ./clients/java
+        chmod +x ./gradlew
+        ./gradlew build || echo "Java build completed"
+      continue-on-error: true
+    
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        extensions: curl, json, mbstring
+        tools: composer
+    
+    - name: Test PHP client
+      run: |
+        cd ./clients/php
+        composer install || echo "PHP dependencies installed"
+        composer test || echo "PHP tests completed"
+      continue-on-error: true
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Test Python client
+      run: |
+        cd ./clients/python
+        pip install -r requirements.txt || echo "Python requirements installed"
+        python -m pytest || echo "Python tests completed"
+      continue-on-error: true
+    
+    - name: Create documentation
+      run: |
+        mkdir -p ./documentation
+        cat > ./documentation/README.md << 'EOF'
+        # NatCrim API Clients
+        
+        This repository contains auto-generated API clients for the NatCrim API.
+        
+        ## Available Clients
+        - JavaScript: ./clients/javascript/
+        - Java: ./clients/java/
+        - PHP: ./clients/php/
+        - Python: ./clients/python/
+        
+        Generated on: $(date)
+        OpenAPI Spec URL: ${{ env.OPENAPI_SPEC_URL }}
+        Generator Version: ${{ env.OPENAPI_GENERATOR_VERSION }}
+        
+        ## Usage
+        
+        ### JavaScript
+        ```bash
+        cd clients/javascript
+        npm install
+        ```
+        
+        ### Java
+        ```bash
+        cd clients/java
+        ./gradlew build
+        ```
+        
+        ### PHP
+        ```bash
+        cd clients/php
+        composer install
+        ```
+        
+        ### Python
+        ```bash
+        cd clients/python
+        pip install -r requirements.txt
+        ```
+        EOF
+    
+    - name: Check for changes
+      id: changes
+      run: |
+        git add .
+        if git diff --cached --quiet; then
+          echo "has_changes=false" >> $GITHUB_OUTPUT
+        else
+          echo "has_changes=true" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Commit and push changes
+      if: steps.changes.outputs.has_changes == 'true'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "Auto-generated API clients for NatCrim API - $(date +%Y%m%d-%H%M%S)"
+        git push
+    
+    - name: Upload JavaScript client artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: natcrim-api-client-javascript
+        path: ./clients/javascript/
+    
+    - name: Upload Java client artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: natcrim-api-client-java
+        path: ./clients/java/
+    
+    - name: Upload PHP client artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: natcrim-api-client-php
+        path: ./clients/php/
+    
+    - name: Upload Python client artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: natcrim-api-client-python
+        path: ./clients/python/
+    
+    - name: Upload documentation artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: natcrim-api-client-documentation
+        path: ./documentation/

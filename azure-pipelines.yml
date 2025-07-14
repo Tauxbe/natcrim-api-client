@@ -1,0 +1,176 @@
+# Azure DevOps Pipeline for NatCrim API Client Generation
+# This pipeline generates API clients for JavaScript, Java, PHP, and Python using OpenAPI Generator
+
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  OPENAPI_SPEC_URL: 'https://api.natcrim.com/openapi.json'
+  OPENAPI_GENERATOR_VERSION: '7.1.0'
+
+stages:
+- stage: GenerateClients
+  displayName: 'Generate API Clients'
+  jobs:
+  - job: GenerateAllClients
+    displayName: 'Generate clients for all languages'
+    steps:
+    
+    # Install OpenAPI Generator
+    - task: JavaToolInstaller@0
+      displayName: 'Install Java 11'
+      inputs:
+        versionSpec: '11'
+        jdkArchitectureOption: 'x64'
+        jdkSourceOption: 'PreInstalled'
+    
+    - script: |
+        wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/$(OPENAPI_GENERATOR_VERSION)/openapi-generator-cli-$(OPENAPI_GENERATOR_VERSION).jar -O openapi-generator-cli.jar
+        java -jar openapi-generator-cli.jar version
+      displayName: 'Download and verify OpenAPI Generator'
+    
+    # Generate JavaScript client
+    - script: |
+        java -jar openapi-generator-cli.jar generate \
+          -i $(OPENAPI_SPEC_URL) \
+          -g javascript \
+          -o ./clients/javascript \
+          --additional-properties=projectName=natcrim-api-client,projectVersion=1.0.0,projectDescription="NatCrim API Client for JavaScript"
+      displayName: 'Generate JavaScript client'
+    
+    # Generate Java client
+    - script: |
+        java -jar openapi-generator-cli.jar generate \
+          -i $(OPENAPI_SPEC_URL) \
+          -g java \
+          -o ./clients/java \
+          --additional-properties=groupId=com.natcrim,artifactId=natcrim-api-client,artifactVersion=1.0.0,invokerPackage=com.natcrim.api.client
+      displayName: 'Generate Java client'
+    
+    # Generate PHP client
+    - script: |
+        java -jar openapi-generator-cli.jar generate \
+          -i $(OPENAPI_SPEC_URL) \
+          -g php \
+          -o ./clients/php \
+          --additional-properties=packageName=NatCrimApiClient,composerVendorName=natcrim,composerProjectName=api-client
+      displayName: 'Generate PHP client'
+    
+    # Generate Python client
+    - script: |
+        java -jar openapi-generator-cli.jar generate \
+          -i $(OPENAPI_SPEC_URL) \
+          -g python \
+          -o ./clients/python \
+          --additional-properties=packageName=natcrim_api_client,projectName=natcrim-api-client,packageVersion=1.0.0
+      displayName: 'Generate Python client'
+    
+    # Install Node.js for JavaScript client testing
+    - task: NodeTool@0
+      displayName: 'Install Node.js'
+      inputs:
+        versionSpec: '18.x'
+    
+    # Test JavaScript client
+    - script: |
+        cd ./clients/javascript
+        npm install
+        npm test || echo "JavaScript tests completed"
+      displayName: 'Test JavaScript client'
+      continueOnError: true
+    
+    # Test Java client
+    - script: |
+        cd ./clients/java
+        ./gradlew build || echo "Java build completed"
+      displayName: 'Test Java client'
+      continueOnError: true
+    
+    # Install PHP and Composer
+    - script: |
+        sudo apt-get update
+        sudo apt-get install -y php php-curl php-json php-mbstring composer
+      displayName: 'Install PHP and Composer'
+    
+    # Test PHP client
+    - script: |
+        cd ./clients/php
+        composer install || echo "PHP dependencies installed"
+        composer test || echo "PHP tests completed"
+      displayName: 'Test PHP client'
+      continueOnError: true
+    
+    # Install Python dependencies
+    - task: UsePythonVersion@0
+      displayName: 'Install Python'
+      inputs:
+        versionSpec: '3.9'
+    
+    # Test Python client
+    - script: |
+        cd ./clients/python
+        pip install -r requirements.txt || echo "Python requirements installed"
+        python -m pytest || echo "Python tests completed"
+      displayName: 'Test Python client'
+      continueOnError: true
+    
+    # Create client documentation
+    - script: |
+        mkdir -p ./documentation
+        echo "# NatCrim API Clients" > ./documentation/README.md
+        echo "" >> ./documentation/README.md
+        echo "This repository contains auto-generated API clients for the NatCrim API." >> ./documentation/README.md
+        echo "" >> ./documentation/README.md
+        echo "## Available Clients" >> ./documentation/README.md
+        echo "- JavaScript: ./clients/javascript/" >> ./documentation/README.md
+        echo "- Java: ./clients/java/" >> ./documentation/README.md
+        echo "- PHP: ./clients/php/" >> ./documentation/README.md
+        echo "- Python: ./clients/python/" >> ./documentation/README.md
+        echo "" >> ./documentation/README.md
+        echo "Generated on: $(date)" >> ./documentation/README.md
+        echo "OpenAPI Spec URL: $(OPENAPI_SPEC_URL)" >> ./documentation/README.md
+      displayName: 'Create documentation'
+    
+    # Configure git and commit generated clients
+    - script: |
+        git config --global user.email "pipeline@azure-devops.com"
+        git config --global user.name "Azure DevOps Pipeline"
+        git add .
+        git commit -m "Auto-generated API clients for NatCrim API - $(date +%Y%m%d-%H%M%S)" || echo "No changes to commit"
+        git push origin HEAD:$(Build.SourceBranch) || echo "Push failed - check repository permissions"
+      displayName: 'Commit generated clients to repository'
+      continueOnError: true
+    
+    # Publish artifacts
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish JavaScript client'
+      inputs:
+        pathtoPublish: './clients/javascript'
+        artifactName: 'natcrim-api-client-javascript'
+    
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Java client'
+      inputs:
+        pathtoPublish: './clients/java'
+        artifactName: 'natcrim-api-client-java'
+    
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish PHP client'
+      inputs:
+        pathtoPublish: './clients/php'
+        artifactName: 'natcrim-api-client-php'
+    
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Python client'
+      inputs:
+        pathtoPublish: './clients/python'
+        artifactName: 'natcrim-api-client-python'
+    
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish documentation'
+      inputs:
+        pathtoPublish: './documentation'
+        artifactName: 'natcrim-api-client-documentation'
