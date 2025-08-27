@@ -60,7 +60,7 @@ import com.google.gson.JsonParseException;
 
 import com.natcrim.api.client.JSON;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-08-26T03:05:42.359972Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-08-27T02:58:53.441840Z[Etc/UTC]")
 public class ProfileMaxAge extends AbstractOpenApiSchema {
     private static final Logger log = Logger.getLogger(ProfileMaxAge.class.getName());
 
