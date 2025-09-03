@@ -50,7 +50,7 @@ import com.google.gson.JsonParseException;
 
 import com.natcrim.api.client.JSON;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-09-02T03:02:42.597667Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-09-03T02:51:28.197302Z[Etc/UTC]")
 public class Fips extends AbstractOpenApiSchema {
     private static final Logger log = Logger.getLogger(Fips.class.getName());
 
