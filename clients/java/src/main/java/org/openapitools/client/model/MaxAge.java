@@ -51,7 +51,7 @@ import com.natcrim.api.client.JSON;
 /**
  * MaxAge
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-09-18T02:53:37.135587Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-09-19T02:57:22.774459Z[Etc/UTC]")
 public class MaxAge {
   public static final String SERIALIZED_NAME_AGE = "age";
   @SerializedName(SERIALIZED_NAME_AGE)
