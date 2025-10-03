@@ -56,7 +56,7 @@ import com.natcrim.api.client.JSON;
 /**
  * OrderRequestGet
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-02T02:53:20.690263Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-03T02:52:54.728174Z[Etc/UTC]")
 public class OrderRequestGet {
   public static final String SERIALIZED_NAME_CLIENT_REFERENCE = "client_reference";
   @SerializedName(SERIALIZED_NAME_CLIENT_REFERENCE)
