@@ -51,7 +51,7 @@ import com.natcrim.api.client.JSON;
 /**
  * OrderSubject
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-12T02:58:29.148129Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-13T03:05:46.696995Z[Etc/UTC]")
 public class OrderSubject {
   public static final String SERIALIZED_NAME_FIRST_NAME = "first_name";
   @SerializedName(SERIALIZED_NAME_FIRST_NAME)
