@@ -42,7 +42,7 @@ import com.natcrim.api.client.JSON;
 /**
  * SourceType
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-17T02:57:59.021651Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-18T02:51:18.053890Z[Etc/UTC]")
 public class SourceType {
   public SourceType() {
   }
