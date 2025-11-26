@@ -53,7 +53,7 @@ import com.natcrim.api.client.JSON;
 /**
  * OrderPostResponseOutput
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-25T03:10:51.770414Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-26T03:11:05.152475Z[Etc/UTC]")
 public class OrderPostResponseOutput {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
