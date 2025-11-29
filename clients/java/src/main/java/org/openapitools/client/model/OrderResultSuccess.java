@@ -58,7 +58,7 @@ import com.google.gson.JsonParseException;
 
 import com.natcrim.api.client.JSON;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-28T03:07:01.670959Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-29T03:07:18.980543Z[Etc/UTC]")
 public class OrderResultSuccess extends AbstractOpenApiSchema {
     private static final Logger log = Logger.getLogger(OrderResultSuccess.class.getName());
 
