@@ -52,7 +52,7 @@ import com.natcrim.api.client.JSON;
 /**
  * OrderResult
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-12-08T03:17:24.524407Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-12-09T03:14:45.354652Z[Etc/UTC]")
 public class OrderResult {
   public static final String SERIALIZED_NAME_COMPLETED_AT = "completed_at";
   @SerializedName(SERIALIZED_NAME_COMPLETED_AT)
