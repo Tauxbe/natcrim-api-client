@@ -7,7 +7,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**recordsReturned** | **Object** |  |  |
+|**recordsReturned** | **Integer** |  |  |
 
 
 

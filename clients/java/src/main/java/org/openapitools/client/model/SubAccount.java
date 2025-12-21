@@ -21,7 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.Arrays;
-import org.openapitools.client.model.DefaultProfile;
+import java.util.UUID;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -50,32 +50,32 @@ import com.natcrim.api.client.JSON;
 /**
  * SubAccount
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-12-20T03:11:11.149103Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-12-21T03:25:25.736217Z[Etc/UTC]")
 public class SubAccount {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
-  private Object id = null;
+  private UUID id;
 
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
-  private Object name = null;
+  private String name;
 
   public static final String SERIALIZED_NAME_EMAIL = "email";
   @SerializedName(SERIALIZED_NAME_EMAIL)
-  private Object email = null;
+  private String email;
 
   public static final String SERIALIZED_NAME_DEFAULT_PROFILE = "default_profile";
   @SerializedName(SERIALIZED_NAME_DEFAULT_PROFILE)
-  private DefaultProfile defaultProfile;
+  private UUID defaultProfile;
 
   public static final String SERIALIZED_NAME_IS_DELETED = "is_deleted";
   @SerializedName(SERIALIZED_NAME_IS_DELETED)
-  private Object isDeleted = null;
+  private Boolean isDeleted;
 
   public SubAccount() {
   }
 
-  public SubAccount id(Object id) {
+  public SubAccount id(UUID id) {
     
     this.id = id;
     return this;
@@ -85,18 +85,18 @@ public class SubAccount {
    * Get id
    * @return id
   **/
-  @javax.annotation.Nullable
-  public Object getId() {
+  @javax.annotation.Nonnull
+  public UUID getId() {
     return id;
   }
 
 
-  public void setId(Object id) {
+  public void setId(UUID id) {
     this.id = id;
   }
 
 
-  public SubAccount name(Object name) {
+  public SubAccount name(String name) {
     
     this.name = name;
     return this;
@@ -106,18 +106,18 @@ public class SubAccount {
    * Descriptive name of sub-account
    * @return name
   **/
-  @javax.annotation.Nullable
-  public Object getName() {
+  @javax.annotation.Nonnull
+  public String getName() {
     return name;
   }
 
 
-  public void setName(Object name) {
+  public void setName(String name) {
     this.name = name;
   }
 
 
-  public SubAccount email(Object email) {
+  public SubAccount email(String email) {
     
     this.email = email;
     return this;
@@ -127,18 +127,18 @@ public class SubAccount {
    * Email address. Also functions as a username if a password is set
    * @return email
   **/
-  @javax.annotation.Nullable
-  public Object getEmail() {
+  @javax.annotation.Nonnull
+  public String getEmail() {
     return email;
   }
 
 
-  public void setEmail(Object email) {
+  public void setEmail(String email) {
     this.email = email;
   }
 
 
-  public SubAccount defaultProfile(DefaultProfile defaultProfile) {
+  public SubAccount defaultProfile(UUID defaultProfile) {
     
     this.defaultProfile = defaultProfile;
     return this;
@@ -148,18 +148,18 @@ public class SubAccount {
    * Get defaultProfile
    * @return defaultProfile
   **/
-  @javax.annotation.Nonnull
-  public DefaultProfile getDefaultProfile() {
+  @javax.annotation.Nullable
+  public UUID getDefaultProfile() {
     return defaultProfile;
   }
 
 
-  public void setDefaultProfile(DefaultProfile defaultProfile) {
+  public void setDefaultProfile(UUID defaultProfile) {
     this.defaultProfile = defaultProfile;
   }
 
 
-  public SubAccount isDeleted(Object isDeleted) {
+  public SubAccount isDeleted(Boolean isDeleted) {
     
     this.isDeleted = isDeleted;
     return this;
@@ -169,13 +169,13 @@ public class SubAccount {
    * Get isDeleted
    * @return isDeleted
   **/
-  @javax.annotation.Nullable
-  public Object getIsDeleted() {
+  @javax.annotation.Nonnull
+  public Boolean getIsDeleted() {
     return isDeleted;
   }
 
 
-  public void setIsDeleted(Object isDeleted) {
+  public void setIsDeleted(Boolean isDeleted) {
     this.isDeleted = isDeleted;
   }
 
@@ -276,8 +276,18 @@ public class SubAccount {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the required field `default_profile`
-      DefaultProfile.validateJsonElement(jsonObj.get("default_profile"));
+      if (!jsonObj.get("id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
+      }
+      if (!jsonObj.get("name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
+      }
+      if (!jsonObj.get("email").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `email` to be a primitive type in the JSON string but got `%s`", jsonObj.get("email").toString()));
+      }
+      if ((jsonObj.get("default_profile") != null && !jsonObj.get("default_profile").isJsonNull()) && !jsonObj.get("default_profile").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `default_profile` to be a primitive type in the JSON string but got `%s`", jsonObj.get("default_profile").toString()));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

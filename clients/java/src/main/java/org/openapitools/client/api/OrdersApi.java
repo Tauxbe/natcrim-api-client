@@ -32,8 +32,7 @@ import org.openapitools.client.model.HTTPValidationError;
 import java.time.OffsetDateTime;
 import org.openapitools.client.model.Order;
 import org.openapitools.client.model.OrderPost;
-import org.openapitools.client.model.OrderPostResponseInput;
-import org.openapitools.client.model.OrderPostResponseOutput;
+import org.openapitools.client.model.OrderPostResponse;
 import java.util.UUID;
 
 import java.lang.reflect.Type;
@@ -167,7 +166,7 @@ public class OrdersApi {
      * @param orderId  (required)
      * @param offset  (optional, default to 0)
      * @param length  (optional, default to 20)
-     * @return OrderPostResponseInput
+     * @return OrderPostResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -179,8 +178,8 @@ public class OrdersApi {
         <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
      </table>
      */
-    public OrderPostResponseInput getOrderCacheOrdersCacheOrderIdGet(UUID orderId, Integer offset, Integer length) throws ApiException {
-        ApiResponse<OrderPostResponseInput> localVarResp = getOrderCacheOrdersCacheOrderIdGetWithHttpInfo(orderId, offset, length);
+    public OrderPostResponse getOrderCacheOrdersCacheOrderIdGet(UUID orderId, Integer offset, Integer length) throws ApiException {
+        ApiResponse<OrderPostResponse> localVarResp = getOrderCacheOrdersCacheOrderIdGetWithHttpInfo(orderId, offset, length);
         return localVarResp.getData();
     }
 
@@ -190,7 +189,7 @@ public class OrdersApi {
      * @param orderId  (required)
      * @param offset  (optional, default to 0)
      * @param length  (optional, default to 20)
-     * @return ApiResponse&lt;OrderPostResponseInput&gt;
+     * @return ApiResponse&lt;OrderPostResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -202,9 +201,9 @@ public class OrdersApi {
         <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<OrderPostResponseInput> getOrderCacheOrdersCacheOrderIdGetWithHttpInfo(UUID orderId, Integer offset, Integer length) throws ApiException {
+    public ApiResponse<OrderPostResponse> getOrderCacheOrdersCacheOrderIdGetWithHttpInfo(UUID orderId, Integer offset, Integer length) throws ApiException {
         okhttp3.Call localVarCall = getOrderCacheOrdersCacheOrderIdGetValidateBeforeCall(orderId, offset, length, null);
-        Type localVarReturnType = new TypeToken<OrderPostResponseInput>(){}.getType();
+        Type localVarReturnType = new TypeToken<OrderPostResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -227,10 +226,10 @@ public class OrdersApi {
         <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getOrderCacheOrdersCacheOrderIdGetAsync(UUID orderId, Integer offset, Integer length, final ApiCallback<OrderPostResponseInput> _callback) throws ApiException {
+    public okhttp3.Call getOrderCacheOrdersCacheOrderIdGetAsync(UUID orderId, Integer offset, Integer length, final ApiCallback<OrderPostResponse> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getOrderCacheOrdersCacheOrderIdGetValidateBeforeCall(orderId, offset, length, _callback);
-        Type localVarReturnType = new TypeToken<OrderPostResponseInput>(){}.getType();
+        Type localVarReturnType = new TypeToken<OrderPostResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -645,7 +644,7 @@ public class OrdersApi {
      * 
      * @param orderPost  (required)
      * @param paginate  (optional)
-     * @return OrderPostResponseOutput
+     * @return OrderPostResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -654,8 +653,8 @@ public class OrdersApi {
         <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
      </table>
      */
-    public OrderPostResponseOutput postOrderOrdersPost(OrderPost orderPost, Boolean paginate) throws ApiException {
-        ApiResponse<OrderPostResponseOutput> localVarResp = postOrderOrdersPostWithHttpInfo(orderPost, paginate);
+    public OrderPostResponse postOrderOrdersPost(OrderPost orderPost, Boolean paginate) throws ApiException {
+        ApiResponse<OrderPostResponse> localVarResp = postOrderOrdersPostWithHttpInfo(orderPost, paginate);
         return localVarResp.getData();
     }
 
@@ -664,7 +663,7 @@ public class OrdersApi {
      * 
      * @param orderPost  (required)
      * @param paginate  (optional)
-     * @return ApiResponse&lt;OrderPostResponseOutput&gt;
+     * @return ApiResponse&lt;OrderPostResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -673,9 +672,9 @@ public class OrdersApi {
         <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<OrderPostResponseOutput> postOrderOrdersPostWithHttpInfo(OrderPost orderPost, Boolean paginate) throws ApiException {
+    public ApiResponse<OrderPostResponse> postOrderOrdersPostWithHttpInfo(OrderPost orderPost, Boolean paginate) throws ApiException {
         okhttp3.Call localVarCall = postOrderOrdersPostValidateBeforeCall(orderPost, paginate, null);
-        Type localVarReturnType = new TypeToken<OrderPostResponseOutput>(){}.getType();
+        Type localVarReturnType = new TypeToken<OrderPostResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -694,10 +693,10 @@ public class OrdersApi {
         <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call postOrderOrdersPostAsync(OrderPost orderPost, Boolean paginate, final ApiCallback<OrderPostResponseOutput> _callback) throws ApiException {
+    public okhttp3.Call postOrderOrdersPostAsync(OrderPost orderPost, Boolean paginate, final ApiCallback<OrderPostResponse> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = postOrderOrdersPostValidateBeforeCall(orderPost, paginate, _callback);
-        Type localVarReturnType = new TypeToken<OrderPostResponseOutput>(){}.getType();
+        Type localVarReturnType = new TypeToken<OrderPostResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

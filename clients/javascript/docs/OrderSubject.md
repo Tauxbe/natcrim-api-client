@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**firstName** | **Object** |  | 
-**middleName** | [**MiddleName**](MiddleName.md) |  | [optional] 
-**lastName** | **Object** |  | 
-**dob** | [**Dob**](Dob.md) |  | [optional] 
+**firstName** | **String** |  | 
+**middleName** | **String** |  | [optional] 
+**lastName** | **String** |  | 
+**dob** | **Date** |  | [optional] 
 
 

@@ -12,64 +12,70 @@
  */
 
 import ApiClient from '../ApiClient';
-
 /**
- * The SourceType model module.
- * @module model/SourceType
- * @version 1.0.0
- */
-class SourceType {
-    /**
-     * Constructs a new <code>SourceType</code>.
-     * @alias module:model/SourceType
-     */
-    constructor() { 
-        
-        SourceType.initialize(this);
-    }
+* Enum class SourceType.
+* @enum {}
+* @readonly
+*/
+export default class SourceType {
+    
+        /**
+         * value: "court"
+         * @const
+         */
+        "court" = "court";
+
+    
+        /**
+         * value: "doc"
+         * @const
+         */
+        "doc" = "doc";
+
+    
+        /**
+         * value: "arrest"
+         * @const
+         */
+        "arrest" = "arrest";
+
+    
+        /**
+         * value: "sor"
+         * @const
+         */
+        "sor" = "sor";
+
+    
+        /**
+         * value: "warrant"
+         * @const
+         */
+        "warrant" = "warrant";
+
+    
+        /**
+         * value: "swl"
+         * @const
+         */
+        "swl" = "swl";
+
+    
+        /**
+         * value: "federal"
+         * @const
+         */
+        "federal" = "federal";
+
+    
 
     /**
-     * Initializes the fields of this object.
-     * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
-     * Only for internal use.
-     */
-    static initialize(obj) { 
+    * Returns a <code>SourceType</code> enum value from a Javascript object name.
+    * @param {Object} data The plain JavaScript object containing the name of the enum value.
+    * @return {module:model/SourceType} The enum <code>SourceType</code> value.
+    */
+    static constructFromObject(object) {
+        return object;
     }
-
-    /**
-     * Constructs a <code>SourceType</code> from a plain JavaScript object, optionally creating a new instance.
-     * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
-     * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/SourceType} obj Optional instance to populate.
-     * @return {module:model/SourceType} The populated <code>SourceType</code> instance.
-     */
-    static constructFromObject(data, obj) {
-        if (data) {
-            obj = obj || new SourceType();
-
-        }
-        return obj;
-    }
-
-    /**
-     * Validates the JSON data with respect to <code>SourceType</code>.
-     * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>SourceType</code>.
-     */
-    static validateJSON(data) {
-
-        return true;
-    }
-
-
 }
-
-
-
-
-
-
-
-
-export default SourceType;
 

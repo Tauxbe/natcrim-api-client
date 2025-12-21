@@ -12,9 +12,8 @@
  */
 
 import ApiClient from '../ApiClient';
-import MaxResults2 from './MaxResults2';
-import OrderResultFailure from './OrderResultFailure';
-import OrderResultSuccess from './OrderResultSuccess';
+import OrderFailure from './OrderFailure';
+import OrderSuccess from './OrderSuccess';
 
 /**
  * The OrderResult model module.
@@ -25,9 +24,9 @@ class OrderResult {
     /**
      * Constructs a new <code>OrderResult</code>.
      * @alias module:model/OrderResult
-     * @param completedAt {Object} 
-     * @param failure {module:model/OrderResultFailure} 
-     * @param success {module:model/OrderResultSuccess} 
+     * @param completedAt {Date} 
+     * @param failure {module:model/OrderFailure} 
+     * @param success {module:model/OrderSuccess} 
      */
     constructor(completedAt, failure, success) { 
         
@@ -57,16 +56,16 @@ class OrderResult {
             obj = obj || new OrderResult();
 
             if (data.hasOwnProperty('completed_at')) {
-                obj['completed_at'] = ApiClient.convertToType(data['completed_at'], Object);
+                obj['completed_at'] = ApiClient.convertToType(data['completed_at'], 'Date');
             }
             if (data.hasOwnProperty('failure')) {
-                obj['failure'] = OrderResultFailure.constructFromObject(data['failure']);
+                obj['failure'] = OrderFailure.constructFromObject(data['failure']);
             }
             if (data.hasOwnProperty('success')) {
-                obj['success'] = OrderResultSuccess.constructFromObject(data['success']);
+                obj['success'] = OrderSuccess.constructFromObject(data['success']);
             }
             if (data.hasOwnProperty('max_results')) {
-                obj['max_results'] = MaxResults2.constructFromObject(data['max_results']);
+                obj['max_results'] = ApiClient.convertToType(data['max_results'], 'Boolean');
             }
         }
         return obj;
@@ -86,15 +85,11 @@ class OrderResult {
         }
         // validate the optional field `failure`
         if (data['failure']) { // data not null
-          OrderResultFailure.validateJSON(data['failure']);
+          OrderFailure.validateJSON(data['failure']);
         }
         // validate the optional field `success`
         if (data['success']) { // data not null
-          OrderResultSuccess.validateJSON(data['success']);
-        }
-        // validate the optional field `max_results`
-        if (data['max_results']) { // data not null
-          MaxResults2.validateJSON(data['max_results']);
+          OrderSuccess.validateJSON(data['success']);
         }
 
         return true;
@@ -106,22 +101,22 @@ class OrderResult {
 OrderResult.RequiredProperties = ["completed_at", "failure", "success"];
 
 /**
- * @member {Object} completed_at
+ * @member {Date} completed_at
  */
 OrderResult.prototype['completed_at'] = undefined;
 
 /**
- * @member {module:model/OrderResultFailure} failure
+ * @member {module:model/OrderFailure} failure
  */
 OrderResult.prototype['failure'] = undefined;
 
 /**
- * @member {module:model/OrderResultSuccess} success
+ * @member {module:model/OrderSuccess} success
  */
 OrderResult.prototype['success'] = undefined;
 
 /**
- * @member {module:model/MaxResults2} max_results
+ * @member {Boolean} max_results
  */
 OrderResult.prototype['max_results'] = undefined;
 

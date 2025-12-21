@@ -21,11 +21,11 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import org.openapitools.client.model.AnyOf;
 import org.openapitools.client.model.DOBFilterGet;
+import org.openapitools.client.model.MaxAgeGet;
 import org.openapitools.client.model.NameFilterGet;
-import org.openapitools.client.model.ProfileMaxAge;
-import org.openapitools.client.model.SourceTypes;
-import org.openapitools.client.model.Tag;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -54,11 +54,11 @@ import com.natcrim.api.client.JSON;
 /**
  * ProfileDefinitionGet
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-12-20T03:11:11.149103Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-12-21T03:25:25.736217Z[Etc/UTC]")
 public class ProfileDefinitionGet {
   public static final String SERIALIZED_NAME_TAG = "tag";
   @SerializedName(SERIALIZED_NAME_TAG)
-  private Tag tag;
+  private String tag;
 
   public static final String SERIALIZED_NAME_FIRST_NAME = "first_name";
   @SerializedName(SERIALIZED_NAME_FIRST_NAME)
@@ -78,16 +78,16 @@ public class ProfileDefinitionGet {
 
   public static final String SERIALIZED_NAME_SOURCE_TYPES = "source_types";
   @SerializedName(SERIALIZED_NAME_SOURCE_TYPES)
-  private SourceTypes sourceTypes = [];
+  private AnyOf sourceTypes = [];
 
   public static final String SERIALIZED_NAME_MAX_AGE = "max_age";
   @SerializedName(SERIALIZED_NAME_MAX_AGE)
-  private ProfileMaxAge maxAge = {age=99, max_age_field=filed};
+  private MaxAgeGet maxAge;
 
   public ProfileDefinitionGet() {
   }
 
-  public ProfileDefinitionGet tag(Tag tag) {
+  public ProfileDefinitionGet tag(String tag) {
     
     this.tag = tag;
     return this;
@@ -98,12 +98,12 @@ public class ProfileDefinitionGet {
    * @return tag
   **/
   @javax.annotation.Nullable
-  public Tag getTag() {
+  public String getTag() {
     return tag;
   }
 
 
-  public void setTag(Tag tag) {
+  public void setTag(String tag) {
     this.tag = tag;
   }
 
@@ -192,28 +192,28 @@ public class ProfileDefinitionGet {
   }
 
 
-  public ProfileDefinitionGet sourceTypes(SourceTypes sourceTypes) {
+  public ProfileDefinitionGet sourceTypes(AnyOf sourceTypes) {
     
     this.sourceTypes = sourceTypes;
     return this;
   }
 
    /**
-   * Get sourceTypes
+   * Source types filter. Includes all types by default
    * @return sourceTypes
   **/
   @javax.annotation.Nullable
-  public SourceTypes getSourceTypes() {
+  public AnyOf getSourceTypes() {
     return sourceTypes;
   }
 
 
-  public void setSourceTypes(SourceTypes sourceTypes) {
+  public void setSourceTypes(AnyOf sourceTypes) {
     this.sourceTypes = sourceTypes;
   }
 
 
-  public ProfileDefinitionGet maxAge(ProfileMaxAge maxAge) {
+  public ProfileDefinitionGet maxAge(MaxAgeGet maxAge) {
     
     this.maxAge = maxAge;
     return this;
@@ -224,12 +224,12 @@ public class ProfileDefinitionGet {
    * @return maxAge
   **/
   @javax.annotation.Nullable
-  public ProfileMaxAge getMaxAge() {
+  public MaxAgeGet getMaxAge() {
     return maxAge;
   }
 
 
-  public void setMaxAge(ProfileMaxAge maxAge) {
+  public void setMaxAge(MaxAgeGet maxAge) {
     this.maxAge = maxAge;
   }
 
@@ -253,9 +253,20 @@ public class ProfileDefinitionGet {
         Objects.equals(this.maxAge, profileDefinitionGet.maxAge);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(tag, firstName, middleName, lastName, dob, sourceTypes, maxAge);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -335,9 +346,8 @@ public class ProfileDefinitionGet {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the optional field `tag`
-      if (jsonObj.get("tag") != null && !jsonObj.get("tag").isJsonNull()) {
-        Tag.validateJsonElement(jsonObj.get("tag"));
+      if ((jsonObj.get("tag") != null && !jsonObj.get("tag").isJsonNull()) && !jsonObj.get("tag").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `tag` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tag").toString()));
       }
       // validate the required field `first_name`
       NameFilterGet.validateJsonElement(jsonObj.get("first_name"));
@@ -349,11 +359,11 @@ public class ProfileDefinitionGet {
       DOBFilterGet.validateJsonElement(jsonObj.get("dob"));
       // validate the optional field `source_types`
       if (jsonObj.get("source_types") != null && !jsonObj.get("source_types").isJsonNull()) {
-        SourceTypes.validateJsonElement(jsonObj.get("source_types"));
+        AnyOf.validateJsonElement(jsonObj.get("source_types"));
       }
       // validate the optional field `max_age`
       if (jsonObj.get("max_age") != null && !jsonObj.get("max_age").isJsonNull()) {
-        ProfileMaxAge.validateJsonElement(jsonObj.get("max_age"));
+        MaxAgeGet.validateJsonElement(jsonObj.get("max_age"));
       }
   }
 

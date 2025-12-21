@@ -19,12 +19,11 @@ import json
 
 
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, StrictStr
+from pydantic import Field
 from natcrim_api_client.models.dob_filter import DOBFilter
+from natcrim_api_client.models.max_age import MaxAge
 from natcrim_api_client.models.name_filter import NameFilter
-from natcrim_api_client.models.profile_definition_max_age import ProfileDefinitionMaxAge
-from natcrim_api_client.models.source_types import SourceTypes
-from natcrim_api_client.models.tag import Tag
 try:
     from typing import Self
 except ImportError:
@@ -34,13 +33,13 @@ class ProfileDefinition(BaseModel):
     """
     ProfileDefinition
     """ # noqa: E501
-    tag: Optional[Tag] = None
+    tag: Optional[StrictStr] = None
     first_name: NameFilter
     middle_name: NameFilter
     last_name: NameFilter
     dob: DOBFilter
-    source_types: Optional[SourceTypes] = None
-    max_age: Optional[ProfileDefinitionMaxAge] = None
+    source_types: Optional[Any] = Field(default=None, description="Source types filter. Includes all types by default")
+    max_age: Optional[MaxAge] = None
     __properties: ClassVar[List[str]] = ["tag", "first_name", "middle_name", "last_name", "dob", "source_types", "max_age"]
 
     model_config = {
@@ -79,9 +78,6 @@ class ProfileDefinition(BaseModel):
             },
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of tag
-        if self.tag:
-            _dict['tag'] = self.tag.to_dict()
         # override the default output from pydantic by calling `to_dict()` of first_name
         if self.first_name:
             _dict['first_name'] = self.first_name.to_dict()
@@ -100,6 +96,21 @@ class ProfileDefinition(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of max_age
         if self.max_age:
             _dict['max_age'] = self.max_age.to_dict()
+        # set to None if tag (nullable) is None
+        # and model_fields_set contains the field
+        if self.tag is None and "tag" in self.model_fields_set:
+            _dict['tag'] = None
+
+        # set to None if source_types (nullable) is None
+        # and model_fields_set contains the field
+        if self.source_types is None and "source_types" in self.model_fields_set:
+            _dict['source_types'] = None
+
+        # set to None if max_age (nullable) is None
+        # and model_fields_set contains the field
+        if self.max_age is None and "max_age" in self.model_fields_set:
+            _dict['max_age'] = None
+
         return _dict
 
     @classmethod
@@ -112,13 +123,13 @@ class ProfileDefinition(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "tag": Tag.from_dict(obj.get("tag")) if obj.get("tag") is not None else None,
+            "tag": obj.get("tag"),
             "first_name": NameFilter.from_dict(obj.get("first_name")) if obj.get("first_name") is not None else None,
             "middle_name": NameFilter.from_dict(obj.get("middle_name")) if obj.get("middle_name") is not None else None,
             "last_name": NameFilter.from_dict(obj.get("last_name")) if obj.get("last_name") is not None else None,
             "dob": DOBFilter.from_dict(obj.get("dob")) if obj.get("dob") is not None else None,
-            "source_types": SourceTypes.from_dict(obj.get("source_types")) if obj.get("source_types") is not None else None,
-            "max_age": ProfileDefinitionMaxAge.from_dict(obj.get("max_age")) if obj.get("max_age") is not None else None
+            "source_types": AnyOf.from_dict(obj.get("source_types")) if obj.get("source_types") is not None else None,
+            "max_age": MaxAge.from_dict(obj.get("max_age")) if obj.get("max_age") is not None else None
         })
         return _obj
 

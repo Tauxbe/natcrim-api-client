@@ -12,11 +12,10 @@
  */
 
 import ApiClient from '../ApiClient';
+import AnyOf from './AnyOf';
 import DOBFilterGet from './DOBFilterGet';
+import MaxAgeGet from './MaxAgeGet';
 import NameFilterGet from './NameFilterGet';
-import ProfileMaxAge from './ProfileMaxAge';
-import SourceTypes from './SourceTypes';
-import Tag from './Tag';
 
 /**
  * The ProfileDefinitionGet model module.
@@ -61,7 +60,7 @@ class ProfileDefinitionGet {
             obj = obj || new ProfileDefinitionGet();
 
             if (data.hasOwnProperty('tag')) {
-                obj['tag'] = Tag.constructFromObject(data['tag']);
+                obj['tag'] = ApiClient.convertToType(data['tag'], 'String');
             }
             if (data.hasOwnProperty('first_name')) {
                 obj['first_name'] = NameFilterGet.constructFromObject(data['first_name']);
@@ -76,10 +75,10 @@ class ProfileDefinitionGet {
                 obj['dob'] = DOBFilterGet.constructFromObject(data['dob']);
             }
             if (data.hasOwnProperty('source_types')) {
-                obj['source_types'] = SourceTypes.constructFromObject(data['source_types']);
+                obj['source_types'] = ApiClient.convertToType(data['source_types'], AnyOf);
             }
             if (data.hasOwnProperty('max_age')) {
-                obj['max_age'] = ProfileMaxAge.constructFromObject(data['max_age']);
+                obj['max_age'] = MaxAgeGet.constructFromObject(data['max_age']);
             }
         }
         return obj;
@@ -97,9 +96,9 @@ class ProfileDefinitionGet {
                 throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
             }
         }
-        // validate the optional field `tag`
-        if (data['tag']) { // data not null
-          Tag.validateJSON(data['tag']);
+        // ensure the json data is a string
+        if (data['tag'] && !(typeof data['tag'] === 'string' || data['tag'] instanceof String)) {
+            throw new Error("Expected the field `tag` to be a primitive type in the JSON string but got " + data['tag']);
         }
         // validate the optional field `first_name`
         if (data['first_name']) { // data not null
@@ -119,11 +118,11 @@ class ProfileDefinitionGet {
         }
         // validate the optional field `source_types`
         if (data['source_types']) { // data not null
-          SourceTypes.validateJSON(data['source_types']);
+          AnyOf.validateJSON(data['source_types']);
         }
         // validate the optional field `max_age`
         if (data['max_age']) { // data not null
-          ProfileMaxAge.validateJSON(data['max_age']);
+          MaxAgeGet.validateJSON(data['max_age']);
         }
 
         return true;
@@ -135,7 +134,7 @@ class ProfileDefinitionGet {
 ProfileDefinitionGet.RequiredProperties = ["first_name", "middle_name", "last_name", "dob"];
 
 /**
- * @member {module:model/Tag} tag
+ * @member {String} tag
  */
 ProfileDefinitionGet.prototype['tag'] = undefined;
 
@@ -160,12 +159,13 @@ ProfileDefinitionGet.prototype['last_name'] = undefined;
 ProfileDefinitionGet.prototype['dob'] = undefined;
 
 /**
- * @member {module:model/SourceTypes} source_types
+ * Source types filter. Includes all types by default
+ * @member {module:model/AnyOf} source_types
  */
 ProfileDefinitionGet.prototype['source_types'] = undefined;
 
 /**
- * @member {module:model/ProfileMaxAge} max_age
+ * @member {module:model/MaxAgeGet} max_age
  */
 ProfileDefinitionGet.prototype['max_age'] = undefined;
 

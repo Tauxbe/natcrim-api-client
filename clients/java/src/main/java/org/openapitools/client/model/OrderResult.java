@@ -20,10 +20,11 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.Arrays;
-import org.openapitools.client.model.MaxResults2;
-import org.openapitools.client.model.OrderResultFailure;
-import org.openapitools.client.model.OrderResultSuccess;
+import org.openapitools.client.model.OrderFailure;
+import org.openapitools.client.model.OrderSuccess;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -52,28 +53,28 @@ import com.natcrim.api.client.JSON;
 /**
  * OrderResult
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-12-20T03:11:11.149103Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-12-21T03:25:25.736217Z[Etc/UTC]")
 public class OrderResult {
   public static final String SERIALIZED_NAME_COMPLETED_AT = "completed_at";
   @SerializedName(SERIALIZED_NAME_COMPLETED_AT)
-  private Object completedAt = null;
+  private OffsetDateTime completedAt;
 
   public static final String SERIALIZED_NAME_FAILURE = "failure";
   @SerializedName(SERIALIZED_NAME_FAILURE)
-  private OrderResultFailure failure;
+  private OrderFailure failure;
 
   public static final String SERIALIZED_NAME_SUCCESS = "success";
   @SerializedName(SERIALIZED_NAME_SUCCESS)
-  private OrderResultSuccess success;
+  private OrderSuccess success;
 
   public static final String SERIALIZED_NAME_MAX_RESULTS = "max_results";
   @SerializedName(SERIALIZED_NAME_MAX_RESULTS)
-  private MaxResults2 maxResults = false;
+  private Boolean maxResults;
 
   public OrderResult() {
   }
 
-  public OrderResult completedAt(Object completedAt) {
+  public OrderResult completedAt(OffsetDateTime completedAt) {
     
     this.completedAt = completedAt;
     return this;
@@ -83,18 +84,18 @@ public class OrderResult {
    * Get completedAt
    * @return completedAt
   **/
-  @javax.annotation.Nullable
-  public Object getCompletedAt() {
+  @javax.annotation.Nonnull
+  public OffsetDateTime getCompletedAt() {
     return completedAt;
   }
 
 
-  public void setCompletedAt(Object completedAt) {
+  public void setCompletedAt(OffsetDateTime completedAt) {
     this.completedAt = completedAt;
   }
 
 
-  public OrderResult failure(OrderResultFailure failure) {
+  public OrderResult failure(OrderFailure failure) {
     
     this.failure = failure;
     return this;
@@ -104,18 +105,18 @@ public class OrderResult {
    * Get failure
    * @return failure
   **/
-  @javax.annotation.Nonnull
-  public OrderResultFailure getFailure() {
+  @javax.annotation.Nullable
+  public OrderFailure getFailure() {
     return failure;
   }
 
 
-  public void setFailure(OrderResultFailure failure) {
+  public void setFailure(OrderFailure failure) {
     this.failure = failure;
   }
 
 
-  public OrderResult success(OrderResultSuccess success) {
+  public OrderResult success(OrderSuccess success) {
     
     this.success = success;
     return this;
@@ -125,18 +126,18 @@ public class OrderResult {
    * Get success
    * @return success
   **/
-  @javax.annotation.Nonnull
-  public OrderResultSuccess getSuccess() {
+  @javax.annotation.Nullable
+  public OrderSuccess getSuccess() {
     return success;
   }
 
 
-  public void setSuccess(OrderResultSuccess success) {
+  public void setSuccess(OrderSuccess success) {
     this.success = success;
   }
 
 
-  public OrderResult maxResults(MaxResults2 maxResults) {
+  public OrderResult maxResults(Boolean maxResults) {
     
     this.maxResults = maxResults;
     return this;
@@ -147,12 +148,12 @@ public class OrderResult {
    * @return maxResults
   **/
   @javax.annotation.Nullable
-  public MaxResults2 getMaxResults() {
+  public Boolean getMaxResults() {
     return maxResults;
   }
 
 
-  public void setMaxResults(MaxResults2 maxResults) {
+  public void setMaxResults(Boolean maxResults) {
     this.maxResults = maxResults;
   }
 
@@ -173,9 +174,20 @@ public class OrderResult {
         Objects.equals(this.maxResults, orderResult.maxResults);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(completedAt, failure, success, maxResults);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -249,13 +261,9 @@ public class OrderResult {
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       // validate the required field `failure`
-      OrderResultFailure.validateJsonElement(jsonObj.get("failure"));
+      OrderFailure.validateJsonElement(jsonObj.get("failure"));
       // validate the required field `success`
-      OrderResultSuccess.validateJsonElement(jsonObj.get("success"));
-      // validate the optional field `max_results`
-      if (jsonObj.get("max_results") != null && !jsonObj.get("max_results").isJsonNull()) {
-        MaxResults2.validateJsonElement(jsonObj.get("max_results"));
-      }
+      OrderSuccess.validateJsonElement(jsonObj.get("success"));
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

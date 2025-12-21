@@ -4,13 +4,13 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**tag** | [**Tag1**](Tag1.md) |  | [optional] 
+**tag** | **str** |  | [optional] 
 **first_name** | [**NameFilter**](NameFilter.md) |  | 
 **middle_name** | [**NameFilter**](NameFilter.md) |  | 
 **last_name** | [**NameFilter**](NameFilter.md) |  | 
 **dob** | [**DOBFilter**](DOBFilter.md) |  | 
-**source_types** | [**SourceTypes**](SourceTypes.md) |  | [optional] 
-**max_age** | [**ProfileDefinitionMaxAge**](ProfileDefinitionMaxAge.md) |  | [optional] 
+**source_types** | [**AnyOf**](AnyOf.md) | Source types filter. Includes all types by default | [optional] 
+**max_age** | [**MaxAge**](MaxAge.md) |  | [optional] 
 
 ## Example
 

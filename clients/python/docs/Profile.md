@@ -4,15 +4,15 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**tag** | [**Tag**](Tag.md) |  | [optional] 
+**tag** | **str** |  | [optional] 
 **first_name** | [**NameFilterGet**](NameFilterGet.md) |  | 
 **middle_name** | [**NameFilterGet**](NameFilterGet.md) |  | 
 **last_name** | [**NameFilterGet**](NameFilterGet.md) |  | 
 **dob** | [**DOBFilterGet**](DOBFilterGet.md) |  | 
-**source_types** | [**SourceTypes**](SourceTypes.md) |  | [optional] 
-**max_age** | [**ProfileMaxAge**](ProfileMaxAge.md) |  | [optional] 
-**id** | **object** |  | 
-**is_deleted** | **object** |  | 
+**source_types** | [**AnyOf**](AnyOf.md) | Source types filter. Includes all types by default | [optional] 
+**max_age** | [**MaxAgeGet**](MaxAgeGet.md) |  | [optional] 
+**id** | **str** |  | 
+**is_deleted** | **bool** |  | 
 
 ## Example
 

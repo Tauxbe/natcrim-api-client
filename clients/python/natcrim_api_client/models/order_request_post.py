@@ -19,14 +19,11 @@ import json
 
 
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel
-from natcrim_api_client.models.client_reference import ClientReference
-from natcrim_api_client.models.fips import Fips
-from natcrim_api_client.models.max_results1 import MaxResults1
-from natcrim_api_client.models.order_request_post_profile_def import OrderRequestPostProfileDef
+from pydantic import BaseModel, StrictStr
+from pydantic import Field
+from typing_extensions import Annotated
 from natcrim_api_client.models.order_subject import OrderSubject
-from natcrim_api_client.models.profile_id1 import ProfileId1
-from natcrim_api_client.models.region import Region
+from natcrim_api_client.models.profile_definition import ProfileDefinition
 try:
     from typing import Self
 except ImportError:
@@ -36,13 +33,13 @@ class OrderRequestPost(BaseModel):
     """
     OrderRequestPost
     """ # noqa: E501
-    client_reference: Optional[ClientReference] = None
-    profile_id: Optional[ProfileId1] = None
-    profile_def: Optional[OrderRequestPostProfileDef] = None
-    fips: Optional[Fips] = None
-    region: Optional[Region] = None
+    client_reference: Optional[StrictStr] = None
+    profile_id: Optional[StrictStr] = None
+    profile_def: Optional[ProfileDefinition] = None
+    fips: Optional[StrictStr] = None
+    region: Optional[StrictStr] = None
     subject: OrderSubject
-    max_results: Optional[MaxResults1] = None
+    max_results: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None
     __properties: ClassVar[List[str]] = ["client_reference", "profile_id", "profile_def", "fips", "region", "subject", "max_results"]
 
     model_config = {
@@ -81,27 +78,42 @@ class OrderRequestPost(BaseModel):
             },
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of client_reference
-        if self.client_reference:
-            _dict['client_reference'] = self.client_reference.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of profile_id
-        if self.profile_id:
-            _dict['profile_id'] = self.profile_id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of profile_def
         if self.profile_def:
             _dict['profile_def'] = self.profile_def.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of fips
-        if self.fips:
-            _dict['fips'] = self.fips.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of region
-        if self.region:
-            _dict['region'] = self.region.to_dict()
         # override the default output from pydantic by calling `to_dict()` of subject
         if self.subject:
             _dict['subject'] = self.subject.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of max_results
-        if self.max_results:
-            _dict['max_results'] = self.max_results.to_dict()
+        # set to None if client_reference (nullable) is None
+        # and model_fields_set contains the field
+        if self.client_reference is None and "client_reference" in self.model_fields_set:
+            _dict['client_reference'] = None
+
+        # set to None if profile_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.profile_id is None and "profile_id" in self.model_fields_set:
+            _dict['profile_id'] = None
+
+        # set to None if profile_def (nullable) is None
+        # and model_fields_set contains the field
+        if self.profile_def is None and "profile_def" in self.model_fields_set:
+            _dict['profile_def'] = None
+
+        # set to None if fips (nullable) is None
+        # and model_fields_set contains the field
+        if self.fips is None and "fips" in self.model_fields_set:
+            _dict['fips'] = None
+
+        # set to None if region (nullable) is None
+        # and model_fields_set contains the field
+        if self.region is None and "region" in self.model_fields_set:
+            _dict['region'] = None
+
+        # set to None if max_results (nullable) is None
+        # and model_fields_set contains the field
+        if self.max_results is None and "max_results" in self.model_fields_set:
+            _dict['max_results'] = None
+
         return _dict
 
     @classmethod
@@ -114,13 +126,13 @@ class OrderRequestPost(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "client_reference": ClientReference.from_dict(obj.get("client_reference")) if obj.get("client_reference") is not None else None,
-            "profile_id": ProfileId1.from_dict(obj.get("profile_id")) if obj.get("profile_id") is not None else None,
-            "profile_def": OrderRequestPostProfileDef.from_dict(obj.get("profile_def")) if obj.get("profile_def") is not None else None,
-            "fips": Fips.from_dict(obj.get("fips")) if obj.get("fips") is not None else None,
-            "region": Region.from_dict(obj.get("region")) if obj.get("region") is not None else None,
+            "client_reference": obj.get("client_reference"),
+            "profile_id": obj.get("profile_id"),
+            "profile_def": ProfileDefinition.from_dict(obj.get("profile_def")) if obj.get("profile_def") is not None else None,
+            "fips": obj.get("fips"),
+            "region": obj.get("region"),
             "subject": OrderSubject.from_dict(obj.get("subject")) if obj.get("subject") is not None else None,
-            "max_results": MaxResults1.from_dict(obj.get("max_results")) if obj.get("max_results") is not None else None
+            "max_results": obj.get("max_results")
         })
         return _obj
 

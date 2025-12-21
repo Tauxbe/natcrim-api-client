@@ -17,11 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from datetime import date
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel
-from natcrim_api_client.models.dob import Dob
-from natcrim_api_client.models.middle_name import MiddleName
+from pydantic import BaseModel, StrictStr
 try:
     from typing import Self
 except ImportError:
@@ -31,10 +29,10 @@ class OrderSubject(BaseModel):
     """
     OrderSubject
     """ # noqa: E501
-    first_name: Optional[Any]
-    middle_name: Optional[MiddleName] = None
-    last_name: Optional[Any]
-    dob: Optional[Dob] = None
+    first_name: StrictStr
+    middle_name: Optional[StrictStr] = None
+    last_name: StrictStr
+    dob: Optional[date] = None
     __properties: ClassVar[List[str]] = ["first_name", "middle_name", "last_name", "dob"]
 
     model_config = {
@@ -73,21 +71,15 @@ class OrderSubject(BaseModel):
             },
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of middle_name
-        if self.middle_name:
-            _dict['middle_name'] = self.middle_name.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of dob
-        if self.dob:
-            _dict['dob'] = self.dob.to_dict()
-        # set to None if first_name (nullable) is None
+        # set to None if middle_name (nullable) is None
         # and model_fields_set contains the field
-        if self.first_name is None and "first_name" in self.model_fields_set:
-            _dict['first_name'] = None
+        if self.middle_name is None and "middle_name" in self.model_fields_set:
+            _dict['middle_name'] = None
 
-        # set to None if last_name (nullable) is None
+        # set to None if dob (nullable) is None
         # and model_fields_set contains the field
-        if self.last_name is None and "last_name" in self.model_fields_set:
-            _dict['last_name'] = None
+        if self.dob is None and "dob" in self.model_fields_set:
+            _dict['dob'] = None
 
         return _dict
 
@@ -102,9 +94,9 @@ class OrderSubject(BaseModel):
 
         _obj = cls.model_validate({
             "first_name": obj.get("first_name"),
-            "middle_name": MiddleName.from_dict(obj.get("middle_name")) if obj.get("middle_name") is not None else None,
+            "middle_name": obj.get("middle_name"),
             "last_name": obj.get("last_name"),
-            "dob": Dob.from_dict(obj.get("dob")) if obj.get("dob") is not None else None
+            "dob": obj.get("dob")
         })
         return _obj
 

@@ -12,13 +12,8 @@
  */
 
 import ApiClient from '../ApiClient';
-import ClientReference from './ClientReference';
-import Fips from './Fips';
-import MaxResults1 from './MaxResults1';
-import OrderRequestPostProfileDef from './OrderRequestPostProfileDef';
 import OrderSubject from './OrderSubject';
-import ProfileId1 from './ProfileId1';
-import Region from './Region';
+import ProfileDefinition from './ProfileDefinition';
 
 /**
  * The OrderRequestPost model module.
@@ -57,25 +52,25 @@ class OrderRequestPost {
             obj = obj || new OrderRequestPost();
 
             if (data.hasOwnProperty('client_reference')) {
-                obj['client_reference'] = ClientReference.constructFromObject(data['client_reference']);
+                obj['client_reference'] = ApiClient.convertToType(data['client_reference'], 'String');
             }
             if (data.hasOwnProperty('profile_id')) {
-                obj['profile_id'] = ProfileId1.constructFromObject(data['profile_id']);
+                obj['profile_id'] = ApiClient.convertToType(data['profile_id'], 'String');
             }
             if (data.hasOwnProperty('profile_def')) {
-                obj['profile_def'] = OrderRequestPostProfileDef.constructFromObject(data['profile_def']);
+                obj['profile_def'] = ProfileDefinition.constructFromObject(data['profile_def']);
             }
             if (data.hasOwnProperty('fips')) {
-                obj['fips'] = Fips.constructFromObject(data['fips']);
+                obj['fips'] = ApiClient.convertToType(data['fips'], 'String');
             }
             if (data.hasOwnProperty('region')) {
-                obj['region'] = Region.constructFromObject(data['region']);
+                obj['region'] = ApiClient.convertToType(data['region'], 'String');
             }
             if (data.hasOwnProperty('subject')) {
                 obj['subject'] = OrderSubject.constructFromObject(data['subject']);
             }
             if (data.hasOwnProperty('max_results')) {
-                obj['max_results'] = MaxResults1.constructFromObject(data['max_results']);
+                obj['max_results'] = ApiClient.convertToType(data['max_results'], 'Number');
             }
         }
         return obj;
@@ -93,33 +88,29 @@ class OrderRequestPost {
                 throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
             }
         }
-        // validate the optional field `client_reference`
-        if (data['client_reference']) { // data not null
-          ClientReference.validateJSON(data['client_reference']);
+        // ensure the json data is a string
+        if (data['client_reference'] && !(typeof data['client_reference'] === 'string' || data['client_reference'] instanceof String)) {
+            throw new Error("Expected the field `client_reference` to be a primitive type in the JSON string but got " + data['client_reference']);
         }
-        // validate the optional field `profile_id`
-        if (data['profile_id']) { // data not null
-          ProfileId1.validateJSON(data['profile_id']);
+        // ensure the json data is a string
+        if (data['profile_id'] && !(typeof data['profile_id'] === 'string' || data['profile_id'] instanceof String)) {
+            throw new Error("Expected the field `profile_id` to be a primitive type in the JSON string but got " + data['profile_id']);
         }
         // validate the optional field `profile_def`
         if (data['profile_def']) { // data not null
-          OrderRequestPostProfileDef.validateJSON(data['profile_def']);
+          ProfileDefinition.validateJSON(data['profile_def']);
         }
-        // validate the optional field `fips`
-        if (data['fips']) { // data not null
-          Fips.validateJSON(data['fips']);
+        // ensure the json data is a string
+        if (data['fips'] && !(typeof data['fips'] === 'string' || data['fips'] instanceof String)) {
+            throw new Error("Expected the field `fips` to be a primitive type in the JSON string but got " + data['fips']);
         }
-        // validate the optional field `region`
-        if (data['region']) { // data not null
-          Region.validateJSON(data['region']);
+        // ensure the json data is a string
+        if (data['region'] && !(typeof data['region'] === 'string' || data['region'] instanceof String)) {
+            throw new Error("Expected the field `region` to be a primitive type in the JSON string but got " + data['region']);
         }
         // validate the optional field `subject`
         if (data['subject']) { // data not null
           OrderSubject.validateJSON(data['subject']);
-        }
-        // validate the optional field `max_results`
-        if (data['max_results']) { // data not null
-          MaxResults1.validateJSON(data['max_results']);
         }
 
         return true;
@@ -131,27 +122,27 @@ class OrderRequestPost {
 OrderRequestPost.RequiredProperties = ["subject"];
 
 /**
- * @member {module:model/ClientReference} client_reference
+ * @member {String} client_reference
  */
 OrderRequestPost.prototype['client_reference'] = undefined;
 
 /**
- * @member {module:model/ProfileId1} profile_id
+ * @member {String} profile_id
  */
 OrderRequestPost.prototype['profile_id'] = undefined;
 
 /**
- * @member {module:model/OrderRequestPostProfileDef} profile_def
+ * @member {module:model/ProfileDefinition} profile_def
  */
 OrderRequestPost.prototype['profile_def'] = undefined;
 
 /**
- * @member {module:model/Fips} fips
+ * @member {String} fips
  */
 OrderRequestPost.prototype['fips'] = undefined;
 
 /**
- * @member {module:model/Region} region
+ * @member {String} region
  */
 OrderRequestPost.prototype['region'] = undefined;
 
@@ -161,7 +152,7 @@ OrderRequestPost.prototype['region'] = undefined;
 OrderRequestPost.prototype['subject'] = undefined;
 
 /**
- * @member {module:model/MaxResults1} max_results
+ * @member {Number} max_results
  */
 OrderRequestPost.prototype['max_results'] = undefined;
 

@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **get_order_cache_orders_cache_order_id_get**
-> OrderPostResponseInput get_order_cache_orders_cache_order_id_get(order_id, offset=offset, length=length)
+> OrderPostResponse get_order_cache_orders_cache_order_id_get(order_id, offset=offset, length=length)
 
 Get Order Cache
 
@@ -25,7 +25,7 @@ Get Order Cache
 import time
 import os
 import natcrim_api_client
-from natcrim_api_client.models.order_post_response_input import OrderPostResponseInput
+from natcrim_api_client.models.order_post_response import OrderPostResponse
 from natcrim_api_client.rest import ApiException
 from pprint import pprint
 
@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrderPostResponseInput**](OrderPostResponseInput.md)
+[**OrderPostResponse**](OrderPostResponse.md)
 
 ### Authorization
 
@@ -289,7 +289,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_order_orders_post**
-> OrderPostResponseOutput post_order_orders_post(order_post, paginate=paginate)
+> OrderPostResponse post_order_orders_post(order_post, paginate=paginate)
 
 Post Order
 
@@ -302,7 +302,7 @@ import time
 import os
 import natcrim_api_client
 from natcrim_api_client.models.order_post import OrderPost
-from natcrim_api_client.models.order_post_response_output import OrderPostResponseOutput
+from natcrim_api_client.models.order_post_response import OrderPostResponse
 from natcrim_api_client.rest import ApiException
 from pprint import pprint
 
@@ -355,7 +355,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrderPostResponseOutput**](OrderPostResponseOutput.md)
+[**OrderPostResponse**](OrderPostResponse.md)
 
 ### Authorization
 

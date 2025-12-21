@@ -57,11 +57,11 @@ class SubAccount implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'mixed',
-        'name' => 'mixed',
-        'email' => 'mixed',
-        'default_profile' => '\OpenAPI\Client\Model\DefaultProfile',
-        'is_deleted' => 'mixed'
+        'id' => 'string',
+        'name' => 'string',
+        'email' => 'string',
+        'default_profile' => 'string',
+        'is_deleted' => 'bool'
     ];
 
     /**
@@ -75,7 +75,7 @@ class SubAccount implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'uuid',
         'name' => null,
         'email' => null,
-        'default_profile' => null,
+        'default_profile' => 'uuid',
         'is_deleted' => null
     ];
 
@@ -85,11 +85,11 @@ class SubAccount implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => true,
-		'name' => true,
-		'email' => true,
-		'default_profile' => false,
-		'is_deleted' => true
+        'id' => false,
+		'name' => false,
+		'email' => false,
+		'default_profile' => true,
+		'is_deleted' => false
     ];
 
     /**
@@ -335,7 +335,7 @@ class SubAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets id
      *
-     * @return mixed
+     * @return string
      */
     public function getId()
     {
@@ -345,21 +345,14 @@ class SubAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param mixed $id id
+     * @param string $id id
      *
      * @return self
      */
     public function setId($id)
     {
         if (is_null($id)) {
-            array_push($this->openAPINullablesSetToNull, 'id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
         $this->container['id'] = $id;
 
@@ -369,7 +362,7 @@ class SubAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets name
      *
-     * @return mixed
+     * @return string
      */
     public function getName()
     {
@@ -379,21 +372,14 @@ class SubAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets name
      *
-     * @param mixed $name Descriptive name of sub-account
+     * @param string $name Descriptive name of sub-account
      *
      * @return self
      */
     public function setName($name)
     {
         if (is_null($name)) {
-            array_push($this->openAPINullablesSetToNull, 'name');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('name', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
         $this->container['name'] = $name;
 
@@ -403,7 +389,7 @@ class SubAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets email
      *
-     * @return mixed
+     * @return string
      */
     public function getEmail()
     {
@@ -413,21 +399,14 @@ class SubAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets email
      *
-     * @param mixed $email Email address. Also functions as a username if a password is set
+     * @param string $email Email address. Also functions as a username if a password is set
      *
      * @return self
      */
     public function setEmail($email)
     {
         if (is_null($email)) {
-            array_push($this->openAPINullablesSetToNull, 'email');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('email', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable email cannot be null');
         }
         $this->container['email'] = $email;
 
@@ -437,7 +416,7 @@ class SubAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets default_profile
      *
-     * @return \OpenAPI\Client\Model\DefaultProfile
+     * @return string
      */
     public function getDefaultProfile()
     {
@@ -447,14 +426,21 @@ class SubAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets default_profile
      *
-     * @param \OpenAPI\Client\Model\DefaultProfile $default_profile default_profile
+     * @param string $default_profile default_profile
      *
      * @return self
      */
     public function setDefaultProfile($default_profile)
     {
         if (is_null($default_profile)) {
-            throw new \InvalidArgumentException('non-nullable default_profile cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'default_profile');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('default_profile', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['default_profile'] = $default_profile;
 
@@ -464,7 +450,7 @@ class SubAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets is_deleted
      *
-     * @return mixed
+     * @return bool
      */
     public function getIsDeleted()
     {
@@ -474,21 +460,14 @@ class SubAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_deleted
      *
-     * @param mixed $is_deleted is_deleted
+     * @param bool $is_deleted is_deleted
      *
      * @return self
      */
     public function setIsDeleted($is_deleted)
     {
         if (is_null($is_deleted)) {
-            array_push($this->openAPINullablesSetToNull, 'is_deleted');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('is_deleted', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable is_deleted cannot be null');
         }
         $this->container['is_deleted'] = $is_deleted;
 

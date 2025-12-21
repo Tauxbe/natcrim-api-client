@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## getOrderCacheOrdersCacheOrderIdGet
 
-> OrderPostResponseInput getOrderCacheOrdersCacheOrderIdGet(orderId, opts)
+> OrderPostResponse getOrderCacheOrdersCacheOrderIdGet(orderId, opts)
 
 Get Order Cache
 
@@ -58,7 +58,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrderPostResponseInput**](OrderPostResponseInput.md)
+[**OrderPostResponse**](OrderPostResponse.md)
 
 ### Authorization
 
@@ -196,7 +196,7 @@ Name | Type | Description  | Notes
 
 ## postOrderOrdersPost
 
-> OrderPostResponseOutput postOrderOrdersPost(orderPost, opts)
+> OrderPostResponse postOrderOrdersPost(orderPost, opts)
 
 Post Order
 
@@ -237,7 +237,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrderPostResponseOutput**](OrderPostResponseOutput.md)
+[**OrderPostResponse**](OrderPostResponse.md)
 
 ### Authorization
 

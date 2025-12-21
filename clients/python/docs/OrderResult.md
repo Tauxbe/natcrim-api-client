@@ -4,10 +4,10 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**completed_at** | **object** |  | 
-**failure** | [**OrderResultFailure**](OrderResultFailure.md) |  | 
-**success** | [**OrderResultSuccess**](OrderResultSuccess.md) |  | 
-**max_results** | [**MaxResults2**](MaxResults2.md) |  | [optional] 
+**completed_at** | **datetime** |  | 
+**failure** | [**OrderFailure**](OrderFailure.md) |  | 
+**success** | [**OrderSuccess**](OrderSuccess.md) |  | 
+**max_results** | **bool** |  | [optional] 
 
 ## Example
 

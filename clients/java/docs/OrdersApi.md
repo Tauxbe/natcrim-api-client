@@ -12,7 +12,7 @@ All URIs are relative to *http://localhost*
 
 <a id="getOrderCacheOrdersCacheOrderIdGet"></a>
 # **getOrderCacheOrdersCacheOrderIdGet**
-> OrderPostResponseInput getOrderCacheOrdersCacheOrderIdGet(orderId, offset, length)
+> OrderPostResponse getOrderCacheOrdersCacheOrderIdGet(orderId, offset, length)
 
 Get Order Cache
 
@@ -47,7 +47,7 @@ public class Example {
     Integer offset = 0; // Integer | 
     Integer length = 20; // Integer | 
     try {
-      OrderPostResponseInput result = apiInstance.getOrderCacheOrdersCacheOrderIdGet(orderId, offset, length);
+      OrderPostResponse result = apiInstance.getOrderCacheOrdersCacheOrderIdGet(orderId, offset, length);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling OrdersApi#getOrderCacheOrdersCacheOrderIdGet");
@@ -70,7 +70,7 @@ public class Example {
 
 ### Return type
 
-[**OrderPostResponseInput**](OrderPostResponseInput.md)
+[**OrderPostResponse**](OrderPostResponse.md)
 
 ### Authorization
 
@@ -254,7 +254,7 @@ public class Example {
 
 <a id="postOrderOrdersPost"></a>
 # **postOrderOrdersPost**
-> OrderPostResponseOutput postOrderOrdersPost(orderPost, paginate)
+> OrderPostResponse postOrderOrdersPost(orderPost, paginate)
 
 Post Order
 
@@ -286,7 +286,7 @@ public class Example {
     OrderPost orderPost = new OrderPost(); // OrderPost | 
     Boolean paginate = true; // Boolean | 
     try {
-      OrderPostResponseOutput result = apiInstance.postOrderOrdersPost(orderPost, paginate);
+      OrderPostResponse result = apiInstance.postOrderOrdersPost(orderPost, paginate);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling OrdersApi#postOrderOrdersPost");
@@ -308,7 +308,7 @@ public class Example {
 
 ### Return type
 
-[**OrderPostResponseOutput**](OrderPostResponseOutput.md)
+[**OrderPostResponse**](OrderPostResponse.md)
 
 ### Authorization
 

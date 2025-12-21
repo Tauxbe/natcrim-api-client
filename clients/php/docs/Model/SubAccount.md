@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **mixed** |  |
-**name** | **mixed** | Descriptive name of sub-account |
-**email** | **mixed** | Email address. Also functions as a username if a password is set |
-**default_profile** | [**\OpenAPI\Client\Model\DefaultProfile**](DefaultProfile.md) |  |
-**is_deleted** | **mixed** |  |
+**id** | **string** |  |
+**name** | **string** | Descriptive name of sub-account |
+**email** | **string** | Email address. Also functions as a username if a password is set |
+**default_profile** | **string** |  |
+**is_deleted** | **bool** |  |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

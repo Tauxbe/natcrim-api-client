@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**tag** | [**Tag**](Tag.md) |  | [optional] 
+**tag** | **String** |  | [optional] 
 **firstName** | [**NameFilter**](NameFilter.md) |  | 
 **middleName** | [**NameFilter**](NameFilter.md) |  | 
 **lastName** | [**NameFilter**](NameFilter.md) |  | 
 **dob** | [**DOBFilter**](DOBFilter.md) |  | 
-**sourceTypes** | [**SourceTypes**](SourceTypes.md) |  | [optional] 
-**maxAge** | [**ProfileDefinitionMaxAge**](ProfileDefinitionMaxAge.md) |  | [optional] 
+**sourceTypes** | [**AnyOf**](AnyOf.md) | Source types filter. Includes all types by default | [optional] 
+**maxAge** | [**MaxAge**](MaxAge.md) |  | [optional] 
 
 

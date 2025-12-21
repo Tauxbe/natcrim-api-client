@@ -4,10 +4,10 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**first_name** | **object** |  | 
-**middle_name** | [**MiddleName**](MiddleName.md) |  | [optional] 
-**last_name** | **object** |  | 
-**dob** | [**Dob**](Dob.md) |  | [optional] 
+**first_name** | **str** |  | 
+**middle_name** | **str** |  | [optional] 
+**last_name** | **str** |  | 
+**dob** | **date** |  | [optional] 
 
 ## Example
 

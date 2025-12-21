@@ -17,12 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel
-from natcrim_api_client.models.max_results2 import MaxResults2
-from natcrim_api_client.models.order_result_failure import OrderResultFailure
-from natcrim_api_client.models.order_result_success import OrderResultSuccess
+from pydantic import BaseModel, StrictBool
+from natcrim_api_client.models.order_failure import OrderFailure
+from natcrim_api_client.models.order_success import OrderSuccess
 try:
     from typing import Self
 except ImportError:
@@ -32,10 +31,10 @@ class OrderResult(BaseModel):
     """
     OrderResult
     """ # noqa: E501
-    completed_at: Optional[Any]
-    failure: OrderResultFailure
-    success: OrderResultSuccess
-    max_results: Optional[MaxResults2] = None
+    completed_at: datetime
+    failure: Optional[OrderFailure]
+    success: Optional[OrderSuccess]
+    max_results: Optional[StrictBool] = None
     __properties: ClassVar[List[str]] = ["completed_at", "failure", "success", "max_results"]
 
     model_config = {
@@ -80,13 +79,20 @@ class OrderResult(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of success
         if self.success:
             _dict['success'] = self.success.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of max_results
-        if self.max_results:
-            _dict['max_results'] = self.max_results.to_dict()
-        # set to None if completed_at (nullable) is None
+        # set to None if failure (nullable) is None
         # and model_fields_set contains the field
-        if self.completed_at is None and "completed_at" in self.model_fields_set:
-            _dict['completed_at'] = None
+        if self.failure is None and "failure" in self.model_fields_set:
+            _dict['failure'] = None
+
+        # set to None if success (nullable) is None
+        # and model_fields_set contains the field
+        if self.success is None and "success" in self.model_fields_set:
+            _dict['success'] = None
+
+        # set to None if max_results (nullable) is None
+        # and model_fields_set contains the field
+        if self.max_results is None and "max_results" in self.model_fields_set:
+            _dict['max_results'] = None
 
         return _dict
 
@@ -101,9 +107,9 @@ class OrderResult(BaseModel):
 
         _obj = cls.model_validate({
             "completed_at": obj.get("completed_at"),
-            "failure": OrderResultFailure.from_dict(obj.get("failure")) if obj.get("failure") is not None else None,
-            "success": OrderResultSuccess.from_dict(obj.get("success")) if obj.get("success") is not None else None,
-            "max_results": MaxResults2.from_dict(obj.get("max_results")) if obj.get("max_results") is not None else None
+            "failure": OrderFailure.from_dict(obj.get("failure")) if obj.get("failure") is not None else None,
+            "success": OrderSuccess.from_dict(obj.get("success")) if obj.get("success") is not None else None,
+            "max_results": obj.get("max_results")
         })
         return _obj
 

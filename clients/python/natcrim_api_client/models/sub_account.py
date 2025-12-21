@@ -19,9 +19,8 @@ import json
 
 
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, StrictBool, StrictStr
 from pydantic import Field
-from natcrim_api_client.models.default_profile import DefaultProfile
 try:
     from typing import Self
 except ImportError:
@@ -31,11 +30,11 @@ class SubAccount(BaseModel):
     """
     SubAccount
     """ # noqa: E501
-    id: Optional[Any]
-    name: Optional[Any] = Field(description="Descriptive name of sub-account")
-    email: Optional[Any] = Field(description="Email address. Also functions as a username if a password is set")
-    default_profile: DefaultProfile
-    is_deleted: Optional[Any]
+    id: StrictStr
+    name: StrictStr = Field(description="Descriptive name of sub-account")
+    email: StrictStr = Field(description="Email address. Also functions as a username if a password is set")
+    default_profile: Optional[StrictStr]
+    is_deleted: StrictBool
     __properties: ClassVar[List[str]] = ["id", "name", "email", "default_profile", "is_deleted"]
 
     model_config = {
@@ -74,28 +73,10 @@ class SubAccount(BaseModel):
             },
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of default_profile
-        if self.default_profile:
-            _dict['default_profile'] = self.default_profile.to_dict()
-        # set to None if id (nullable) is None
+        # set to None if default_profile (nullable) is None
         # and model_fields_set contains the field
-        if self.id is None and "id" in self.model_fields_set:
-            _dict['id'] = None
-
-        # set to None if name (nullable) is None
-        # and model_fields_set contains the field
-        if self.name is None and "name" in self.model_fields_set:
-            _dict['name'] = None
-
-        # set to None if email (nullable) is None
-        # and model_fields_set contains the field
-        if self.email is None and "email" in self.model_fields_set:
-            _dict['email'] = None
-
-        # set to None if is_deleted (nullable) is None
-        # and model_fields_set contains the field
-        if self.is_deleted is None and "is_deleted" in self.model_fields_set:
-            _dict['is_deleted'] = None
+        if self.default_profile is None and "default_profile" in self.model_fields_set:
+            _dict['default_profile'] = None
 
         return _dict
 
@@ -112,7 +93,7 @@ class SubAccount(BaseModel):
             "id": obj.get("id"),
             "name": obj.get("name"),
             "email": obj.get("email"),
-            "default_profile": DefaultProfile.from_dict(obj.get("default_profile")) if obj.get("default_profile") is not None else None,
+            "default_profile": obj.get("default_profile"),
             "is_deleted": obj.get("is_deleted")
         })
         return _obj

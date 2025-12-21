@@ -12,8 +12,6 @@
  */
 
 import ApiClient from '../ApiClient';
-import Dob from './Dob';
-import MiddleName from './MiddleName';
 
 /**
  * The OrderSubject model module.
@@ -24,8 +22,8 @@ class OrderSubject {
     /**
      * Constructs a new <code>OrderSubject</code>.
      * @alias module:model/OrderSubject
-     * @param firstName {Object} 
-     * @param lastName {Object} 
+     * @param firstName {String} 
+     * @param lastName {String} 
      */
     constructor(firstName, lastName) { 
         
@@ -54,16 +52,16 @@ class OrderSubject {
             obj = obj || new OrderSubject();
 
             if (data.hasOwnProperty('first_name')) {
-                obj['first_name'] = ApiClient.convertToType(data['first_name'], Object);
+                obj['first_name'] = ApiClient.convertToType(data['first_name'], 'String');
             }
             if (data.hasOwnProperty('middle_name')) {
-                obj['middle_name'] = MiddleName.constructFromObject(data['middle_name']);
+                obj['middle_name'] = ApiClient.convertToType(data['middle_name'], 'String');
             }
             if (data.hasOwnProperty('last_name')) {
-                obj['last_name'] = ApiClient.convertToType(data['last_name'], Object);
+                obj['last_name'] = ApiClient.convertToType(data['last_name'], 'String');
             }
             if (data.hasOwnProperty('dob')) {
-                obj['dob'] = Dob.constructFromObject(data['dob']);
+                obj['dob'] = ApiClient.convertToType(data['dob'], 'Date');
             }
         }
         return obj;
@@ -81,13 +79,17 @@ class OrderSubject {
                 throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
             }
         }
-        // validate the optional field `middle_name`
-        if (data['middle_name']) { // data not null
-          MiddleName.validateJSON(data['middle_name']);
+        // ensure the json data is a string
+        if (data['first_name'] && !(typeof data['first_name'] === 'string' || data['first_name'] instanceof String)) {
+            throw new Error("Expected the field `first_name` to be a primitive type in the JSON string but got " + data['first_name']);
         }
-        // validate the optional field `dob`
-        if (data['dob']) { // data not null
-          Dob.validateJSON(data['dob']);
+        // ensure the json data is a string
+        if (data['middle_name'] && !(typeof data['middle_name'] === 'string' || data['middle_name'] instanceof String)) {
+            throw new Error("Expected the field `middle_name` to be a primitive type in the JSON string but got " + data['middle_name']);
+        }
+        // ensure the json data is a string
+        if (data['last_name'] && !(typeof data['last_name'] === 'string' || data['last_name'] instanceof String)) {
+            throw new Error("Expected the field `last_name` to be a primitive type in the JSON string but got " + data['last_name']);
         }
 
         return true;
@@ -99,22 +101,22 @@ class OrderSubject {
 OrderSubject.RequiredProperties = ["first_name", "last_name"];
 
 /**
- * @member {Object} first_name
+ * @member {String} first_name
  */
 OrderSubject.prototype['first_name'] = undefined;
 
 /**
- * @member {module:model/MiddleName} middle_name
+ * @member {String} middle_name
  */
 OrderSubject.prototype['middle_name'] = undefined;
 
 /**
- * @member {Object} last_name
+ * @member {String} last_name
  */
 OrderSubject.prototype['last_name'] = undefined;
 
 /**
- * @member {module:model/Dob} dob
+ * @member {Date} dob
  */
 OrderSubject.prototype['dob'] = undefined;
 

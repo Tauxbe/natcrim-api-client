@@ -21,11 +21,12 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.UUID;
+import org.openapitools.client.model.AnyOf;
 import org.openapitools.client.model.DOBFilterGet;
+import org.openapitools.client.model.MaxAgeGet;
 import org.openapitools.client.model.NameFilterGet;
-import org.openapitools.client.model.ProfileMaxAge;
-import org.openapitools.client.model.SourceTypes;
-import org.openapitools.client.model.Tag;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -54,11 +55,11 @@ import com.natcrim.api.client.JSON;
 /**
  * Profile
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-12-20T03:11:11.149103Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-12-21T03:25:25.736217Z[Etc/UTC]")
 public class Profile {
   public static final String SERIALIZED_NAME_TAG = "tag";
   @SerializedName(SERIALIZED_NAME_TAG)
-  private Tag tag;
+  private String tag;
 
   public static final String SERIALIZED_NAME_FIRST_NAME = "first_name";
   @SerializedName(SERIALIZED_NAME_FIRST_NAME)
@@ -78,24 +79,24 @@ public class Profile {
 
   public static final String SERIALIZED_NAME_SOURCE_TYPES = "source_types";
   @SerializedName(SERIALIZED_NAME_SOURCE_TYPES)
-  private SourceTypes sourceTypes = [];
+  private AnyOf sourceTypes = [];
 
   public static final String SERIALIZED_NAME_MAX_AGE = "max_age";
   @SerializedName(SERIALIZED_NAME_MAX_AGE)
-  private ProfileMaxAge maxAge = {age=99, max_age_field=filed};
+  private MaxAgeGet maxAge;
 
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
-  private Object id = null;
+  private UUID id;
 
   public static final String SERIALIZED_NAME_IS_DELETED = "is_deleted";
   @SerializedName(SERIALIZED_NAME_IS_DELETED)
-  private Object isDeleted = null;
+  private Boolean isDeleted;
 
   public Profile() {
   }
 
-  public Profile tag(Tag tag) {
+  public Profile tag(String tag) {
     
     this.tag = tag;
     return this;
@@ -106,12 +107,12 @@ public class Profile {
    * @return tag
   **/
   @javax.annotation.Nullable
-  public Tag getTag() {
+  public String getTag() {
     return tag;
   }
 
 
-  public void setTag(Tag tag) {
+  public void setTag(String tag) {
     this.tag = tag;
   }
 
@@ -200,28 +201,28 @@ public class Profile {
   }
 
 
-  public Profile sourceTypes(SourceTypes sourceTypes) {
+  public Profile sourceTypes(AnyOf sourceTypes) {
     
     this.sourceTypes = sourceTypes;
     return this;
   }
 
    /**
-   * Get sourceTypes
+   * Source types filter. Includes all types by default
    * @return sourceTypes
   **/
   @javax.annotation.Nullable
-  public SourceTypes getSourceTypes() {
+  public AnyOf getSourceTypes() {
     return sourceTypes;
   }
 
 
-  public void setSourceTypes(SourceTypes sourceTypes) {
+  public void setSourceTypes(AnyOf sourceTypes) {
     this.sourceTypes = sourceTypes;
   }
 
 
-  public Profile maxAge(ProfileMaxAge maxAge) {
+  public Profile maxAge(MaxAgeGet maxAge) {
     
     this.maxAge = maxAge;
     return this;
@@ -232,17 +233,17 @@ public class Profile {
    * @return maxAge
   **/
   @javax.annotation.Nullable
-  public ProfileMaxAge getMaxAge() {
+  public MaxAgeGet getMaxAge() {
     return maxAge;
   }
 
 
-  public void setMaxAge(ProfileMaxAge maxAge) {
+  public void setMaxAge(MaxAgeGet maxAge) {
     this.maxAge = maxAge;
   }
 
 
-  public Profile id(Object id) {
+  public Profile id(UUID id) {
     
     this.id = id;
     return this;
@@ -252,18 +253,18 @@ public class Profile {
    * Get id
    * @return id
   **/
-  @javax.annotation.Nullable
-  public Object getId() {
+  @javax.annotation.Nonnull
+  public UUID getId() {
     return id;
   }
 
 
-  public void setId(Object id) {
+  public void setId(UUID id) {
     this.id = id;
   }
 
 
-  public Profile isDeleted(Object isDeleted) {
+  public Profile isDeleted(Boolean isDeleted) {
     
     this.isDeleted = isDeleted;
     return this;
@@ -273,13 +274,13 @@ public class Profile {
    * Get isDeleted
    * @return isDeleted
   **/
-  @javax.annotation.Nullable
-  public Object getIsDeleted() {
+  @javax.annotation.Nonnull
+  public Boolean getIsDeleted() {
     return isDeleted;
   }
 
 
-  public void setIsDeleted(Object isDeleted) {
+  public void setIsDeleted(Boolean isDeleted) {
     this.isDeleted = isDeleted;
   }
 
@@ -305,9 +306,20 @@ public class Profile {
         Objects.equals(this.isDeleted, profile.isDeleted);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(tag, firstName, middleName, lastName, dob, sourceTypes, maxAge, id, isDeleted);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -393,9 +405,8 @@ public class Profile {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the optional field `tag`
-      if (jsonObj.get("tag") != null && !jsonObj.get("tag").isJsonNull()) {
-        Tag.validateJsonElement(jsonObj.get("tag"));
+      if ((jsonObj.get("tag") != null && !jsonObj.get("tag").isJsonNull()) && !jsonObj.get("tag").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `tag` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tag").toString()));
       }
       // validate the required field `first_name`
       NameFilterGet.validateJsonElement(jsonObj.get("first_name"));
@@ -407,11 +418,14 @@ public class Profile {
       DOBFilterGet.validateJsonElement(jsonObj.get("dob"));
       // validate the optional field `source_types`
       if (jsonObj.get("source_types") != null && !jsonObj.get("source_types").isJsonNull()) {
-        SourceTypes.validateJsonElement(jsonObj.get("source_types"));
+        AnyOf.validateJsonElement(jsonObj.get("source_types"));
       }
       // validate the optional field `max_age`
       if (jsonObj.get("max_age") != null && !jsonObj.get("max_age").isJsonNull()) {
-        ProfileMaxAge.validateJsonElement(jsonObj.get("max_age"));
+        MaxAgeGet.validateJsonElement(jsonObj.get("max_age"));
+      }
+      if (!jsonObj.get("id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
       }
   }
 

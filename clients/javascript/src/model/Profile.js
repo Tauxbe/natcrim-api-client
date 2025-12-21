@@ -12,11 +12,10 @@
  */
 
 import ApiClient from '../ApiClient';
+import AnyOf from './AnyOf';
 import DOBFilterGet from './DOBFilterGet';
+import MaxAgeGet from './MaxAgeGet';
 import NameFilterGet from './NameFilterGet';
-import ProfileMaxAge from './ProfileMaxAge';
-import SourceTypes from './SourceTypes';
-import Tag from './Tag';
 
 /**
  * The Profile model module.
@@ -31,8 +30,8 @@ class Profile {
      * @param middleName {module:model/NameFilterGet} 
      * @param lastName {module:model/NameFilterGet} 
      * @param dob {module:model/DOBFilterGet} 
-     * @param id {Object} 
-     * @param isDeleted {Object} 
+     * @param id {String} 
+     * @param isDeleted {Boolean} 
      */
     constructor(firstName, middleName, lastName, dob, id, isDeleted) { 
         
@@ -65,7 +64,7 @@ class Profile {
             obj = obj || new Profile();
 
             if (data.hasOwnProperty('tag')) {
-                obj['tag'] = Tag.constructFromObject(data['tag']);
+                obj['tag'] = ApiClient.convertToType(data['tag'], 'String');
             }
             if (data.hasOwnProperty('first_name')) {
                 obj['first_name'] = NameFilterGet.constructFromObject(data['first_name']);
@@ -80,16 +79,16 @@ class Profile {
                 obj['dob'] = DOBFilterGet.constructFromObject(data['dob']);
             }
             if (data.hasOwnProperty('source_types')) {
-                obj['source_types'] = SourceTypes.constructFromObject(data['source_types']);
+                obj['source_types'] = ApiClient.convertToType(data['source_types'], AnyOf);
             }
             if (data.hasOwnProperty('max_age')) {
-                obj['max_age'] = ProfileMaxAge.constructFromObject(data['max_age']);
+                obj['max_age'] = MaxAgeGet.constructFromObject(data['max_age']);
             }
             if (data.hasOwnProperty('id')) {
-                obj['id'] = ApiClient.convertToType(data['id'], Object);
+                obj['id'] = ApiClient.convertToType(data['id'], 'String');
             }
             if (data.hasOwnProperty('is_deleted')) {
-                obj['is_deleted'] = ApiClient.convertToType(data['is_deleted'], Object);
+                obj['is_deleted'] = ApiClient.convertToType(data['is_deleted'], 'Boolean');
             }
         }
         return obj;
@@ -107,9 +106,9 @@ class Profile {
                 throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
             }
         }
-        // validate the optional field `tag`
-        if (data['tag']) { // data not null
-          Tag.validateJSON(data['tag']);
+        // ensure the json data is a string
+        if (data['tag'] && !(typeof data['tag'] === 'string' || data['tag'] instanceof String)) {
+            throw new Error("Expected the field `tag` to be a primitive type in the JSON string but got " + data['tag']);
         }
         // validate the optional field `first_name`
         if (data['first_name']) { // data not null
@@ -129,11 +128,15 @@ class Profile {
         }
         // validate the optional field `source_types`
         if (data['source_types']) { // data not null
-          SourceTypes.validateJSON(data['source_types']);
+          AnyOf.validateJSON(data['source_types']);
         }
         // validate the optional field `max_age`
         if (data['max_age']) { // data not null
-          ProfileMaxAge.validateJSON(data['max_age']);
+          MaxAgeGet.validateJSON(data['max_age']);
+        }
+        // ensure the json data is a string
+        if (data['id'] && !(typeof data['id'] === 'string' || data['id'] instanceof String)) {
+            throw new Error("Expected the field `id` to be a primitive type in the JSON string but got " + data['id']);
         }
 
         return true;
@@ -145,7 +148,7 @@ class Profile {
 Profile.RequiredProperties = ["first_name", "middle_name", "last_name", "dob", "id", "is_deleted"];
 
 /**
- * @member {module:model/Tag} tag
+ * @member {String} tag
  */
 Profile.prototype['tag'] = undefined;
 
@@ -170,22 +173,23 @@ Profile.prototype['last_name'] = undefined;
 Profile.prototype['dob'] = undefined;
 
 /**
- * @member {module:model/SourceTypes} source_types
+ * Source types filter. Includes all types by default
+ * @member {module:model/AnyOf} source_types
  */
 Profile.prototype['source_types'] = undefined;
 
 /**
- * @member {module:model/ProfileMaxAge} max_age
+ * @member {module:model/MaxAgeGet} max_age
  */
 Profile.prototype['max_age'] = undefined;
 
 /**
- * @member {Object} id
+ * @member {String} id
  */
 Profile.prototype['id'] = undefined;
 
 /**
- * @member {Object} is_deleted
+ * @member {Boolean} is_deleted
  */
 Profile.prototype['is_deleted'] = undefined;
 

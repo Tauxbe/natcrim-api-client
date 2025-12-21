@@ -49,16 +49,16 @@ import com.natcrim.api.client.JSON;
 /**
  * OrderSuccess
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-12-20T03:11:11.149103Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-12-21T03:25:25.736217Z[Etc/UTC]")
 public class OrderSuccess {
   public static final String SERIALIZED_NAME_RECORDS_RETURNED = "records_returned";
   @SerializedName(SERIALIZED_NAME_RECORDS_RETURNED)
-  private Object recordsReturned = null;
+  private Integer recordsReturned;
 
   public OrderSuccess() {
   }
 
-  public OrderSuccess recordsReturned(Object recordsReturned) {
+  public OrderSuccess recordsReturned(Integer recordsReturned) {
     
     this.recordsReturned = recordsReturned;
     return this;
@@ -68,13 +68,13 @@ public class OrderSuccess {
    * Get recordsReturned
    * @return recordsReturned
   **/
-  @javax.annotation.Nullable
-  public Object getRecordsReturned() {
+  @javax.annotation.Nonnull
+  public Integer getRecordsReturned() {
     return recordsReturned;
   }
 
 
-  public void setRecordsReturned(Object recordsReturned) {
+  public void setRecordsReturned(Integer recordsReturned) {
     this.recordsReturned = recordsReturned;
   }
 

@@ -12,7 +12,6 @@
  */
 
 import ApiClient from '../ApiClient';
-import DefaultProfile from './DefaultProfile';
 
 /**
  * The SubAccount model module.
@@ -23,11 +22,11 @@ class SubAccount {
     /**
      * Constructs a new <code>SubAccount</code>.
      * @alias module:model/SubAccount
-     * @param id {Object} 
-     * @param name {Object} Descriptive name of sub-account
-     * @param email {Object} Email address. Also functions as a username if a password is set
-     * @param defaultProfile {module:model/DefaultProfile} 
-     * @param isDeleted {Object} 
+     * @param id {String} 
+     * @param name {String} Descriptive name of sub-account
+     * @param email {String} Email address. Also functions as a username if a password is set
+     * @param defaultProfile {String} 
+     * @param isDeleted {Boolean} 
      */
     constructor(id, name, email, defaultProfile, isDeleted) { 
         
@@ -59,19 +58,19 @@ class SubAccount {
             obj = obj || new SubAccount();
 
             if (data.hasOwnProperty('id')) {
-                obj['id'] = ApiClient.convertToType(data['id'], Object);
+                obj['id'] = ApiClient.convertToType(data['id'], 'String');
             }
             if (data.hasOwnProperty('name')) {
-                obj['name'] = ApiClient.convertToType(data['name'], Object);
+                obj['name'] = ApiClient.convertToType(data['name'], 'String');
             }
             if (data.hasOwnProperty('email')) {
-                obj['email'] = ApiClient.convertToType(data['email'], Object);
+                obj['email'] = ApiClient.convertToType(data['email'], 'String');
             }
             if (data.hasOwnProperty('default_profile')) {
-                obj['default_profile'] = DefaultProfile.constructFromObject(data['default_profile']);
+                obj['default_profile'] = ApiClient.convertToType(data['default_profile'], 'String');
             }
             if (data.hasOwnProperty('is_deleted')) {
-                obj['is_deleted'] = ApiClient.convertToType(data['is_deleted'], Object);
+                obj['is_deleted'] = ApiClient.convertToType(data['is_deleted'], 'Boolean');
             }
         }
         return obj;
@@ -89,9 +88,21 @@ class SubAccount {
                 throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
             }
         }
-        // validate the optional field `default_profile`
-        if (data['default_profile']) { // data not null
-          DefaultProfile.validateJSON(data['default_profile']);
+        // ensure the json data is a string
+        if (data['id'] && !(typeof data['id'] === 'string' || data['id'] instanceof String)) {
+            throw new Error("Expected the field `id` to be a primitive type in the JSON string but got " + data['id']);
+        }
+        // ensure the json data is a string
+        if (data['name'] && !(typeof data['name'] === 'string' || data['name'] instanceof String)) {
+            throw new Error("Expected the field `name` to be a primitive type in the JSON string but got " + data['name']);
+        }
+        // ensure the json data is a string
+        if (data['email'] && !(typeof data['email'] === 'string' || data['email'] instanceof String)) {
+            throw new Error("Expected the field `email` to be a primitive type in the JSON string but got " + data['email']);
+        }
+        // ensure the json data is a string
+        if (data['default_profile'] && !(typeof data['default_profile'] === 'string' || data['default_profile'] instanceof String)) {
+            throw new Error("Expected the field `default_profile` to be a primitive type in the JSON string but got " + data['default_profile']);
         }
 
         return true;
@@ -103,29 +114,29 @@ class SubAccount {
 SubAccount.RequiredProperties = ["id", "name", "email", "default_profile", "is_deleted"];
 
 /**
- * @member {Object} id
+ * @member {String} id
  */
 SubAccount.prototype['id'] = undefined;
 
 /**
  * Descriptive name of sub-account
- * @member {Object} name
+ * @member {String} name
  */
 SubAccount.prototype['name'] = undefined;
 
 /**
  * Email address. Also functions as a username if a password is set
- * @member {Object} email
+ * @member {String} email
  */
 SubAccount.prototype['email'] = undefined;
 
 /**
- * @member {module:model/DefaultProfile} default_profile
+ * @member {String} default_profile
  */
 SubAccount.prototype['default_profile'] = undefined;
 
 /**
- * @member {Object} is_deleted
+ * @member {Boolean} is_deleted
  */
 SubAccount.prototype['is_deleted'] = undefined;
 

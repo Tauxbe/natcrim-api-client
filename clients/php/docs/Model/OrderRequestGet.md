@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**client_reference** | [**\OpenAPI\Client\Model\ClientReference**](ClientReference.md) |  |
-**profile_id** | [**\OpenAPI\Client\Model\ProfileId**](ProfileId.md) |  |
+**client_reference** | **string** |  |
+**profile_id** | **string** |  |
 **profile_def** | [**\OpenAPI\Client\Model\ProfileDefinitionGet**](ProfileDefinitionGet.md) |  |
-**fips** | [**\OpenAPI\Client\Model\Fips**](Fips.md) |  | [optional]
-**region** | [**\OpenAPI\Client\Model\Region**](Region.md) |  | [optional]
+**fips** | **string** |  | [optional]
+**region** | **string** |  | [optional]
 **subject** | [**\OpenAPI\Client\Model\OrderSubject**](OrderSubject.md) |  |
-**max_results** | [**\OpenAPI\Client\Model\MaxResults**](MaxResults.md) |  | [optional]
+**max_results** | **int** |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

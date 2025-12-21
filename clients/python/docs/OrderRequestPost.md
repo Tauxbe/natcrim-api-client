@@ -4,13 +4,13 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**client_reference** | [**ClientReference**](ClientReference.md) |  | [optional] 
-**profile_id** | [**ProfileId1**](ProfileId1.md) |  | [optional] 
-**profile_def** | [**OrderRequestPostProfileDef**](OrderRequestPostProfileDef.md) |  | [optional] 
-**fips** | [**Fips**](Fips.md) |  | [optional] 
-**region** | [**Region**](Region.md) |  | [optional] 
+**client_reference** | **str** |  | [optional] 
+**profile_id** | **str** |  | [optional] 
+**profile_def** | [**ProfileDefinition**](ProfileDefinition.md) |  | [optional] 
+**fips** | **str** |  | [optional] 
+**region** | **str** |  | [optional] 
 **subject** | [**OrderSubject**](OrderSubject.md) |  | 
-**max_results** | [**MaxResults1**](MaxResults1.md) |  | [optional] 
+**max_results** | **int** |  | [optional] 
 
 ## Example
 

@@ -57,7 +57,7 @@ class OrderSuccess implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'records_returned' => 'mixed'
+        'records_returned' => 'int'
     ];
 
     /**
@@ -77,7 +77,7 @@ class OrderSuccess implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'records_returned' => true
+        'records_returned' => false
     ];
 
     /**
@@ -295,7 +295,7 @@ class OrderSuccess implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets records_returned
      *
-     * @return mixed
+     * @return int
      */
     public function getRecordsReturned()
     {
@@ -305,21 +305,14 @@ class OrderSuccess implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets records_returned
      *
-     * @param mixed $records_returned records_returned
+     * @param int $records_returned records_returned
      *
      * @return self
      */
     public function setRecordsReturned($records_returned)
     {
         if (is_null($records_returned)) {
-            array_push($this->openAPINullablesSetToNull, 'records_returned');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('records_returned', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable records_returned cannot be null');
         }
         $this->container['records_returned'] = $records_returned;
 

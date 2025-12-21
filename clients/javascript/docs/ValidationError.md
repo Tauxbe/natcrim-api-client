@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**loc** | **Object** |  | 
-**msg** | **Object** |  | 
-**type** | **Object** |  | 
+**loc** | [**[ValidationErrorLocInner]**](ValidationErrorLocInner.md) |  | 
+**msg** | **String** |  | 
+**type** | **String** |  | 
 
 

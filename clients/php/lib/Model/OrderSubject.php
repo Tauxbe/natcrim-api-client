@@ -57,10 +57,10 @@ class OrderSubject implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'first_name' => 'mixed',
-        'middle_name' => '\OpenAPI\Client\Model\MiddleName',
-        'last_name' => 'mixed',
-        'dob' => '\OpenAPI\Client\Model\Dob'
+        'first_name' => 'string',
+        'middle_name' => 'string',
+        'last_name' => 'string',
+        'dob' => '\DateTime'
     ];
 
     /**
@@ -74,7 +74,7 @@ class OrderSubject implements ModelInterface, ArrayAccess, \JsonSerializable
         'first_name' => null,
         'middle_name' => null,
         'last_name' => null,
-        'dob' => null
+        'dob' => 'date'
     ];
 
     /**
@@ -83,10 +83,10 @@ class OrderSubject implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'first_name' => true,
-		'middle_name' => false,
-		'last_name' => true,
-		'dob' => false
+        'first_name' => false,
+		'middle_name' => true,
+		'last_name' => false,
+		'dob' => true
     ];
 
     /**
@@ -319,7 +319,7 @@ class OrderSubject implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets first_name
      *
-     * @return mixed
+     * @return string
      */
     public function getFirstName()
     {
@@ -329,21 +329,14 @@ class OrderSubject implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets first_name
      *
-     * @param mixed $first_name first_name
+     * @param string $first_name first_name
      *
      * @return self
      */
     public function setFirstName($first_name)
     {
         if (is_null($first_name)) {
-            array_push($this->openAPINullablesSetToNull, 'first_name');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('first_name', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable first_name cannot be null');
         }
         $this->container['first_name'] = $first_name;
 
@@ -353,7 +346,7 @@ class OrderSubject implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets middle_name
      *
-     * @return \OpenAPI\Client\Model\MiddleName|null
+     * @return string|null
      */
     public function getMiddleName()
     {
@@ -363,14 +356,21 @@ class OrderSubject implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets middle_name
      *
-     * @param \OpenAPI\Client\Model\MiddleName|null $middle_name middle_name
+     * @param string|null $middle_name middle_name
      *
      * @return self
      */
     public function setMiddleName($middle_name)
     {
         if (is_null($middle_name)) {
-            throw new \InvalidArgumentException('non-nullable middle_name cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'middle_name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('middle_name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['middle_name'] = $middle_name;
 
@@ -380,7 +380,7 @@ class OrderSubject implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets last_name
      *
-     * @return mixed
+     * @return string
      */
     public function getLastName()
     {
@@ -390,21 +390,14 @@ class OrderSubject implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets last_name
      *
-     * @param mixed $last_name last_name
+     * @param string $last_name last_name
      *
      * @return self
      */
     public function setLastName($last_name)
     {
         if (is_null($last_name)) {
-            array_push($this->openAPINullablesSetToNull, 'last_name');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('last_name', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable last_name cannot be null');
         }
         $this->container['last_name'] = $last_name;
 
@@ -414,7 +407,7 @@ class OrderSubject implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets dob
      *
-     * @return \OpenAPI\Client\Model\Dob|null
+     * @return \DateTime|null
      */
     public function getDob()
     {
@@ -424,14 +417,21 @@ class OrderSubject implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets dob
      *
-     * @param \OpenAPI\Client\Model\Dob|null $dob dob
+     * @param \DateTime|null $dob dob
      *
      * @return self
      */
     public function setDob($dob)
     {
         if (is_null($dob)) {
-            throw new \InvalidArgumentException('non-nullable dob cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'dob');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('dob', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['dob'] = $dob;
 

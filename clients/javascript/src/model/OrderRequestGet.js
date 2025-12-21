@@ -12,13 +12,8 @@
  */
 
 import ApiClient from '../ApiClient';
-import ClientReference from './ClientReference';
-import Fips from './Fips';
-import MaxResults from './MaxResults';
 import OrderSubject from './OrderSubject';
 import ProfileDefinitionGet from './ProfileDefinitionGet';
-import ProfileId from './ProfileId';
-import Region from './Region';
 
 /**
  * The OrderRequestGet model module.
@@ -29,8 +24,8 @@ class OrderRequestGet {
     /**
      * Constructs a new <code>OrderRequestGet</code>.
      * @alias module:model/OrderRequestGet
-     * @param clientReference {module:model/ClientReference} 
-     * @param profileId {module:model/ProfileId} 
+     * @param clientReference {String} 
+     * @param profileId {String} 
      * @param profileDef {module:model/ProfileDefinitionGet} 
      * @param subject {module:model/OrderSubject} 
      */
@@ -63,25 +58,25 @@ class OrderRequestGet {
             obj = obj || new OrderRequestGet();
 
             if (data.hasOwnProperty('client_reference')) {
-                obj['client_reference'] = ClientReference.constructFromObject(data['client_reference']);
+                obj['client_reference'] = ApiClient.convertToType(data['client_reference'], 'String');
             }
             if (data.hasOwnProperty('profile_id')) {
-                obj['profile_id'] = ProfileId.constructFromObject(data['profile_id']);
+                obj['profile_id'] = ApiClient.convertToType(data['profile_id'], 'String');
             }
             if (data.hasOwnProperty('profile_def')) {
                 obj['profile_def'] = ApiClient.convertToType(data['profile_def'], ProfileDefinitionGet);
             }
             if (data.hasOwnProperty('fips')) {
-                obj['fips'] = Fips.constructFromObject(data['fips']);
+                obj['fips'] = ApiClient.convertToType(data['fips'], 'String');
             }
             if (data.hasOwnProperty('region')) {
-                obj['region'] = Region.constructFromObject(data['region']);
+                obj['region'] = ApiClient.convertToType(data['region'], 'String');
             }
             if (data.hasOwnProperty('subject')) {
                 obj['subject'] = OrderSubject.constructFromObject(data['subject']);
             }
             if (data.hasOwnProperty('max_results')) {
-                obj['max_results'] = MaxResults.constructFromObject(data['max_results']);
+                obj['max_results'] = ApiClient.convertToType(data['max_results'], 'Number');
             }
         }
         return obj;
@@ -99,33 +94,29 @@ class OrderRequestGet {
                 throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
             }
         }
-        // validate the optional field `client_reference`
-        if (data['client_reference']) { // data not null
-          ClientReference.validateJSON(data['client_reference']);
+        // ensure the json data is a string
+        if (data['client_reference'] && !(typeof data['client_reference'] === 'string' || data['client_reference'] instanceof String)) {
+            throw new Error("Expected the field `client_reference` to be a primitive type in the JSON string but got " + data['client_reference']);
         }
-        // validate the optional field `profile_id`
-        if (data['profile_id']) { // data not null
-          ProfileId.validateJSON(data['profile_id']);
+        // ensure the json data is a string
+        if (data['profile_id'] && !(typeof data['profile_id'] === 'string' || data['profile_id'] instanceof String)) {
+            throw new Error("Expected the field `profile_id` to be a primitive type in the JSON string but got " + data['profile_id']);
         }
         // validate the optional field `profile_def`
         if (data['profile_def']) { // data not null
           ProfileDefinitionGet.validateJSON(data['profile_def']);
         }
-        // validate the optional field `fips`
-        if (data['fips']) { // data not null
-          Fips.validateJSON(data['fips']);
+        // ensure the json data is a string
+        if (data['fips'] && !(typeof data['fips'] === 'string' || data['fips'] instanceof String)) {
+            throw new Error("Expected the field `fips` to be a primitive type in the JSON string but got " + data['fips']);
         }
-        // validate the optional field `region`
-        if (data['region']) { // data not null
-          Region.validateJSON(data['region']);
+        // ensure the json data is a string
+        if (data['region'] && !(typeof data['region'] === 'string' || data['region'] instanceof String)) {
+            throw new Error("Expected the field `region` to be a primitive type in the JSON string but got " + data['region']);
         }
         // validate the optional field `subject`
         if (data['subject']) { // data not null
           OrderSubject.validateJSON(data['subject']);
-        }
-        // validate the optional field `max_results`
-        if (data['max_results']) { // data not null
-          MaxResults.validateJSON(data['max_results']);
         }
 
         return true;
@@ -137,12 +128,12 @@ class OrderRequestGet {
 OrderRequestGet.RequiredProperties = ["client_reference", "profile_id", "profile_def", "subject"];
 
 /**
- * @member {module:model/ClientReference} client_reference
+ * @member {String} client_reference
  */
 OrderRequestGet.prototype['client_reference'] = undefined;
 
 /**
- * @member {module:model/ProfileId} profile_id
+ * @member {String} profile_id
  */
 OrderRequestGet.prototype['profile_id'] = undefined;
 
@@ -152,12 +143,12 @@ OrderRequestGet.prototype['profile_id'] = undefined;
 OrderRequestGet.prototype['profile_def'] = undefined;
 
 /**
- * @member {module:model/Fips} fips
+ * @member {String} fips
  */
 OrderRequestGet.prototype['fips'] = undefined;
 
 /**
- * @member {module:model/Region} region
+ * @member {String} region
  */
 OrderRequestGet.prototype['region'] = undefined;
 
@@ -167,7 +158,7 @@ OrderRequestGet.prototype['region'] = undefined;
 OrderRequestGet.prototype['subject'] = undefined;
 
 /**
- * @member {module:model/MaxResults} max_results
+ * @member {Number} max_results
  */
 OrderRequestGet.prototype['max_results'] = undefined;
 

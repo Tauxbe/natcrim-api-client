@@ -1,8 +1,20 @@
 # NatcrimApiClient.SourceType
 
-## Properties
+## Enum
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
+
+* `court` (value: `"court"`)
+
+* `doc` (value: `"doc"`)
+
+* `arrest` (value: `"arrest"`)
+
+* `sor` (value: `"sor"`)
+
+* `warrant` (value: `"warrant"`)
+
+* `swl` (value: `"swl"`)
+
+* `federal` (value: `"federal"`)
 
 

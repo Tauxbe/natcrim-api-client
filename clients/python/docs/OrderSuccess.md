@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**records_returned** | **object** |  | 
+**records_returned** | **int** |  | 
 
 ## Example
 

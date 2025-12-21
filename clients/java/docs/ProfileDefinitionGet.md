@@ -7,13 +7,13 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**tag** | [**Tag**](Tag.md) |  |  [optional] |
+|**tag** | **String** |  |  [optional] |
 |**firstName** | [**NameFilterGet**](NameFilterGet.md) |  |  |
 |**middleName** | [**NameFilterGet**](NameFilterGet.md) |  |  |
 |**lastName** | [**NameFilterGet**](NameFilterGet.md) |  |  |
 |**dob** | [**DOBFilterGet**](DOBFilterGet.md) |  |  |
-|**sourceTypes** | [**SourceTypes**](SourceTypes.md) |  |  [optional] |
-|**maxAge** | [**ProfileMaxAge**](ProfileMaxAge.md) |  |  [optional] |
+|**sourceTypes** | [**AnyOf**](AnyOf.md) | Source types filter. Includes all types by default |  [optional] |
+|**maxAge** | [**MaxAgeGet**](MaxAgeGet.md) |  |  [optional] |
 
 
 

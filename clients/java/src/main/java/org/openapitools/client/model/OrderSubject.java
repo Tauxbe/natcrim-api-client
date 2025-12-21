@@ -20,9 +20,9 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Arrays;
-import org.openapitools.client.model.Dob;
-import org.openapitools.client.model.MiddleName;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -51,28 +51,28 @@ import com.natcrim.api.client.JSON;
 /**
  * OrderSubject
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-12-20T03:11:11.149103Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-12-21T03:25:25.736217Z[Etc/UTC]")
 public class OrderSubject {
   public static final String SERIALIZED_NAME_FIRST_NAME = "first_name";
   @SerializedName(SERIALIZED_NAME_FIRST_NAME)
-  private Object firstName = null;
+  private String firstName;
 
   public static final String SERIALIZED_NAME_MIDDLE_NAME = "middle_name";
   @SerializedName(SERIALIZED_NAME_MIDDLE_NAME)
-  private MiddleName middleName = ;
+  private String middleName;
 
   public static final String SERIALIZED_NAME_LAST_NAME = "last_name";
   @SerializedName(SERIALIZED_NAME_LAST_NAME)
-  private Object lastName = null;
+  private String lastName;
 
   public static final String SERIALIZED_NAME_DOB = "dob";
   @SerializedName(SERIALIZED_NAME_DOB)
-  private Dob dob;
+  private LocalDate dob;
 
   public OrderSubject() {
   }
 
-  public OrderSubject firstName(Object firstName) {
+  public OrderSubject firstName(String firstName) {
     
     this.firstName = firstName;
     return this;
@@ -82,18 +82,18 @@ public class OrderSubject {
    * Get firstName
    * @return firstName
   **/
-  @javax.annotation.Nullable
-  public Object getFirstName() {
+  @javax.annotation.Nonnull
+  public String getFirstName() {
     return firstName;
   }
 
 
-  public void setFirstName(Object firstName) {
+  public void setFirstName(String firstName) {
     this.firstName = firstName;
   }
 
 
-  public OrderSubject middleName(MiddleName middleName) {
+  public OrderSubject middleName(String middleName) {
     
     this.middleName = middleName;
     return this;
@@ -104,17 +104,17 @@ public class OrderSubject {
    * @return middleName
   **/
   @javax.annotation.Nullable
-  public MiddleName getMiddleName() {
+  public String getMiddleName() {
     return middleName;
   }
 
 
-  public void setMiddleName(MiddleName middleName) {
+  public void setMiddleName(String middleName) {
     this.middleName = middleName;
   }
 
 
-  public OrderSubject lastName(Object lastName) {
+  public OrderSubject lastName(String lastName) {
     
     this.lastName = lastName;
     return this;
@@ -124,18 +124,18 @@ public class OrderSubject {
    * Get lastName
    * @return lastName
   **/
-  @javax.annotation.Nullable
-  public Object getLastName() {
+  @javax.annotation.Nonnull
+  public String getLastName() {
     return lastName;
   }
 
 
-  public void setLastName(Object lastName) {
+  public void setLastName(String lastName) {
     this.lastName = lastName;
   }
 
 
-  public OrderSubject dob(Dob dob) {
+  public OrderSubject dob(LocalDate dob) {
     
     this.dob = dob;
     return this;
@@ -146,12 +146,12 @@ public class OrderSubject {
    * @return dob
   **/
   @javax.annotation.Nullable
-  public Dob getDob() {
+  public LocalDate getDob() {
     return dob;
   }
 
 
-  public void setDob(Dob dob) {
+  public void setDob(LocalDate dob) {
     this.dob = dob;
   }
 
@@ -172,9 +172,20 @@ public class OrderSubject {
         Objects.equals(this.dob, orderSubject.dob);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(firstName, middleName, lastName, dob);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -246,13 +257,14 @@ public class OrderSubject {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the optional field `middle_name`
-      if (jsonObj.get("middle_name") != null && !jsonObj.get("middle_name").isJsonNull()) {
-        MiddleName.validateJsonElement(jsonObj.get("middle_name"));
+      if (!jsonObj.get("first_name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `first_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("first_name").toString()));
       }
-      // validate the optional field `dob`
-      if (jsonObj.get("dob") != null && !jsonObj.get("dob").isJsonNull()) {
-        Dob.validateJsonElement(jsonObj.get("dob"));
+      if ((jsonObj.get("middle_name") != null && !jsonObj.get("middle_name").isJsonNull()) && !jsonObj.get("middle_name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `middle_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("middle_name").toString()));
+      }
+      if (!jsonObj.get("last_name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `last_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("last_name").toString()));
       }
   }
 

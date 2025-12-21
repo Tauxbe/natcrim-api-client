@@ -57,10 +57,10 @@ class OrderResult implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'completed_at' => 'mixed',
-        'failure' => '\OpenAPI\Client\Model\OrderResultFailure',
-        'success' => '\OpenAPI\Client\Model\OrderResultSuccess',
-        'max_results' => '\OpenAPI\Client\Model\MaxResults2'
+        'completed_at' => '\DateTime',
+        'failure' => '\OpenAPI\Client\Model\OrderFailure',
+        'success' => '\OpenAPI\Client\Model\OrderSuccess',
+        'max_results' => 'bool'
     ];
 
     /**
@@ -83,10 +83,10 @@ class OrderResult implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'completed_at' => true,
-		'failure' => false,
-		'success' => false,
-		'max_results' => false
+        'completed_at' => false,
+		'failure' => true,
+		'success' => true,
+		'max_results' => true
     ];
 
     /**
@@ -322,7 +322,7 @@ class OrderResult implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets completed_at
      *
-     * @return mixed
+     * @return \DateTime
      */
     public function getCompletedAt()
     {
@@ -332,21 +332,14 @@ class OrderResult implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets completed_at
      *
-     * @param mixed $completed_at completed_at
+     * @param \DateTime $completed_at completed_at
      *
      * @return self
      */
     public function setCompletedAt($completed_at)
     {
         if (is_null($completed_at)) {
-            array_push($this->openAPINullablesSetToNull, 'completed_at');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('completed_at', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable completed_at cannot be null');
         }
         $this->container['completed_at'] = $completed_at;
 
@@ -356,7 +349,7 @@ class OrderResult implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets failure
      *
-     * @return \OpenAPI\Client\Model\OrderResultFailure
+     * @return \OpenAPI\Client\Model\OrderFailure
      */
     public function getFailure()
     {
@@ -366,14 +359,21 @@ class OrderResult implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets failure
      *
-     * @param \OpenAPI\Client\Model\OrderResultFailure $failure failure
+     * @param \OpenAPI\Client\Model\OrderFailure $failure failure
      *
      * @return self
      */
     public function setFailure($failure)
     {
         if (is_null($failure)) {
-            throw new \InvalidArgumentException('non-nullable failure cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'failure');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('failure', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['failure'] = $failure;
 
@@ -383,7 +383,7 @@ class OrderResult implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets success
      *
-     * @return \OpenAPI\Client\Model\OrderResultSuccess
+     * @return \OpenAPI\Client\Model\OrderSuccess
      */
     public function getSuccess()
     {
@@ -393,14 +393,21 @@ class OrderResult implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets success
      *
-     * @param \OpenAPI\Client\Model\OrderResultSuccess $success success
+     * @param \OpenAPI\Client\Model\OrderSuccess $success success
      *
      * @return self
      */
     public function setSuccess($success)
     {
         if (is_null($success)) {
-            throw new \InvalidArgumentException('non-nullable success cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'success');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('success', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['success'] = $success;
 
@@ -410,7 +417,7 @@ class OrderResult implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets max_results
      *
-     * @return \OpenAPI\Client\Model\MaxResults2|null
+     * @return bool|null
      */
     public function getMaxResults()
     {
@@ -420,14 +427,21 @@ class OrderResult implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets max_results
      *
-     * @param \OpenAPI\Client\Model\MaxResults2|null $max_results max_results
+     * @param bool|null $max_results max_results
      *
      * @return self
      */
     public function setMaxResults($max_results)
     {
         if (is_null($max_results)) {
-            throw new \InvalidArgumentException('non-nullable max_results cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'max_results');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('max_results', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['max_results'] = $max_results;
 

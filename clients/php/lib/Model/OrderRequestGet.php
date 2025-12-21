@@ -57,13 +57,13 @@ class OrderRequestGet implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'client_reference' => '\OpenAPI\Client\Model\ClientReference',
-        'profile_id' => '\OpenAPI\Client\Model\ProfileId',
+        'client_reference' => 'string',
+        'profile_id' => 'string',
         'profile_def' => '\OpenAPI\Client\Model\ProfileDefinitionGet',
-        'fips' => '\OpenAPI\Client\Model\Fips',
-        'region' => '\OpenAPI\Client\Model\Region',
+        'fips' => 'string',
+        'region' => 'string',
         'subject' => '\OpenAPI\Client\Model\OrderSubject',
-        'max_results' => '\OpenAPI\Client\Model\MaxResults'
+        'max_results' => 'int'
     ];
 
     /**
@@ -75,7 +75,7 @@ class OrderRequestGet implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'client_reference' => null,
-        'profile_id' => null,
+        'profile_id' => 'uuid',
         'profile_def' => null,
         'fips' => null,
         'region' => null,
@@ -89,13 +89,13 @@ class OrderRequestGet implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'client_reference' => false,
-		'profile_id' => false,
+        'client_reference' => true,
+		'profile_id' => true,
 		'profile_def' => false,
-		'fips' => false,
-		'region' => false,
+		'fips' => true,
+		'region' => true,
 		'subject' => false,
-		'max_results' => false
+		'max_results' => true
     ];
 
     /**
@@ -346,7 +346,7 @@ class OrderRequestGet implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets client_reference
      *
-     * @return \OpenAPI\Client\Model\ClientReference
+     * @return string
      */
     public function getClientReference()
     {
@@ -356,14 +356,21 @@ class OrderRequestGet implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets client_reference
      *
-     * @param \OpenAPI\Client\Model\ClientReference $client_reference client_reference
+     * @param string $client_reference client_reference
      *
      * @return self
      */
     public function setClientReference($client_reference)
     {
         if (is_null($client_reference)) {
-            throw new \InvalidArgumentException('non-nullable client_reference cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'client_reference');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('client_reference', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['client_reference'] = $client_reference;
 
@@ -373,7 +380,7 @@ class OrderRequestGet implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets profile_id
      *
-     * @return \OpenAPI\Client\Model\ProfileId
+     * @return string
      */
     public function getProfileId()
     {
@@ -383,14 +390,21 @@ class OrderRequestGet implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets profile_id
      *
-     * @param \OpenAPI\Client\Model\ProfileId $profile_id profile_id
+     * @param string $profile_id profile_id
      *
      * @return self
      */
     public function setProfileId($profile_id)
     {
         if (is_null($profile_id)) {
-            throw new \InvalidArgumentException('non-nullable profile_id cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'profile_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('profile_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['profile_id'] = $profile_id;
 
@@ -427,7 +441,7 @@ class OrderRequestGet implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets fips
      *
-     * @return \OpenAPI\Client\Model\Fips|null
+     * @return string|null
      */
     public function getFips()
     {
@@ -437,14 +451,21 @@ class OrderRequestGet implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets fips
      *
-     * @param \OpenAPI\Client\Model\Fips|null $fips fips
+     * @param string|null $fips fips
      *
      * @return self
      */
     public function setFips($fips)
     {
         if (is_null($fips)) {
-            throw new \InvalidArgumentException('non-nullable fips cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'fips');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('fips', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['fips'] = $fips;
 
@@ -454,7 +475,7 @@ class OrderRequestGet implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets region
      *
-     * @return \OpenAPI\Client\Model\Region|null
+     * @return string|null
      */
     public function getRegion()
     {
@@ -464,14 +485,21 @@ class OrderRequestGet implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets region
      *
-     * @param \OpenAPI\Client\Model\Region|null $region region
+     * @param string|null $region region
      *
      * @return self
      */
     public function setRegion($region)
     {
         if (is_null($region)) {
-            throw new \InvalidArgumentException('non-nullable region cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'region');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('region', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['region'] = $region;
 
@@ -508,7 +536,7 @@ class OrderRequestGet implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets max_results
      *
-     * @return \OpenAPI\Client\Model\MaxResults|null
+     * @return int|null
      */
     public function getMaxResults()
     {
@@ -518,14 +546,21 @@ class OrderRequestGet implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets max_results
      *
-     * @param \OpenAPI\Client\Model\MaxResults|null $max_results max_results
+     * @param int|null $max_results max_results
      *
      * @return self
      */
     public function setMaxResults($max_results)
     {
         if (is_null($max_results)) {
-            throw new \InvalidArgumentException('non-nullable max_results cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'max_results');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('max_results', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['max_results'] = $max_results;
 

@@ -12,6 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
+import ValidationErrorLocInner from './ValidationErrorLocInner';
 
 /**
  * The ValidationError model module.
@@ -22,9 +23,9 @@ class ValidationError {
     /**
      * Constructs a new <code>ValidationError</code>.
      * @alias module:model/ValidationError
-     * @param loc {Object} 
-     * @param msg {Object} 
-     * @param type {Object} 
+     * @param loc {Array.<module:model/ValidationErrorLocInner>} 
+     * @param msg {String} 
+     * @param type {String} 
      */
     constructor(loc, msg, type) { 
         
@@ -54,13 +55,13 @@ class ValidationError {
             obj = obj || new ValidationError();
 
             if (data.hasOwnProperty('loc')) {
-                obj['loc'] = ApiClient.convertToType(data['loc'], Object);
+                obj['loc'] = ApiClient.convertToType(data['loc'], [ValidationErrorLocInner]);
             }
             if (data.hasOwnProperty('msg')) {
-                obj['msg'] = ApiClient.convertToType(data['msg'], Object);
+                obj['msg'] = ApiClient.convertToType(data['msg'], 'String');
             }
             if (data.hasOwnProperty('type')) {
-                obj['type'] = ApiClient.convertToType(data['type'], Object);
+                obj['type'] = ApiClient.convertToType(data['type'], 'String');
             }
         }
         return obj;
@@ -78,6 +79,24 @@ class ValidationError {
                 throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
             }
         }
+        if (data['loc']) { // data not null
+            // ensure the json data is an array
+            if (!Array.isArray(data['loc'])) {
+                throw new Error("Expected the field `loc` to be an array in the JSON data but got " + data['loc']);
+            }
+            // validate the optional field `loc` (array)
+            for (const item of data['loc']) {
+                ValidationErrorLocInner.validateJSON(item);
+            };
+        }
+        // ensure the json data is a string
+        if (data['msg'] && !(typeof data['msg'] === 'string' || data['msg'] instanceof String)) {
+            throw new Error("Expected the field `msg` to be a primitive type in the JSON string but got " + data['msg']);
+        }
+        // ensure the json data is a string
+        if (data['type'] && !(typeof data['type'] === 'string' || data['type'] instanceof String)) {
+            throw new Error("Expected the field `type` to be a primitive type in the JSON string but got " + data['type']);
+        }
 
         return true;
     }
@@ -88,17 +107,17 @@ class ValidationError {
 ValidationError.RequiredProperties = ["loc", "msg", "type"];
 
 /**
- * @member {Object} loc
+ * @member {Array.<module:model/ValidationErrorLocInner>} loc
  */
 ValidationError.prototype['loc'] = undefined;
 
 /**
- * @member {Object} msg
+ * @member {String} msg
  */
 ValidationError.prototype['msg'] = undefined;
 
 /**
- * @member {Object} type
+ * @member {String} type
  */
 ValidationError.prototype['type'] = undefined;
 

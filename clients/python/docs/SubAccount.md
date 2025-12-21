@@ -4,11 +4,11 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **object** |  | 
-**name** | **object** | Descriptive name of sub-account | 
-**email** | **object** | Email address. Also functions as a username if a password is set | 
-**default_profile** | [**DefaultProfile**](DefaultProfile.md) |  | 
-**is_deleted** | **object** |  | 
+**id** | **str** |  | 
+**name** | **str** | Descriptive name of sub-account | 
+**email** | **str** | Email address. Also functions as a username if a password is set | 
+**default_profile** | **str** |  | 
+**is_deleted** | **bool** |  | 
 
 ## Example
 

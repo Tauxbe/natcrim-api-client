@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**tag** | [**\OpenAPI\Client\Model\Tag**](Tag.md) |  | [optional]
+**tag** | **string** |  | [optional]
 **first_name** | [**\OpenAPI\Client\Model\NameFilterGet**](NameFilterGet.md) |  |
 **middle_name** | [**\OpenAPI\Client\Model\NameFilterGet**](NameFilterGet.md) |  |
 **last_name** | [**\OpenAPI\Client\Model\NameFilterGet**](NameFilterGet.md) |  |
 **dob** | [**\OpenAPI\Client\Model\DOBFilterGet**](DOBFilterGet.md) |  |
-**source_types** | [**\OpenAPI\Client\Model\SourceTypes**](SourceTypes.md) |  | [optional]
-**max_age** | [**\OpenAPI\Client\Model\ProfileMaxAge**](ProfileMaxAge.md) |  | [optional]
-**id** | **mixed** |  |
-**is_deleted** | **mixed** |  |
+**source_types** | [**AnyOf**](AnyOf.md) | Source types filter. Includes all types by default | [optional]
+**max_age** | [**\OpenAPI\Client\Model\MaxAgeGet**](MaxAgeGet.md) |  | [optional]
+**id** | **string** |  |
+**is_deleted** | **bool** |  |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

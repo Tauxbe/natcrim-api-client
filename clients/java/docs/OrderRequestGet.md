@@ -7,13 +7,13 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**clientReference** | [**ClientReference**](ClientReference.md) |  |  |
-|**profileId** | [**ProfileId**](ProfileId.md) |  |  |
+|**clientReference** | **String** |  |  |
+|**profileId** | **UUID** |  |  |
 |**profileDef** | [**ProfileDefinitionGet**](ProfileDefinitionGet.md) |  |  |
-|**fips** | [**Fips**](Fips.md) |  |  [optional] |
-|**region** | [**Region**](Region.md) |  |  [optional] |
+|**fips** | **String** |  |  [optional] |
+|**region** | **String** |  |  [optional] |
 |**subject** | [**OrderSubject**](OrderSubject.md) |  |  |
-|**maxResults** | [**MaxResults**](MaxResults.md) |  |  [optional] |
+|**maxResults** | **Integer** |  |  [optional] |
 
 
 

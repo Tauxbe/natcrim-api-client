@@ -33,8 +33,7 @@ from typing import Any, List, Optional
 
 from natcrim_api_client.models.order import Order
 from natcrim_api_client.models.order_post import OrderPost
-from natcrim_api_client.models.order_post_response_input import OrderPostResponseInput
-from natcrim_api_client.models.order_post_response_output import OrderPostResponseOutput
+from natcrim_api_client.models.order_post_response import OrderPostResponse
 
 from natcrim_api_client.api_client import ApiClient
 from natcrim_api_client.api_response import ApiResponse
@@ -72,7 +71,7 @@ class OrdersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> OrderPostResponseInput:
+    ) -> OrderPostResponse:
         """Get Order Cache
 
         :raises:
@@ -116,7 +115,7 @@ class OrdersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "OrderPostResponseInput",
+            '200': "OrderPostResponse",
             '403': None,
             '410': None,
             '500': None,
@@ -152,7 +151,7 @@ class OrdersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[OrderPostResponseInput]:
+    ) -> ApiResponse[OrderPostResponse]:
         """Get Order Cache
 
         :raises:
@@ -196,7 +195,7 @@ class OrdersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "OrderPostResponseInput",
+            '200': "OrderPostResponse",
             '403': None,
             '410': None,
             '500': None,
@@ -276,7 +275,7 @@ class OrdersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "OrderPostResponseInput",
+            '200': "OrderPostResponse",
             '403': None,
             '410': None,
             '500': None,
@@ -1096,7 +1095,7 @@ class OrdersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> OrderPostResponseOutput:
+    ) -> OrderPostResponse:
         """Post Order
 
 
@@ -1136,7 +1135,7 @@ class OrdersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "OrderPostResponseOutput",
+            '200': "OrderPostResponse",
             '422': "HTTPValidationError"
             
         }
@@ -1168,7 +1167,7 @@ class OrdersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[OrderPostResponseOutput]:
+    ) -> ApiResponse[OrderPostResponse]:
         """Post Order
 
 
@@ -1208,7 +1207,7 @@ class OrdersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "OrderPostResponseOutput",
+            '200': "OrderPostResponse",
             '422': "HTTPValidationError"
             
         }
@@ -1280,7 +1279,7 @@ class OrdersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "OrderPostResponseOutput",
+            '200': "OrderPostResponse",
             '422': "HTTPValidationError"
             
         }

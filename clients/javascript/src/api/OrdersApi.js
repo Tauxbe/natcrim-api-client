@@ -17,8 +17,7 @@ import AnyOf from '../model/AnyOf';
 import HTTPValidationError from '../model/HTTPValidationError';
 import Order from '../model/Order';
 import OrderPost from '../model/OrderPost';
-import OrderPostResponseInput from '../model/OrderPostResponseInput';
-import OrderPostResponseOutput from '../model/OrderPostResponseOutput';
+import OrderPostResponse from '../model/OrderPostResponse';
 
 /**
 * Orders service.
@@ -43,7 +42,7 @@ export default class OrdersApi {
      * Callback function to receive the result of the getOrderCacheOrdersCacheOrderIdGet operation.
      * @callback module:api/OrdersApi~getOrderCacheOrdersCacheOrderIdGetCallback
      * @param {String} error Error message, if any.
-     * @param {module:model/OrderPostResponseInput} data The data returned by the service call.
+     * @param {module:model/OrderPostResponse} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -55,7 +54,7 @@ export default class OrdersApi {
      * @param {Number} [offset = 0)] 
      * @param {Number} [length = 20)] 
      * @param {module:api/OrdersApi~getOrderCacheOrdersCacheOrderIdGetCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/OrderPostResponseInput}
+     * data is of type: {@link module:model/OrderPostResponse}
      */
     getOrderCacheOrdersCacheOrderIdGet(orderId, opts, callback) {
       opts = opts || {};
@@ -80,7 +79,7 @@ export default class OrdersApi {
       let authNames = ['HTTPBasic', 'HTTPBearer'];
       let contentTypes = [];
       let accepts = ['application/json'];
-      let returnType = OrderPostResponseInput;
+      let returnType = OrderPostResponse;
       return this.apiClient.callApi(
         '/orders/cache/{order_id}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
@@ -194,7 +193,7 @@ export default class OrdersApi {
      * Callback function to receive the result of the postOrderOrdersPost operation.
      * @callback module:api/OrdersApi~postOrderOrdersPostCallback
      * @param {String} error Error message, if any.
-     * @param {module:model/OrderPostResponseOutput} data The data returned by the service call.
+     * @param {module:model/OrderPostResponse} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -204,7 +203,7 @@ export default class OrdersApi {
      * @param {Object} opts Optional parameters
      * @param {Boolean} [paginate] 
      * @param {module:api/OrdersApi~postOrderOrdersPostCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/OrderPostResponseOutput}
+     * data is of type: {@link module:model/OrderPostResponse}
      */
     postOrderOrdersPost(orderPost, opts, callback) {
       opts = opts || {};
@@ -227,7 +226,7 @@ export default class OrdersApi {
       let authNames = ['HTTPBasic', 'HTTPBearer'];
       let contentTypes = ['application/json'];
       let accepts = ['application/json'];
-      let returnType = OrderPostResponseOutput;
+      let returnType = OrderPostResponse;
       return this.apiClient.callApi(
         '/orders', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,

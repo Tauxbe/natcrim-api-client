@@ -57,13 +57,13 @@ class ProfilePut implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'tag' => '\OpenAPI\Client\Model\Tag1',
+        'tag' => 'string',
         'first_name' => '\OpenAPI\Client\Model\NameFilter',
         'middle_name' => '\OpenAPI\Client\Model\NameFilter',
         'last_name' => '\OpenAPI\Client\Model\NameFilter',
         'dob' => '\OpenAPI\Client\Model\DOBFilter',
-        'source_types' => '\OpenAPI\Client\Model\SourceTypes',
-        'max_age' => '\OpenAPI\Client\Model\ProfileDefinitionMaxAge'
+        'source_types' => 'AnyOf',
+        'max_age' => '\OpenAPI\Client\Model\MaxAge'
     ];
 
     /**
@@ -89,13 +89,13 @@ class ProfilePut implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'tag' => false,
+        'tag' => true,
 		'first_name' => false,
 		'middle_name' => false,
 		'last_name' => false,
 		'dob' => false,
-		'source_types' => false,
-		'max_age' => false
+		'source_types' => true,
+		'max_age' => true
     ];
 
     /**
@@ -316,6 +316,10 @@ class ProfilePut implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['tag']) && (mb_strlen($this->container['tag']) < 1)) {
+            $invalidProperties[] = "invalid value for 'tag', the character length must be bigger than or equal to 1.";
+        }
+
         if ($this->container['first_name'] === null) {
             $invalidProperties[] = "'first_name' can't be null";
         }
@@ -346,7 +350,7 @@ class ProfilePut implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets tag
      *
-     * @return \OpenAPI\Client\Model\Tag1|null
+     * @return string|null
      */
     public function getTag()
     {
@@ -356,15 +360,27 @@ class ProfilePut implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets tag
      *
-     * @param \OpenAPI\Client\Model\Tag1|null $tag tag
+     * @param string|null $tag tag
      *
      * @return self
      */
     public function setTag($tag)
     {
         if (is_null($tag)) {
-            throw new \InvalidArgumentException('non-nullable tag cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'tag');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('tag', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
+
+        if (!is_null($tag) && (mb_strlen($tag) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $tag when calling ProfilePut., must be bigger than or equal to 1.');
+        }
+
         $this->container['tag'] = $tag;
 
         return $this;
@@ -481,7 +497,7 @@ class ProfilePut implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets source_types
      *
-     * @return \OpenAPI\Client\Model\SourceTypes|null
+     * @return AnyOf|null
      */
     public function getSourceTypes()
     {
@@ -491,14 +507,21 @@ class ProfilePut implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets source_types
      *
-     * @param \OpenAPI\Client\Model\SourceTypes|null $source_types source_types
+     * @param AnyOf|null $source_types Source types filter. Includes all types by default
      *
      * @return self
      */
     public function setSourceTypes($source_types)
     {
         if (is_null($source_types)) {
-            throw new \InvalidArgumentException('non-nullable source_types cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'source_types');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('source_types', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['source_types'] = $source_types;
 
@@ -508,7 +531,7 @@ class ProfilePut implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets max_age
      *
-     * @return \OpenAPI\Client\Model\ProfileDefinitionMaxAge|null
+     * @return \OpenAPI\Client\Model\MaxAge|null
      */
     public function getMaxAge()
     {
@@ -518,14 +541,21 @@ class ProfilePut implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets max_age
      *
-     * @param \OpenAPI\Client\Model\ProfileDefinitionMaxAge|null $max_age max_age
+     * @param \OpenAPI\Client\Model\MaxAge|null $max_age max_age
      *
      * @return self
      */
     public function setMaxAge($max_age)
     {
         if (is_null($max_age)) {
-            throw new \InvalidArgumentException('non-nullable max_age cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'max_age');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('max_age', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['max_age'] = $max_age;
 

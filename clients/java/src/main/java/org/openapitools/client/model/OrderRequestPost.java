@@ -21,13 +21,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.Arrays;
-import org.openapitools.client.model.ClientReference;
-import org.openapitools.client.model.Fips;
-import org.openapitools.client.model.MaxResults1;
-import org.openapitools.client.model.OrderRequestPostProfileDef;
+import java.util.UUID;
 import org.openapitools.client.model.OrderSubject;
-import org.openapitools.client.model.ProfileId1;
-import org.openapitools.client.model.Region;
+import org.openapitools.client.model.ProfileDefinition;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -56,27 +53,27 @@ import com.natcrim.api.client.JSON;
 /**
  * OrderRequestPost
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-12-20T03:11:11.149103Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-12-21T03:25:25.736217Z[Etc/UTC]")
 public class OrderRequestPost {
   public static final String SERIALIZED_NAME_CLIENT_REFERENCE = "client_reference";
   @SerializedName(SERIALIZED_NAME_CLIENT_REFERENCE)
-  private ClientReference clientReference;
+  private String clientReference;
 
   public static final String SERIALIZED_NAME_PROFILE_ID = "profile_id";
   @SerializedName(SERIALIZED_NAME_PROFILE_ID)
-  private ProfileId1 profileId;
+  private UUID profileId;
 
   public static final String SERIALIZED_NAME_PROFILE_DEF = "profile_def";
   @SerializedName(SERIALIZED_NAME_PROFILE_DEF)
-  private OrderRequestPostProfileDef profileDef;
+  private ProfileDefinition profileDef;
 
   public static final String SERIALIZED_NAME_FIPS = "fips";
   @SerializedName(SERIALIZED_NAME_FIPS)
-  private Fips fips = 00000;
+  private String fips;
 
   public static final String SERIALIZED_NAME_REGION = "region";
   @SerializedName(SERIALIZED_NAME_REGION)
-  private Region region;
+  private String region;
 
   public static final String SERIALIZED_NAME_SUBJECT = "subject";
   @SerializedName(SERIALIZED_NAME_SUBJECT)
@@ -84,12 +81,12 @@ public class OrderRequestPost {
 
   public static final String SERIALIZED_NAME_MAX_RESULTS = "max_results";
   @SerializedName(SERIALIZED_NAME_MAX_RESULTS)
-  private MaxResults1 maxResults = 200;
+  private Integer maxResults;
 
   public OrderRequestPost() {
   }
 
-  public OrderRequestPost clientReference(ClientReference clientReference) {
+  public OrderRequestPost clientReference(String clientReference) {
     
     this.clientReference = clientReference;
     return this;
@@ -100,17 +97,17 @@ public class OrderRequestPost {
    * @return clientReference
   **/
   @javax.annotation.Nullable
-  public ClientReference getClientReference() {
+  public String getClientReference() {
     return clientReference;
   }
 
 
-  public void setClientReference(ClientReference clientReference) {
+  public void setClientReference(String clientReference) {
     this.clientReference = clientReference;
   }
 
 
-  public OrderRequestPost profileId(ProfileId1 profileId) {
+  public OrderRequestPost profileId(UUID profileId) {
     
     this.profileId = profileId;
     return this;
@@ -121,17 +118,17 @@ public class OrderRequestPost {
    * @return profileId
   **/
   @javax.annotation.Nullable
-  public ProfileId1 getProfileId() {
+  public UUID getProfileId() {
     return profileId;
   }
 
 
-  public void setProfileId(ProfileId1 profileId) {
+  public void setProfileId(UUID profileId) {
     this.profileId = profileId;
   }
 
 
-  public OrderRequestPost profileDef(OrderRequestPostProfileDef profileDef) {
+  public OrderRequestPost profileDef(ProfileDefinition profileDef) {
     
     this.profileDef = profileDef;
     return this;
@@ -142,17 +139,17 @@ public class OrderRequestPost {
    * @return profileDef
   **/
   @javax.annotation.Nullable
-  public OrderRequestPostProfileDef getProfileDef() {
+  public ProfileDefinition getProfileDef() {
     return profileDef;
   }
 
 
-  public void setProfileDef(OrderRequestPostProfileDef profileDef) {
+  public void setProfileDef(ProfileDefinition profileDef) {
     this.profileDef = profileDef;
   }
 
 
-  public OrderRequestPost fips(Fips fips) {
+  public OrderRequestPost fips(String fips) {
     
     this.fips = fips;
     return this;
@@ -163,17 +160,17 @@ public class OrderRequestPost {
    * @return fips
   **/
   @javax.annotation.Nullable
-  public Fips getFips() {
+  public String getFips() {
     return fips;
   }
 
 
-  public void setFips(Fips fips) {
+  public void setFips(String fips) {
     this.fips = fips;
   }
 
 
-  public OrderRequestPost region(Region region) {
+  public OrderRequestPost region(String region) {
     
     this.region = region;
     return this;
@@ -184,12 +181,12 @@ public class OrderRequestPost {
    * @return region
   **/
   @javax.annotation.Nullable
-  public Region getRegion() {
+  public String getRegion() {
     return region;
   }
 
 
-  public void setRegion(Region region) {
+  public void setRegion(String region) {
     this.region = region;
   }
 
@@ -215,7 +212,7 @@ public class OrderRequestPost {
   }
 
 
-  public OrderRequestPost maxResults(MaxResults1 maxResults) {
+  public OrderRequestPost maxResults(Integer maxResults) {
     
     this.maxResults = maxResults;
     return this;
@@ -223,15 +220,17 @@ public class OrderRequestPost {
 
    /**
    * Get maxResults
+   * minimum: 1
+   * maximum: 10000
    * @return maxResults
   **/
   @javax.annotation.Nullable
-  public MaxResults1 getMaxResults() {
+  public Integer getMaxResults() {
     return maxResults;
   }
 
 
-  public void setMaxResults(MaxResults1 maxResults) {
+  public void setMaxResults(Integer maxResults) {
     this.maxResults = maxResults;
   }
 
@@ -255,9 +254,20 @@ public class OrderRequestPost {
         Objects.equals(this.maxResults, orderRequestPost.maxResults);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(clientReference, profileId, profileDef, fips, region, subject, maxResults);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -334,32 +344,24 @@ public class OrderRequestPost {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the optional field `client_reference`
-      if (jsonObj.get("client_reference") != null && !jsonObj.get("client_reference").isJsonNull()) {
-        ClientReference.validateJsonElement(jsonObj.get("client_reference"));
+      if ((jsonObj.get("client_reference") != null && !jsonObj.get("client_reference").isJsonNull()) && !jsonObj.get("client_reference").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `client_reference` to be a primitive type in the JSON string but got `%s`", jsonObj.get("client_reference").toString()));
       }
-      // validate the optional field `profile_id`
-      if (jsonObj.get("profile_id") != null && !jsonObj.get("profile_id").isJsonNull()) {
-        ProfileId1.validateJsonElement(jsonObj.get("profile_id"));
+      if ((jsonObj.get("profile_id") != null && !jsonObj.get("profile_id").isJsonNull()) && !jsonObj.get("profile_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `profile_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("profile_id").toString()));
       }
       // validate the optional field `profile_def`
       if (jsonObj.get("profile_def") != null && !jsonObj.get("profile_def").isJsonNull()) {
-        OrderRequestPostProfileDef.validateJsonElement(jsonObj.get("profile_def"));
+        ProfileDefinition.validateJsonElement(jsonObj.get("profile_def"));
       }
-      // validate the optional field `fips`
-      if (jsonObj.get("fips") != null && !jsonObj.get("fips").isJsonNull()) {
-        Fips.validateJsonElement(jsonObj.get("fips"));
+      if ((jsonObj.get("fips") != null && !jsonObj.get("fips").isJsonNull()) && !jsonObj.get("fips").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `fips` to be a primitive type in the JSON string but got `%s`", jsonObj.get("fips").toString()));
       }
-      // validate the optional field `region`
-      if (jsonObj.get("region") != null && !jsonObj.get("region").isJsonNull()) {
-        Region.validateJsonElement(jsonObj.get("region"));
+      if ((jsonObj.get("region") != null && !jsonObj.get("region").isJsonNull()) && !jsonObj.get("region").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `region` to be a primitive type in the JSON string but got `%s`", jsonObj.get("region").toString()));
       }
       // validate the required field `subject`
       OrderSubject.validateJsonElement(jsonObj.get("subject"));
-      // validate the optional field `max_results`
-      if (jsonObj.get("max_results") != null && !jsonObj.get("max_results").isJsonNull()) {
-        MaxResults1.validateJsonElement(jsonObj.get("max_results"));
-      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

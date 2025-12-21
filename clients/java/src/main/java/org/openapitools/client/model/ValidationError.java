@@ -20,7 +20,10 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import org.openapitools.client.model.ValidationErrorLocInner;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -49,26 +52,34 @@ import com.natcrim.api.client.JSON;
 /**
  * ValidationError
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-12-20T03:11:11.149103Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-12-21T03:25:25.736217Z[Etc/UTC]")
 public class ValidationError {
   public static final String SERIALIZED_NAME_LOC = "loc";
   @SerializedName(SERIALIZED_NAME_LOC)
-  private Object loc = null;
+  private List<ValidationErrorLocInner> loc = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_MSG = "msg";
   @SerializedName(SERIALIZED_NAME_MSG)
-  private Object msg = null;
+  private String msg;
 
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
-  private Object type = null;
+  private String type;
 
   public ValidationError() {
   }
 
-  public ValidationError loc(Object loc) {
+  public ValidationError loc(List<ValidationErrorLocInner> loc) {
     
     this.loc = loc;
+    return this;
+  }
+
+  public ValidationError addLocItem(ValidationErrorLocInner locItem) {
+    if (this.loc == null) {
+      this.loc = new ArrayList<>();
+    }
+    this.loc.add(locItem);
     return this;
   }
 
@@ -76,18 +87,18 @@ public class ValidationError {
    * Get loc
    * @return loc
   **/
-  @javax.annotation.Nullable
-  public Object getLoc() {
+  @javax.annotation.Nonnull
+  public List<ValidationErrorLocInner> getLoc() {
     return loc;
   }
 
 
-  public void setLoc(Object loc) {
+  public void setLoc(List<ValidationErrorLocInner> loc) {
     this.loc = loc;
   }
 
 
-  public ValidationError msg(Object msg) {
+  public ValidationError msg(String msg) {
     
     this.msg = msg;
     return this;
@@ -97,18 +108,18 @@ public class ValidationError {
    * Get msg
    * @return msg
   **/
-  @javax.annotation.Nullable
-  public Object getMsg() {
+  @javax.annotation.Nonnull
+  public String getMsg() {
     return msg;
   }
 
 
-  public void setMsg(Object msg) {
+  public void setMsg(String msg) {
     this.msg = msg;
   }
 
 
-  public ValidationError type(Object type) {
+  public ValidationError type(String type) {
     
     this.type = type;
     return this;
@@ -118,13 +129,13 @@ public class ValidationError {
    * Get type
    * @return type
   **/
-  @javax.annotation.Nullable
-  public Object getType() {
+  @javax.annotation.Nonnull
+  public String getType() {
     return type;
   }
 
 
-  public void setType(Object type) {
+  public void setType(String type) {
     this.type = type;
   }
 
@@ -217,6 +228,22 @@ public class ValidationError {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
+      // ensure the json data is an array
+      if (!jsonObj.get("loc").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `loc` to be an array in the JSON string but got `%s`", jsonObj.get("loc").toString()));
+      }
+
+      JsonArray jsonArrayloc = jsonObj.getAsJsonArray("loc");
+      // validate the required field `loc` (array)
+      for (int i = 0; i < jsonArrayloc.size(); i++) {
+        ValidationErrorLocInner.validateJsonElement(jsonArrayloc.get(i));
+      };
+      if (!jsonObj.get("msg").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `msg` to be a primitive type in the JSON string but got `%s`", jsonObj.get("msg").toString()));
+      }
+      if (!jsonObj.get("type").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

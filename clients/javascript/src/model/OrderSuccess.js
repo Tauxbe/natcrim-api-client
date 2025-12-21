@@ -22,7 +22,7 @@ class OrderSuccess {
     /**
      * Constructs a new <code>OrderSuccess</code>.
      * @alias module:model/OrderSuccess
-     * @param recordsReturned {Object} 
+     * @param recordsReturned {Number} 
      */
     constructor(recordsReturned) { 
         
@@ -50,7 +50,7 @@ class OrderSuccess {
             obj = obj || new OrderSuccess();
 
             if (data.hasOwnProperty('records_returned')) {
-                obj['records_returned'] = ApiClient.convertToType(data['records_returned'], Object);
+                obj['records_returned'] = ApiClient.convertToType(data['records_returned'], 'Number');
             }
         }
         return obj;
@@ -78,7 +78,7 @@ class OrderSuccess {
 OrderSuccess.RequiredProperties = ["records_returned"];
 
 /**
- * @member {Object} records_returned
+ * @member {Number} records_returned
  */
 OrderSuccess.prototype['records_returned'] = undefined;
 

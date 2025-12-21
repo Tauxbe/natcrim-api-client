@@ -4,13 +4,13 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**client_reference** | [**ClientReference**](ClientReference.md) |  | 
-**profile_id** | [**ProfileId**](ProfileId.md) |  | 
+**client_reference** | **str** |  | 
+**profile_id** | **str** |  | 
 **profile_def** | [**ProfileDefinitionGet**](ProfileDefinitionGet.md) |  | 
-**fips** | [**Fips**](Fips.md) |  | [optional] 
-**region** | [**Region**](Region.md) |  | [optional] 
+**fips** | **str** |  | [optional] 
+**region** | **str** |  | [optional] 
 **subject** | [**OrderSubject**](OrderSubject.md) |  | 
-**max_results** | [**MaxResults**](MaxResults.md) |  | [optional] 
+**max_results** | **int** |  | [optional] 
 
 ## Example
 

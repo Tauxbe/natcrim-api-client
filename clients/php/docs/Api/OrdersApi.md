@@ -13,7 +13,7 @@ All URIs are relative to http://localhost, except if the operation defines anoth
 ## `getOrderCacheOrdersCacheOrderIdGet()`
 
 ```php
-getOrderCacheOrdersCacheOrderIdGet($order_id, $offset, $length): \OpenAPI\Client\Model\OrderPostResponseInput
+getOrderCacheOrdersCacheOrderIdGet($order_id, $offset, $length): \OpenAPI\Client\Model\OrderPostResponse
 ```
 
 Get Order Cache
@@ -64,7 +64,7 @@ try {
 
 ### Return type
 
-[**\OpenAPI\Client\Model\OrderPostResponseInput**](../Model/OrderPostResponseInput.md)
+[**\OpenAPI\Client\Model\OrderPostResponse**](../Model/OrderPostResponse.md)
 
 ### Authorization
 
@@ -228,7 +228,7 @@ try {
 ## `postOrderOrdersPost()`
 
 ```php
-postOrderOrdersPost($order_post, $paginate): \OpenAPI\Client\Model\OrderPostResponseOutput
+postOrderOrdersPost($order_post, $paginate): \OpenAPI\Client\Model\OrderPostResponse
 ```
 
 Post Order
@@ -275,7 +275,7 @@ try {
 
 ### Return type
 
-[**\OpenAPI\Client\Model\OrderPostResponseOutput**](../Model/OrderPostResponseOutput.md)
+[**\OpenAPI\Client\Model\OrderPostResponse**](../Model/OrderPostResponse.md)
 
 ### Authorization
 

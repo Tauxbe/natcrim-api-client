@@ -143,7 +143,7 @@ class OrdersApi
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\OrderPostResponseInput|\OpenAPI\Client\Model\HTTPValidationError
+     * @return \OpenAPI\Client\Model\OrderPostResponse|\OpenAPI\Client\Model\HTTPValidationError
      */
     public function getOrderCacheOrdersCacheOrderIdGet($order_id, $offset = 0, $length = 20, string $contentType = self::contentTypes['getOrderCacheOrdersCacheOrderIdGet'][0])
     {
@@ -163,7 +163,7 @@ class OrdersApi
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\OrderPostResponseInput|\OpenAPI\Client\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\Model\OrderPostResponse|\OpenAPI\Client\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
      */
     public function getOrderCacheOrdersCacheOrderIdGetWithHttpInfo($order_id, $offset = 0, $length = 20, string $contentType = self::contentTypes['getOrderCacheOrdersCacheOrderIdGet'][0])
     {
@@ -206,11 +206,11 @@ class OrdersApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\OpenAPI\Client\Model\OrderPostResponseInput' === '\SplFileObject') {
+                    if ('\OpenAPI\Client\Model\OrderPostResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\OpenAPI\Client\Model\OrderPostResponseInput' !== 'string') {
+                        if ('\OpenAPI\Client\Model\OrderPostResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -228,7 +228,7 @@ class OrdersApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\OrderPostResponseInput', []),
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\OrderPostResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -261,7 +261,7 @@ class OrdersApi
                     ];
             }
 
-            $returnType = '\OpenAPI\Client\Model\OrderPostResponseInput';
+            $returnType = '\OpenAPI\Client\Model\OrderPostResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -294,7 +294,7 @@ class OrdersApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\OrderPostResponseInput',
+                        '\OpenAPI\Client\Model\OrderPostResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -350,7 +350,7 @@ class OrdersApi
      */
     public function getOrderCacheOrdersCacheOrderIdGetAsyncWithHttpInfo($order_id, $offset = 0, $length = 20, string $contentType = self::contentTypes['getOrderCacheOrdersCacheOrderIdGet'][0])
     {
-        $returnType = '\OpenAPI\Client\Model\OrderPostResponseInput';
+        $returnType = '\OpenAPI\Client\Model\OrderPostResponse';
         $request = $this->getOrderCacheOrdersCacheOrderIdGetRequest($order_id, $offset, $length, $contentType);
 
         return $this->client
@@ -1367,7 +1367,7 @@ class OrdersApi
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\OrderPostResponseOutput|\OpenAPI\Client\Model\HTTPValidationError
+     * @return \OpenAPI\Client\Model\OrderPostResponse|\OpenAPI\Client\Model\HTTPValidationError
      */
     public function postOrderOrdersPost($order_post, $paginate = null, string $contentType = self::contentTypes['postOrderOrdersPost'][0])
     {
@@ -1386,7 +1386,7 @@ class OrdersApi
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\OrderPostResponseOutput|\OpenAPI\Client\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\Model\OrderPostResponse|\OpenAPI\Client\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
      */
     public function postOrderOrdersPostWithHttpInfo($order_post, $paginate = null, string $contentType = self::contentTypes['postOrderOrdersPost'][0])
     {
@@ -1429,11 +1429,11 @@ class OrdersApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\OpenAPI\Client\Model\OrderPostResponseOutput' === '\SplFileObject') {
+                    if ('\OpenAPI\Client\Model\OrderPostResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\OpenAPI\Client\Model\OrderPostResponseOutput' !== 'string') {
+                        if ('\OpenAPI\Client\Model\OrderPostResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1451,7 +1451,7 @@ class OrdersApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\OrderPostResponseOutput', []),
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\OrderPostResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1484,7 +1484,7 @@ class OrdersApi
                     ];
             }
 
-            $returnType = '\OpenAPI\Client\Model\OrderPostResponseOutput';
+            $returnType = '\OpenAPI\Client\Model\OrderPostResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1517,7 +1517,7 @@ class OrdersApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\OrderPostResponseOutput',
+                        '\OpenAPI\Client\Model\OrderPostResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1571,7 +1571,7 @@ class OrdersApi
      */
     public function postOrderOrdersPostAsyncWithHttpInfo($order_post, $paginate = null, string $contentType = self::contentTypes['postOrderOrdersPost'][0])
     {
-        $returnType = '\OpenAPI\Client\Model\OrderPostResponseOutput';
+        $returnType = '\OpenAPI\Client\Model\OrderPostResponse';
         $request = $this->postOrderOrdersPostRequest($order_post, $paginate, $contentType);
 
         return $this->client

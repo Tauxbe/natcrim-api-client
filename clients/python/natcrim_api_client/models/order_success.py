@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel
+from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, StrictInt
 try:
     from typing import Self
 except ImportError:
@@ -29,7 +29,7 @@ class OrderSuccess(BaseModel):
     """
     OrderSuccess
     """ # noqa: E501
-    records_returned: Optional[Any]
+    records_returned: StrictInt
     __properties: ClassVar[List[str]] = ["records_returned"]
 
     model_config = {
@@ -68,11 +68,6 @@ class OrderSuccess(BaseModel):
             },
             exclude_none=True,
         )
-        # set to None if records_returned (nullable) is None
-        # and model_fields_set contains the field
-        if self.records_returned is None and "records_returned" in self.model_fields_set:
-            _dict['records_returned'] = None
-
         return _dict
 
     @classmethod

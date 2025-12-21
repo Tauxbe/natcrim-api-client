@@ -178,7 +178,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrderPostResponse-Output'
+                $ref: '#/components/schemas/OrderPostResponse'
           description: Successful Response
         "422":
           content:
@@ -231,7 +231,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrderPostResponse-Input'
+                $ref: '#/components/schemas/OrderPostResponse'
           description: Returns the cached results
         "403":
           description: Forbidden
@@ -624,6 +624,9 @@ components:
           type: array
       title: HTTPValidationError
     MaxAge:
+      example:
+        max_age_field: null
+        age: 15
       properties:
         age:
           maximum: 99.0
@@ -640,6 +643,9 @@ components:
       title: MaxAgeFieldSelector
       type: string
     MaxAgeGet:
+      example:
+        max_age_field: null
+        age: 1
       properties:
         age:
           nullable: true
@@ -650,11 +656,11 @@ components:
     Me:
       example:
         sub_account:
-          is_deleted: ""
-          default_profile: null
-          name: ""
-          id: ""
-          email: ""
+          is_deleted: true
+          default_profile: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          email: email
         customer:
           is_deleted: true
           name: name
@@ -724,22 +730,24 @@ components:
       additionalProperties: false
       example:
         result:
-          completed_at: ""
-          failure: null
-          success: null
-          max_results: null
+          completed_at: 2000-01-23T04:56:07.000+00:00
+          failure:
+            message: message
+          success:
+            records_returned: 6
+          max_results: true
         request:
-          client_reference: null
+          client_reference: client_reference
           profile_def: ""
-          profile_id: null
+          profile_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           subject:
-            dob: null
-            last_name: ""
-            middle_name: null
-            first_name: ""
-          fips: null
-          max_results: null
-          region: null
+            dob: 2000-01-23
+            last_name: last_name
+            middle_name: middle_name
+            first_name: first_name
+          fips: fips
+          max_results: 0
+          region: region
         created_at: 2000-01-23T04:56:07.000+00:00
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         sub_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -769,6 +777,8 @@ components:
       title: Order
     OrderFailure:
       additionalProperties: false
+      example:
+        message: message
       properties:
         message:
           title: Message
@@ -780,17 +790,41 @@ components:
       additionalProperties: false
       example:
         request:
-          client_reference: null
-          profile_def: null
-          profile_id: null
+          client_reference: client_reference
+          profile_def:
+            max_age:
+              max_age_field: null
+              age: 15
+            dob:
+              allow_off_by_one: false
+              minimum_components_matched: 2
+              allow_empty_dob: false
+            source_types: ""
+            last_name:
+              match_first_letters: 0
+              match_full_name: true
+              match_required: true
+              match_begins_with: false
+            tag: tag
+            middle_name:
+              match_first_letters: 0
+              match_full_name: true
+              match_required: true
+              match_begins_with: false
+            first_name:
+              match_first_letters: 0
+              match_full_name: true
+              match_required: true
+              match_begins_with: false
+          profile_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           subject:
-            dob: null
-            last_name: ""
-            middle_name: null
-            first_name: ""
-          fips: null
-          max_results: null
-          region: null
+            dob: 2000-01-23
+            last_name: last_name
+            middle_name: middle_name
+            first_name: first_name
+          fips: fips
+          max_results: 5962
+          region: region
         sub_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         sub_account_id:
@@ -802,52 +836,16 @@ components:
       required:
       - request
       title: OrderPost
-    OrderPostResponse-Input:
+    OrderPostResponse:
       additionalProperties: false
       example:
         result:
-          completed_at: ""
-          failure: null
-          success: null
-          max_results: null
-        created_at: 2000-01-23T04:56:07.000+00:00
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        sub_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        content: ""
-      properties:
-        id:
-          format: uuid
-          title: Id
-          type: string
-        created_at:
-          format: date-time
-          title: Created At
-          type: string
-        sub_account_id:
-          format: uuid
-          title: Sub Account Id
-          type: string
-        result:
-          $ref: '#/components/schemas/OrderResult'
-        content:
-          anyOf: []
-          nullable: true
-          title: Content
-      required:
-      - content
-      - created_at
-      - id
-      - result
-      - sub_account_id
-      title: OrderPostResponse
-    OrderPostResponse-Output:
-      additionalProperties: false
-      example:
-        result:
-          completed_at: ""
-          failure: null
-          success: null
-          max_results: null
+          completed_at: 2000-01-23T04:56:07.000+00:00
+          failure:
+            message: message
+          success:
+            records_returned: 6
+          max_results: true
         created_at: 2000-01-23T04:56:07.000+00:00
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         sub_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -881,35 +879,41 @@ components:
     OrderRequestGet:
       additionalProperties: false
       example:
-        client_reference: null
+        client_reference: client_reference
         profile_def: ""
-        profile_id: null
+        profile_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         subject:
-          dob: null
-          last_name: ""
-          middle_name: null
-          first_name: ""
-        fips: null
-        max_results: null
-        region: null
+          dob: 2000-01-23
+          last_name: last_name
+          middle_name: middle_name
+          first_name: first_name
+        fips: fips
+        max_results: 0
+        region: region
       properties:
         client_reference:
-          $ref: '#/components/schemas/Client_Reference'
+          nullable: true
+          type: string
         profile_id:
-          $ref: '#/components/schemas/Profile_Id'
+          format: uuid
+          nullable: true
+          type: string
         profile_def:
           allOf:
           - $ref: '#/components/schemas/ProfileDefinitionGet'
           description: Search profile of this order. May have been a customization
             of what was referenced by the profile ID.
         fips:
-          $ref: '#/components/schemas/Fips'
+          nullable: true
+          type: string
         region:
-          $ref: '#/components/schemas/Region'
+          nullable: true
+          type: string
         subject:
           $ref: '#/components/schemas/OrderSubject'
         max_results:
-          $ref: '#/components/schemas/Max_Results'
+          nullable: true
+          type: integer
       required:
       - client_reference
       - profile_def
@@ -919,52 +923,88 @@ components:
     OrderRequestPost:
       additionalProperties: false
       example:
-        client_reference: null
-        profile_def: null
-        profile_id: null
+        client_reference: client_reference
+        profile_def:
+          max_age:
+            max_age_field: null
+            age: 15
+          dob:
+            allow_off_by_one: false
+            minimum_components_matched: 2
+            allow_empty_dob: false
+          source_types: ""
+          last_name:
+            match_first_letters: 0
+            match_full_name: true
+            match_required: true
+            match_begins_with: false
+          tag: tag
+          middle_name:
+            match_first_letters: 0
+            match_full_name: true
+            match_required: true
+            match_begins_with: false
+          first_name:
+            match_first_letters: 0
+            match_full_name: true
+            match_required: true
+            match_begins_with: false
+        profile_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         subject:
-          dob: null
-          last_name: ""
-          middle_name: null
-          first_name: ""
-        fips: null
-        max_results: null
-        region: null
+          dob: 2000-01-23
+          last_name: last_name
+          middle_name: middle_name
+          first_name: first_name
+        fips: fips
+        max_results: 5962
+        region: region
       properties:
         client_reference:
-          $ref: '#/components/schemas/Client_Reference'
+          nullable: true
+          type: string
         profile_id:
-          $ref: '#/components/schemas/Profile_Id_1'
+          format: uuid
+          nullable: true
+          type: string
         profile_def:
-          $ref: '#/components/schemas/OrderRequestPost_profile_def'
+          $ref: '#/components/schemas/ProfileDefinition'
         fips:
-          $ref: '#/components/schemas/Fips'
+          nullable: true
+          type: string
         region:
-          $ref: '#/components/schemas/Region'
+          nullable: true
+          type: string
         subject:
           $ref: '#/components/schemas/OrderSubject'
         max_results:
-          $ref: '#/components/schemas/Max_Results_1'
+          maximum: 10000.0
+          minimum: 1.0
+          nullable: true
+          type: integer
       required:
       - subject
       title: OrderRequestPost
     OrderResult:
       additionalProperties: false
       example:
-        completed_at: ""
-        failure: null
-        success: null
-        max_results: null
+        completed_at: 2000-01-23T04:56:07.000+00:00
+        failure:
+          message: message
+        success:
+          records_returned: 6
+        max_results: true
       properties:
         completed_at:
           format: date-time
           title: Completed At
+          type: string
         failure:
-          $ref: '#/components/schemas/OrderResult_failure'
+          $ref: '#/components/schemas/OrderFailure'
         success:
-          $ref: '#/components/schemas/OrderResult_success'
+          $ref: '#/components/schemas/OrderSuccess'
         max_results:
-          $ref: '#/components/schemas/Max_Results_2'
+          nullable: true
+          type: boolean
       required:
       - completed_at
       - failure
@@ -973,47 +1013,57 @@ components:
     OrderSubject:
       additionalProperties: false
       example:
-        dob: null
-        last_name: ""
-        middle_name: null
-        first_name: ""
+        dob: 2000-01-23
+        last_name: last_name
+        middle_name: middle_name
+        first_name: first_name
       properties:
         first_name:
           title: First Name
+          type: string
         middle_name:
-          $ref: '#/components/schemas/Middle_Name'
+          nullable: true
+          type: string
         last_name:
           title: Last Name
+          type: string
         dob:
-          $ref: '#/components/schemas/Dob'
+          format: date
+          nullable: true
+          type: string
       required:
       - first_name
       - last_name
       title: OrderSubject
     OrderSuccess:
       additionalProperties: false
+      example:
+        records_returned: 6
       properties:
         records_returned:
           title: Records Returned
+          type: integer
       required:
       - records_returned
       title: OrderSuccess
     Profile:
       example:
-        max_age: null
-        is_deleted: ""
+        max_age:
+          max_age_field: null
+          age: 1
+        is_deleted: true
         dob:
           allow_off_by_one: false
           minimum_components_matched: 1
           allow_empty_dob: false
-        source_types: null
+        source_types: ""
         last_name:
           match_first_letters: 0
           match_full_name: true
           match_required: true
           match_begins_with: true
-        tag: null
-        id: ""
+        tag: tag
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         middle_name:
           match_first_letters: 0
           match_full_name: true
@@ -1026,7 +1076,8 @@ components:
           match_begins_with: true
       properties:
         tag:
-          $ref: '#/components/schemas/Tag'
+          nullable: true
+          type: string
         first_name:
           $ref: '#/components/schemas/NameFilterGet'
         middle_name:
@@ -1036,14 +1087,20 @@ components:
         dob:
           $ref: '#/components/schemas/DOBFilterGet'
         source_types:
-          $ref: '#/components/schemas/Source_Types'
+          anyOf: []
+          default: []
+          description: Source types filter. Includes all types by default
+          nullable: true
+          title: Source Types
         max_age:
-          $ref: '#/components/schemas/Profile_max_age'
+          $ref: '#/components/schemas/MaxAgeGet'
         id:
           format: uuid
           title: Id
+          type: string
         is_deleted:
           title: Is Deleted
+          type: boolean
       required:
       - dob
       - first_name
@@ -1053,9 +1110,35 @@ components:
       - middle_name
       title: Profile
     ProfileDefinition:
+      example:
+        max_age:
+          max_age_field: null
+          age: 15
+        dob:
+          allow_off_by_one: false
+          minimum_components_matched: 2
+          allow_empty_dob: false
+        source_types: ""
+        last_name:
+          match_first_letters: 0
+          match_full_name: true
+          match_required: true
+          match_begins_with: false
+        tag: tag
+        middle_name:
+          match_first_letters: 0
+          match_full_name: true
+          match_required: true
+          match_begins_with: false
+        first_name:
+          match_first_letters: 0
+          match_full_name: true
+          match_required: true
+          match_begins_with: false
       properties:
         tag:
-          $ref: '#/components/schemas/Tag'
+          nullable: true
+          type: string
         first_name:
           $ref: '#/components/schemas/NameFilter'
         middle_name:
@@ -1065,9 +1148,13 @@ components:
         dob:
           $ref: '#/components/schemas/DOBFilter'
         source_types:
-          $ref: '#/components/schemas/Source_Types'
+          anyOf: []
+          default: []
+          description: Source types filter. Includes all types by default
+          nullable: true
+          title: Source Types
         max_age:
-          $ref: '#/components/schemas/ProfileDefinition_max_age'
+          $ref: '#/components/schemas/MaxAge'
       required:
       - dob
       - first_name
@@ -1077,7 +1164,8 @@ components:
     ProfileDefinitionGet:
       properties:
         tag:
-          $ref: '#/components/schemas/Tag'
+          nullable: true
+          type: string
         first_name:
           $ref: '#/components/schemas/NameFilterGet'
         middle_name:
@@ -1087,9 +1175,13 @@ components:
         dob:
           $ref: '#/components/schemas/DOBFilterGet'
         source_types:
-          $ref: '#/components/schemas/Source_Types'
+          anyOf: []
+          default: []
+          description: Source types filter. Includes all types by default
+          nullable: true
+          title: Source Types
         max_age:
-          $ref: '#/components/schemas/Profile_max_age'
+          $ref: '#/components/schemas/MaxAgeGet'
       required:
       - dob
       - first_name
@@ -1098,18 +1190,20 @@ components:
       title: ProfileDefinitionGet
     ProfilePut:
       example:
-        max_age: null
+        max_age:
+          max_age_field: null
+          age: 15
         dob:
           allow_off_by_one: false
           minimum_components_matched: 2
           allow_empty_dob: false
-        source_types: null
+        source_types: ""
         last_name:
           match_first_letters: 0
           match_full_name: true
           match_required: true
           match_begins_with: false
-        tag: null
+        tag: tag
         middle_name:
           match_first_letters: 0
           match_full_name: true
@@ -1122,7 +1216,9 @@ components:
           match_begins_with: false
       properties:
         tag:
-          $ref: '#/components/schemas/Tag_1'
+          minLength: 1
+          nullable: true
+          type: string
         first_name:
           $ref: '#/components/schemas/NameFilter'
         middle_name:
@@ -1132,9 +1228,13 @@ components:
         dob:
           $ref: '#/components/schemas/DOBFilter'
         source_types:
-          $ref: '#/components/schemas/Source_Types'
+          anyOf: []
+          default: []
+          description: Source types filter. Includes all types by default
+          nullable: true
+          title: Source Types
         max_age:
-          $ref: '#/components/schemas/ProfileDefinition_max_age'
+          $ref: '#/components/schemas/MaxAge'
       required:
       - dob
       - first_name
@@ -1149,30 +1249,38 @@ components:
       - sor
       - warrant
       - swl
+      - federal
       title: SourceType
+      type: string
     SubAccount:
       additionalProperties: false
       example:
-        is_deleted: ""
-        default_profile: null
-        name: ""
-        id: ""
-        email: ""
+        is_deleted: true
+        default_profile: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: name
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        email: email
       properties:
         id:
           format: uuid
           title: Id
+          type: string
         name:
           description: Descriptive name of sub-account
           title: Name
+          type: string
         email:
           description: Email address. Also functions as a username if a password is
             set
           title: Email
+          type: string
         default_profile:
-          $ref: '#/components/schemas/Default_Profile'
+          format: uuid
+          nullable: true
+          type: string
         is_deleted:
           title: Is Deleted
+          type: boolean
       required:
       - default_profile
       - email
@@ -1184,135 +1292,23 @@ components:
       properties:
         loc:
           items:
-            anyOf:
-            - {}
-            - {}
-          title: Location
+            $ref: '#/components/schemas/ValidationError_loc_inner'
+          type: array
         msg:
           title: Message
+          type: string
         type:
           title: Error Type
+          type: string
       required:
       - loc
       - msg
       - type
       title: ValidationError
-    Client_Reference:
+    ValidationError_loc_inner:
       anyOf:
-      - {}
-      - {}
-      description: "Arbitrary value meaningful to client, not Natcrim"
-      title: Client Reference
-    Profile_Id:
-      anyOf:
-      - format: uuid
-      - {}
-      description: Search profile that was associated with this order
-      title: Profile Id
-    Fips:
-      anyOf:
-      - {}
-      - {}
-      default: "00000"
-      description: 5 digit FIPS geographic code
-      title: Fips
-    Region:
-      anyOf:
-      - {}
-      - {}
-      description: Two-letter alpha code from ANSI INCITS 38:2009
-      title: Region
-    Max_Results:
-      anyOf:
-      - {}
-      - {}
-      description: Maximum number of results to return
-      title: Max Results
-    Profile_Id_1:
-      anyOf:
-      - format: uuid
-      - {}
-      description: Search profile to associate with this order
-      title: Profile Id
-    OrderRequestPost_profile_def:
-      anyOf:
-      - $ref: '#/components/schemas/ProfileDefinition'
-      - {}
-      description: Search profile of this order. Does not have to match the definition
-        referenced by the profile ID.
-    Max_Results_1:
-      anyOf:
-      - maximum: 10000.0
-        minimum: 1.0
-      - {}
-      default: 200
-      description: Maximum number of results to return
-      title: Max Results
-    OrderResult_failure:
-      anyOf:
-      - $ref: '#/components/schemas/OrderFailure'
-      - {}
-    OrderResult_success:
-      anyOf:
-      - $ref: '#/components/schemas/OrderSuccess'
-      - {}
-    Max_Results_2:
-      anyOf:
-      - {}
-      - {}
-      default: false
-      title: Max Results
-    Middle_Name:
-      anyOf:
-      - {}
-      - {}
-      default: ""
-      title: Middle Name
-    Dob:
-      anyOf:
-      - format: date
-      - {}
-      title: Dob
-    Tag:
-      anyOf:
-      - {}
-      - {}
-      title: Tag
-    Source_Types:
-      anyOf:
-      - items:
-          $ref: '#/components/schemas/SourceType'
-      - {}
-      default: []
-      description: Source types filter. Includes all types by default
-      title: Source Types
-    Profile_max_age:
-      anyOf:
-      - $ref: '#/components/schemas/MaxAgeGet'
-      - {}
-      default:
-        age: 99
-        max_age_field: filed
-    ProfileDefinition_max_age:
-      anyOf:
-      - $ref: '#/components/schemas/MaxAge'
-      - {}
-      default:
-        age: 99
-        max_age_field: filed
-    Tag_1:
-      anyOf:
-      - minLength: 1
-      - {}
-      description: Search profile name
-      title: Tag
-    Default_Profile:
-      anyOf:
-      - format: uuid
-      - {}
-      description: ID of a search profile to use with a new order order doesn't designate
-        a profile
-      title: Default Profile
+      - type: string
+      - type: integer
   securitySchemes:
     HTTPBasic:
       description: API key and API secret as username and password

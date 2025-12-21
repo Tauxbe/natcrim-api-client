@@ -57,13 +57,13 @@ class OrderRequestPost implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'client_reference' => '\OpenAPI\Client\Model\ClientReference',
-        'profile_id' => '\OpenAPI\Client\Model\ProfileId1',
-        'profile_def' => '\OpenAPI\Client\Model\OrderRequestPostProfileDef',
-        'fips' => '\OpenAPI\Client\Model\Fips',
-        'region' => '\OpenAPI\Client\Model\Region',
+        'client_reference' => 'string',
+        'profile_id' => 'string',
+        'profile_def' => '\OpenAPI\Client\Model\ProfileDefinition',
+        'fips' => 'string',
+        'region' => 'string',
         'subject' => '\OpenAPI\Client\Model\OrderSubject',
-        'max_results' => '\OpenAPI\Client\Model\MaxResults1'
+        'max_results' => 'int'
     ];
 
     /**
@@ -75,7 +75,7 @@ class OrderRequestPost implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'client_reference' => null,
-        'profile_id' => null,
+        'profile_id' => 'uuid',
         'profile_def' => null,
         'fips' => null,
         'region' => null,
@@ -89,13 +89,13 @@ class OrderRequestPost implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'client_reference' => false,
-		'profile_id' => false,
-		'profile_def' => false,
-		'fips' => false,
-		'region' => false,
+        'client_reference' => true,
+		'profile_id' => true,
+		'profile_def' => true,
+		'fips' => true,
+		'region' => true,
 		'subject' => false,
-		'max_results' => false
+		'max_results' => true
     ];
 
     /**
@@ -319,6 +319,14 @@ class OrderRequestPost implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['subject'] === null) {
             $invalidProperties[] = "'subject' can't be null";
         }
+        if (!is_null($this->container['max_results']) && ($this->container['max_results'] > 10000)) {
+            $invalidProperties[] = "invalid value for 'max_results', must be smaller than or equal to 10000.";
+        }
+
+        if (!is_null($this->container['max_results']) && ($this->container['max_results'] < 1)) {
+            $invalidProperties[] = "invalid value for 'max_results', must be bigger than or equal to 1.";
+        }
+
         return $invalidProperties;
     }
 
@@ -337,7 +345,7 @@ class OrderRequestPost implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets client_reference
      *
-     * @return \OpenAPI\Client\Model\ClientReference|null
+     * @return string|null
      */
     public function getClientReference()
     {
@@ -347,14 +355,21 @@ class OrderRequestPost implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets client_reference
      *
-     * @param \OpenAPI\Client\Model\ClientReference|null $client_reference client_reference
+     * @param string|null $client_reference client_reference
      *
      * @return self
      */
     public function setClientReference($client_reference)
     {
         if (is_null($client_reference)) {
-            throw new \InvalidArgumentException('non-nullable client_reference cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'client_reference');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('client_reference', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['client_reference'] = $client_reference;
 
@@ -364,7 +379,7 @@ class OrderRequestPost implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets profile_id
      *
-     * @return \OpenAPI\Client\Model\ProfileId1|null
+     * @return string|null
      */
     public function getProfileId()
     {
@@ -374,14 +389,21 @@ class OrderRequestPost implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets profile_id
      *
-     * @param \OpenAPI\Client\Model\ProfileId1|null $profile_id profile_id
+     * @param string|null $profile_id profile_id
      *
      * @return self
      */
     public function setProfileId($profile_id)
     {
         if (is_null($profile_id)) {
-            throw new \InvalidArgumentException('non-nullable profile_id cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'profile_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('profile_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['profile_id'] = $profile_id;
 
@@ -391,7 +413,7 @@ class OrderRequestPost implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets profile_def
      *
-     * @return \OpenAPI\Client\Model\OrderRequestPostProfileDef|null
+     * @return \OpenAPI\Client\Model\ProfileDefinition|null
      */
     public function getProfileDef()
     {
@@ -401,14 +423,21 @@ class OrderRequestPost implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets profile_def
      *
-     * @param \OpenAPI\Client\Model\OrderRequestPostProfileDef|null $profile_def profile_def
+     * @param \OpenAPI\Client\Model\ProfileDefinition|null $profile_def profile_def
      *
      * @return self
      */
     public function setProfileDef($profile_def)
     {
         if (is_null($profile_def)) {
-            throw new \InvalidArgumentException('non-nullable profile_def cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'profile_def');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('profile_def', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['profile_def'] = $profile_def;
 
@@ -418,7 +447,7 @@ class OrderRequestPost implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets fips
      *
-     * @return \OpenAPI\Client\Model\Fips|null
+     * @return string|null
      */
     public function getFips()
     {
@@ -428,14 +457,21 @@ class OrderRequestPost implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets fips
      *
-     * @param \OpenAPI\Client\Model\Fips|null $fips fips
+     * @param string|null $fips fips
      *
      * @return self
      */
     public function setFips($fips)
     {
         if (is_null($fips)) {
-            throw new \InvalidArgumentException('non-nullable fips cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'fips');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('fips', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['fips'] = $fips;
 
@@ -445,7 +481,7 @@ class OrderRequestPost implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets region
      *
-     * @return \OpenAPI\Client\Model\Region|null
+     * @return string|null
      */
     public function getRegion()
     {
@@ -455,14 +491,21 @@ class OrderRequestPost implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets region
      *
-     * @param \OpenAPI\Client\Model\Region|null $region region
+     * @param string|null $region region
      *
      * @return self
      */
     public function setRegion($region)
     {
         if (is_null($region)) {
-            throw new \InvalidArgumentException('non-nullable region cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'region');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('region', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['region'] = $region;
 
@@ -499,7 +542,7 @@ class OrderRequestPost implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets max_results
      *
-     * @return \OpenAPI\Client\Model\MaxResults1|null
+     * @return int|null
      */
     public function getMaxResults()
     {
@@ -509,15 +552,30 @@ class OrderRequestPost implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets max_results
      *
-     * @param \OpenAPI\Client\Model\MaxResults1|null $max_results max_results
+     * @param int|null $max_results max_results
      *
      * @return self
      */
     public function setMaxResults($max_results)
     {
         if (is_null($max_results)) {
-            throw new \InvalidArgumentException('non-nullable max_results cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'max_results');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('max_results', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
+
+        if (!is_null($max_results) && ($max_results > 10000)) {
+            throw new \InvalidArgumentException('invalid value for $max_results when calling OrderRequestPost., must be smaller than or equal to 10000.');
+        }
+        if (!is_null($max_results) && ($max_results < 1)) {
+            throw new \InvalidArgumentException('invalid value for $max_results when calling OrderRequestPost., must be bigger than or equal to 1.');
+        }
+
         $this->container['max_results'] = $max_results;
 
         return $this;

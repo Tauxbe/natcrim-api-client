@@ -13,52 +13,33 @@
 
 
 import ApiClient from './ApiClient';
-import ClientReference from './model/ClientReference';
 import Customer from './model/Customer';
 import DOBFilter from './model/DOBFilter';
 import DOBFilterGet from './model/DOBFilterGet';
-import DefaultProfile from './model/DefaultProfile';
-import Dob from './model/Dob';
-import Fips from './model/Fips';
 import HTTPValidationError from './model/HTTPValidationError';
 import MaxAge from './model/MaxAge';
 import MaxAgeFieldSelector from './model/MaxAgeFieldSelector';
 import MaxAgeGet from './model/MaxAgeGet';
-import MaxResults from './model/MaxResults';
-import MaxResults1 from './model/MaxResults1';
-import MaxResults2 from './model/MaxResults2';
 import Me from './model/Me';
-import MiddleName from './model/MiddleName';
 import NameFilter from './model/NameFilter';
 import NameFilterGet from './model/NameFilterGet';
 import Order from './model/Order';
 import OrderFailure from './model/OrderFailure';
 import OrderPost from './model/OrderPost';
-import OrderPostResponseInput from './model/OrderPostResponseInput';
-import OrderPostResponseOutput from './model/OrderPostResponseOutput';
+import OrderPostResponse from './model/OrderPostResponse';
 import OrderRequestGet from './model/OrderRequestGet';
 import OrderRequestPost from './model/OrderRequestPost';
-import OrderRequestPostProfileDef from './model/OrderRequestPostProfileDef';
 import OrderResult from './model/OrderResult';
-import OrderResultFailure from './model/OrderResultFailure';
-import OrderResultSuccess from './model/OrderResultSuccess';
 import OrderSubject from './model/OrderSubject';
 import OrderSuccess from './model/OrderSuccess';
 import Profile from './model/Profile';
 import ProfileDefinition from './model/ProfileDefinition';
 import ProfileDefinitionGet from './model/ProfileDefinitionGet';
-import ProfileDefinitionMaxAge from './model/ProfileDefinitionMaxAge';
-import ProfileId from './model/ProfileId';
-import ProfileId1 from './model/ProfileId1';
-import ProfileMaxAge from './model/ProfileMaxAge';
 import ProfilePut from './model/ProfilePut';
-import Region from './model/Region';
 import SourceType from './model/SourceType';
-import SourceTypes from './model/SourceTypes';
 import SubAccount from './model/SubAccount';
-import Tag from './model/Tag';
-import Tag1 from './model/Tag1';
 import ValidationError from './model/ValidationError';
+import ValidationErrorLocInner from './model/ValidationErrorLocInner';
 import OrdersApi from './api/OrdersApi';
 import PrincipalApi from './api/PrincipalApi';
 import SearchProfilesApi from './api/SearchProfilesApi';
@@ -103,12 +84,6 @@ export {
     ApiClient,
 
     /**
-     * The ClientReference model constructor.
-     * @property {module:model/ClientReference}
-     */
-    ClientReference,
-
-    /**
      * The Customer model constructor.
      * @property {module:model/Customer}
      */
@@ -125,24 +100,6 @@ export {
      * @property {module:model/DOBFilterGet}
      */
     DOBFilterGet,
-
-    /**
-     * The DefaultProfile model constructor.
-     * @property {module:model/DefaultProfile}
-     */
-    DefaultProfile,
-
-    /**
-     * The Dob model constructor.
-     * @property {module:model/Dob}
-     */
-    Dob,
-
-    /**
-     * The Fips model constructor.
-     * @property {module:model/Fips}
-     */
-    Fips,
 
     /**
      * The HTTPValidationError model constructor.
@@ -169,34 +126,10 @@ export {
     MaxAgeGet,
 
     /**
-     * The MaxResults model constructor.
-     * @property {module:model/MaxResults}
-     */
-    MaxResults,
-
-    /**
-     * The MaxResults1 model constructor.
-     * @property {module:model/MaxResults1}
-     */
-    MaxResults1,
-
-    /**
-     * The MaxResults2 model constructor.
-     * @property {module:model/MaxResults2}
-     */
-    MaxResults2,
-
-    /**
      * The Me model constructor.
      * @property {module:model/Me}
      */
     Me,
-
-    /**
-     * The MiddleName model constructor.
-     * @property {module:model/MiddleName}
-     */
-    MiddleName,
 
     /**
      * The NameFilter model constructor.
@@ -229,16 +162,10 @@ export {
     OrderPost,
 
     /**
-     * The OrderPostResponseInput model constructor.
-     * @property {module:model/OrderPostResponseInput}
+     * The OrderPostResponse model constructor.
+     * @property {module:model/OrderPostResponse}
      */
-    OrderPostResponseInput,
-
-    /**
-     * The OrderPostResponseOutput model constructor.
-     * @property {module:model/OrderPostResponseOutput}
-     */
-    OrderPostResponseOutput,
+    OrderPostResponse,
 
     /**
      * The OrderRequestGet model constructor.
@@ -253,28 +180,10 @@ export {
     OrderRequestPost,
 
     /**
-     * The OrderRequestPostProfileDef model constructor.
-     * @property {module:model/OrderRequestPostProfileDef}
-     */
-    OrderRequestPostProfileDef,
-
-    /**
      * The OrderResult model constructor.
      * @property {module:model/OrderResult}
      */
     OrderResult,
-
-    /**
-     * The OrderResultFailure model constructor.
-     * @property {module:model/OrderResultFailure}
-     */
-    OrderResultFailure,
-
-    /**
-     * The OrderResultSuccess model constructor.
-     * @property {module:model/OrderResultSuccess}
-     */
-    OrderResultSuccess,
 
     /**
      * The OrderSubject model constructor.
@@ -307,40 +216,10 @@ export {
     ProfileDefinitionGet,
 
     /**
-     * The ProfileDefinitionMaxAge model constructor.
-     * @property {module:model/ProfileDefinitionMaxAge}
-     */
-    ProfileDefinitionMaxAge,
-
-    /**
-     * The ProfileId model constructor.
-     * @property {module:model/ProfileId}
-     */
-    ProfileId,
-
-    /**
-     * The ProfileId1 model constructor.
-     * @property {module:model/ProfileId1}
-     */
-    ProfileId1,
-
-    /**
-     * The ProfileMaxAge model constructor.
-     * @property {module:model/ProfileMaxAge}
-     */
-    ProfileMaxAge,
-
-    /**
      * The ProfilePut model constructor.
      * @property {module:model/ProfilePut}
      */
     ProfilePut,
-
-    /**
-     * The Region model constructor.
-     * @property {module:model/Region}
-     */
-    Region,
 
     /**
      * The SourceType model constructor.
@@ -349,34 +228,22 @@ export {
     SourceType,
 
     /**
-     * The SourceTypes model constructor.
-     * @property {module:model/SourceTypes}
-     */
-    SourceTypes,
-
-    /**
      * The SubAccount model constructor.
      * @property {module:model/SubAccount}
      */
     SubAccount,
 
     /**
-     * The Tag model constructor.
-     * @property {module:model/Tag}
-     */
-    Tag,
-
-    /**
-     * The Tag1 model constructor.
-     * @property {module:model/Tag1}
-     */
-    Tag1,
-
-    /**
      * The ValidationError model constructor.
      * @property {module:model/ValidationError}
      */
     ValidationError,
+
+    /**
+     * The ValidationErrorLocInner model constructor.
+     * @property {module:model/ValidationErrorLocInner}
+     */
+    ValidationErrorLocInner,
 
     /**
     * The OrdersApi service constructor.

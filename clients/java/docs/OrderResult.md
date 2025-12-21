@@ -7,10 +7,10 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**completedAt** | **Object** |  |  |
-|**failure** | [**OrderResultFailure**](OrderResultFailure.md) |  |  |
-|**success** | [**OrderResultSuccess**](OrderResultSuccess.md) |  |  |
-|**maxResults** | [**MaxResults2**](MaxResults2.md) |  |  [optional] |
+|**completedAt** | **OffsetDateTime** |  |  |
+|**failure** | [**OrderFailure**](OrderFailure.md) |  |  |
+|**success** | [**OrderSuccess**](OrderSuccess.md) |  |  |
+|**maxResults** | **Boolean** |  |  [optional] |
 
 
 
