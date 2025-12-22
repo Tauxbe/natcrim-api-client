@@ -67,5 +67,3 @@ src/model/SourceType.js
 src/model/SubAccount.js
 src/model/ValidationError.js
 src/model/ValidationErrorLocInner.js
-test/model/OrderPostResponse.spec.js
-test/model/ValidationErrorLocInner.spec.js

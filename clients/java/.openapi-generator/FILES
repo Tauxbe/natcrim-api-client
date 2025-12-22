@@ -92,5 +92,3 @@ src/main/java/org/openapitools/client/model/SourceType.java
 src/main/java/org/openapitools/client/model/SubAccount.java
 src/main/java/org/openapitools/client/model/ValidationError.java
 src/main/java/org/openapitools/client/model/ValidationErrorLocInner.java
-src/test/java/org/openapitools/client/model/OrderPostResponseTest.java
-src/test/java/org/openapitools/client/model/ValidationErrorLocInnerTest.java
