@@ -52,7 +52,7 @@ import com.natcrim.api.client.JSON;
 /**
  * HTTPValidationError
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-02-09T04:22:34.761026Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-02-10T04:27:52.780784Z[Etc/UTC]")
 public class HTTPValidationError {
   public static final String SERIALIZED_NAME_DETAIL = "detail";
   @SerializedName(SERIALIZED_NAME_DETAIL)
