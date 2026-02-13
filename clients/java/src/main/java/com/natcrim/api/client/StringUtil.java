@@ -16,7 +16,7 @@ package com.natcrim.api.client;
 import java.util.Collection;
 import java.util.Iterator;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-02-12T04:20:33.459346Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-02-13T04:15:37.467702Z[Etc/UTC]")
 public class StringUtil {
   /**
    * Check if the given array contains the given value (with case-insensitive comparison).
