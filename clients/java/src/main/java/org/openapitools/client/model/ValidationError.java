@@ -52,7 +52,7 @@ import com.natcrim.api.client.JSON;
 /**
  * ValidationError
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-03-04T04:03:42.667079Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-03-05T04:07:38.963038Z[Etc/UTC]")
 public class ValidationError {
   public static final String SERIALIZED_NAME_LOC = "loc";
   @SerializedName(SERIALIZED_NAME_LOC)
