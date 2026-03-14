@@ -49,7 +49,7 @@ import com.natcrim.api.client.JSON;
 /**
  * NameFilter
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-03-13T04:07:19.225469Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-03-14T04:05:47.022621Z[Etc/UTC]")
 public class NameFilter {
   public static final String SERIALIZED_NAME_MATCH_REQUIRED = "match_required";
   @SerializedName(SERIALIZED_NAME_MATCH_REQUIRED)
