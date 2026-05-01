@@ -13,7 +13,7 @@
 
 package com.natcrim.api.client;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-30T05:26:02.175299Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-05-01T05:37:44.049730Z[Etc/UTC]")
 public class Pair {
     private String name = "";
     private String value = "";
