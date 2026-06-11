@@ -49,7 +49,7 @@ import com.natcrim.api.client.JSON;
 /**
  * DOBFilter
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-10T06:18:01.170418Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-11T06:43:35.346298Z[Etc/UTC]")
 public class DOBFilter {
   public static final String SERIALIZED_NAME_ALLOW_OFF_BY_ONE = "allow_off_by_one";
   @SerializedName(SERIALIZED_NAME_ALLOW_OFF_BY_ONE)
