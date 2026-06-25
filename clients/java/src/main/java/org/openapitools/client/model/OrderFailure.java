@@ -49,7 +49,7 @@ import com.natcrim.api.client.JSON;
 /**
  * OrderFailure
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-24T06:01:40.656594Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-25T06:00:52.053103Z[Etc/UTC]")
 public class OrderFailure {
   public static final String SERIALIZED_NAME_MESSAGE = "message";
   @SerializedName(SERIALIZED_NAME_MESSAGE)
