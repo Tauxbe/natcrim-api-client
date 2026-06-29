@@ -13,7 +13,7 @@
 
 package com.natcrim.api.client;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-28T06:12:07.751658Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-29T06:39:58.821902Z[Etc/UTC]")
 public class Configuration {
     public static final String VERSION = "1.0.0";
 
