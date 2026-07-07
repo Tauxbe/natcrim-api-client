@@ -54,7 +54,7 @@ import com.natcrim.api.client.JSON;
 /**
  * ProfilePut
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-06T06:22:21.523574Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-07T06:02:23.332365Z[Etc/UTC]")
 public class ProfilePut {
   public static final String SERIALIZED_NAME_TAG = "tag";
   @SerializedName(SERIALIZED_NAME_TAG)
