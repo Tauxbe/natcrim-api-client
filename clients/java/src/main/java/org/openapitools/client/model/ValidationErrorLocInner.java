@@ -50,7 +50,7 @@ import com.google.gson.JsonParseException;
 
 import com.natcrim.api.client.JSON;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-28T13:40:30.994875Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-29T08:31:34.672719Z[Etc/UTC]")
 public class ValidationErrorLocInner extends AbstractOpenApiSchema {
     private static final Logger log = Logger.getLogger(ValidationErrorLocInner.class.getName());
 
