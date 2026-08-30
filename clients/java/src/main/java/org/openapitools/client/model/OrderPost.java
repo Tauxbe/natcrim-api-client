@@ -52,7 +52,7 @@ import com.natcrim.api.client.JSON;
 /**
  * OrderPost
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-29T08:31:34.672719Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-30T07:44:57.610721Z[Etc/UTC]")
 public class OrderPost {
   public static final String SERIALIZED_NAME_SUB_ACCOUNT_ID = "sub_account_id";
   @SerializedName(SERIALIZED_NAME_SUB_ACCOUNT_ID)
