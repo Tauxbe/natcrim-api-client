@@ -50,7 +50,7 @@ import com.natcrim.api.client.JSON;
 /**
  * SubAccount
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-03T06:45:24.913646Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-04T06:50:06.062384Z[Etc/UTC]")
 public class SubAccount {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
